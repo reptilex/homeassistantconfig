@@ -101,3 +101,6 @@ utility_meter:
   power_water_heating_daily:
     source: sensor.stromz_brauchwasser
     cycle: daily
+  solar_generation_daily:
+    source: sensor.solar_yield
+    cycle: daily
