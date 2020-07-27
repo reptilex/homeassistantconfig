@@ -235,3 +235,4 @@
         value_template: "Battery: {{ states.vacuum.walle.attributes.battery_level }}"
         device_class: battery
         unit_of_measurement: '%'
+

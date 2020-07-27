@@ -94,3 +94,10 @@ group: !include groups.yaml
 automation: !include automations.yaml
 script: !include scripts.yaml
 scene: !include scenes.yaml
+
+
+
+utility_meter:
+  power_water_heating_daily:
+    source: sensor.stromz_brauchwasser
+    cycle: daily
