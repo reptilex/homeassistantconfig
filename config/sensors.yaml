@@ -1,0 +1,237 @@
+  - platform: rest
+    resource: !secret solar_url
+    name: solarsensors
+    value_template: 'ok'
+    json_attributes:
+      - timestamp
+      - datetime
+      - batteryCharge
+      - batteryConsumption
+      - batteryCharging
+      - solarConsumption
+      - solarYield
+      - gridConsumption
+      - gridFeedIn
+      - houseConsumption
+      - inverterState
+  - platform: template
+    sensors:
+      solar_yield:
+        value_template: '{{ states.sensor.solarsensors.attributes["solarYield"] | round(0) }}'
+        device_class: power
+        unit_of_measurement: W
+      battery_charge:
+        value_template: '{{ states.sensor.solarsensors.attributes["batteryCharge"] | round(0) }}'
+        unit_of_measurement: '%'
+      battery_consumption:
+        value_template: '{{   states.sensor.solarsensors.attributes["batteryConsumption"] | round(0) }}'
+        device_class: power
+        unit_of_measurement: W
+      grid_consumption:
+        value_template: '{{ states.sensor.solarsensors.attributes["gridConsumption"] | round(0) }}'
+        device_class: power
+        unit_of_measurement: W
+      grid_feed_in:
+        value_template: '{{ states.sensor.solarsensors.attributes["gridFeedIn"] | round(0) }}'
+        device_class: power
+        unit_of_measurement: W
+      solar_consumption:
+        value_template: '{{ states.sensor.solarsensors.attributes["solarConsumption"] | round(0) }}'
+        device_class: power
+        unit_of_measurement: W
+      house_consumption:
+        value_template: '{{ states.sensor.solarsensors.attributes["houseConsumption"] | round(0) }}'
+        device_class: power
+        unit_of_measurement: W
+      inverter_state:
+        value_template: '{{ states.sensor.solarsensors.attributes["inverterState"] | round(0) }}'
+  - platform: rest
+    resource: !secret heater_url
+    name: heatersensors
+    value_template: 'ok'
+    json_attributes:
+      - temp_aussen
+      - temp_brauchwasser
+      - temp_ruecklauf
+      - temp_pufferspeicher
+      - temp_eq_eintritt
+      - temp_sauggas
+      - temp_verdampfung
+      - temp_kondensation
+      - temp_heissgas
+      - niederdruck
+      - hochdruck
+      - heizkreispumpe
+      - pufferladepumpe
+      - verdichter
+      - stoerung
+      - vierwegewentil_luft
+      - wmz_durchfluss
+      - n_soll_verdichter
+      - cop
+      - evu_sperre
+      - aussentemperatur_verzoegert
+      - hkr_solltemp
+      - eq_ventilator
+      - ww_vorrang
+      - expansionsventil
+      - verdichtungsanforderung
+      - wmz_heizung
+      - stromz_heizung
+      - wmz_brauchwasser
+      - stromz_brauchwasser
+      - stromz_gesamt
+      - stromz_leistung
+      - wmz_gesamt
+  - platform: template
+    sensors:
+      temp_aussen:
+        value_template: '{{ states.sensor.heatersensors.attributes["temp_aussen"] / 10 }}'
+        device_class: temperature
+        unit_of_measurement: °C
+      temp_brauchwasser:
+        value_template: '{{ states.sensor.heatersensors.attributes["temp_brauchwasser"] / 10 }}'
+        device_class: temperature
+        unit_of_measurement: °C
+      temp_ruecklauf:
+        value_template: '{{ states.sensor.heatersensors.attributes["temp_ruecklauf"] / 10 }}'
+        device_class: temperature
+        unit_of_measurement: °C
+      temp_pufferspeicher:
+        value_template: '{{ states.sensor.heatersensors.attributes["temp_pufferspeicher"] / 10 }}'
+        device_class: temperature
+        unit_of_measurement: °C
+      temp_eq_eintritt:
+        value_template: '{{ states.sensor.heatersensors.attributes["temp_eq_eintritt"] / 10 }}'
+        device_class: temperature
+        unit_of_measurement: °C
+      temp_sauggas:
+        value_template: '{{ states.sensor.heatersensors.attributes["temp_sauggas"] / 10 }}'
+        device_class: temperature
+        unit_of_measurement: °C
+      temp_verdampfung:
+        value_template: '{{ states.sensor.heatersensors.attributes["temp_verdampfung"] / 10 }}'
+        device_class: temperature
+        unit_of_measurement: °C
+      temp_kondensation:
+        value_template: '{{ states.sensor.heatersensors.attributes["temp_kondensation"] / 10 }}'
+        device_class: temperature
+        unit_of_measurement: °C
+      temp_heissgas:
+        value_template: '{{ states.sensor.heatersensors.attributes["temp_heissgas"] / 10 }}'
+        device_class: temperature
+        unit_of_measurement: °C
+      niederdruck:
+        value_template: '{{ states.sensor.heatersensors.attributes["niederdruck"] }}'
+        device_class: pressure
+        unit_of_measurement: bar
+      hochdruck:
+        value_template: '{{ states.sensor.heatersensors.attributes["hochdruck"] }}'
+        device_class: pressure
+        unit_of_measurement: bar
+      heizkreispumpe:
+        value_template: '{{ states.sensor.heatersensors.attributes["heizkreispumpe"] }}'
+        device_class: temperature
+        unit_of_measurement: °C
+      pufferladepumpe:
+        value_template: '{{ states.sensor.heatersensors.attributes["pufferladepumpe"] }}'
+        device_class: temperature
+        unit_of_measurement: °C
+      verdichter:
+        value_template: '{{ states.sensor.heatersensors.attributes["verdichter"] }}'
+        device_class: temperature
+        unit_of_measurement: °C
+      stoerung:
+        value_template: '{{ states.sensor.heatersensors.attributes["stoerung"] }}'
+      vierwegewentil_luft:
+        value_template: '{{ states.sensor.heatersensors.attributes["vierwegewentil_luft"] }}'
+        device_class: temperature
+        unit_of_measurement: °C
+      wmz_durchfluss:
+        value_template: '{{ states.sensor.heatersensors.attributes["wmz_durchfluss"] }}'
+        device_class: temperature
+        unit_of_measurement: °C
+      n_soll_verdichter:
+        value_template: '{{ states.sensor.heatersensors.attributes["n_soll_verdichter"] }}'
+        device_class: temperature
+        unit_of_measurement: °C
+      cop:
+        value_template: '{{ states.sensor.heatersensors.attributes["cop"] }}'
+        device_class: temperature
+        unit_of_measurement: °C
+      eq_ventilator:
+        value_template: '{{ states.sensor.heatersensors.attributes["eq_ventilator"] }}'
+        device_class: temperature
+        unit_of_measurement: °C
+      ww_vorrang:
+        value_template: '{{ states.sensor.heatersensors.attributes["ww_vorrang"] }}'
+        device_class: temperature
+        unit_of_measurement: °C
+      expansionsventil:
+        value_template: '{{ states.sensor.heatersensors.attributes["expansionsventil"] }}'
+        device_class: temperature
+        unit_of_measurement: °C
+      verdichtungsanforderung:
+        value_template: '{{ states.sensor.heatersensors.attributes["verdichtungsanforderung"] }}'
+        device_class: temperature
+        unit_of_measurement: °C
+      wmz_heizung:
+        value_template: '{{ states.sensor.heatersensors.attributes["wmz_heizung"] }}'
+        device_class: power
+        unit_of_measurement: W
+      stromz_heizung:
+        value_template: '{{ states.sensor.heatersensors.attributes["stromz_heizung"] }}'
+        device_class: power
+        unit_of_measurement: W
+      wmz_brauchwasser:
+        value_template: '{{ states.sensor.heatersensors.attributes["wmz_brauchwasser"] }}'
+        device_class: power
+        unit_of_measurement: W
+      stromz_brauchwasser:
+        value_template: '{{ states.sensor.heatersensors.attributes["stromz_brauchwasser"] }}'
+        device_class: power
+        unit_of_measurement: W
+      stromz_gesamt:
+        value_template: '{{ states.sensor.heatersensors.attributes["stromz_gesamt"] }}'
+        device_class: power
+        unit_of_measurement: W
+      stromz_leistung:
+        value_template: '{{ states.sensor.heatersensors.attributes["stromz_leistung"] }}'
+        device_class: power
+        unit_of_measurement: W
+      wmz_gesamt:
+        value_template: '{{ states.sensor.heatersensors.attributes["wmz_gesamt"] }}'
+        device_class: power
+        unit_of_measurement: W
+  - platform: openweathermap
+    api_key: !secret owm_api_key
+    monitored_conditions:
+      - weather
+      - temperature
+      - wind_speed
+      - clouds
+      - rain
+
+  - platform: systemmonitor
+    resources:
+      - type: disk_use_percent
+        arg: /home
+      - type: memory_free
+      - type: last_boot
+      - type: load_5m
+      - type: processor_use
+
+  - platform: template
+    sensors:
+      vacuum_status:
+        friendly_name: "Vacuum - Status"
+        value_template: "Status: {{ states.vacuum.walle.attributes.state }}"
+
+
+  - platform: template
+    sensors:
+      vacuum_battery:
+        friendly_name: "Vacuum - Battery"
+        value_template: "Battery: {{ states.vacuum.walle.attributes.battery_level }}"
+        device_class: battery
+        unit_of_measurement: '%'

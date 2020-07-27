@@ -1,0 +1,96 @@
+
+# Configure a default setup of Home Assistant (frontend, api, etc)
+homeassistant:
+  time_zone: Europe/Berlin
+  elevation: 53
+default_config:
+
+#logger:
+#  default: notset
+#testing
+# Text to speech
+tts:
+  - platform: google_translate
+
+binary_sensor:
+  - platform: ping
+    host: !secret host_modbus_server_ip
+    name: Modbus API PiServer
+  - platform: ping
+    host: !secret host_solar_server_ip
+    name: Kostal Server
+  - platform: ping
+    host: !secret host_heating_server_ip
+    name: Heizung Server
+  - platform: ping
+    host: !secret host_vacuum_ip
+    name: Wall-E
+  - platform: ping
+    host: !secret host_repeater_ip
+    name: Echorep
+  - platform: ping
+    host: !secret host_battery_server_ip
+    name: Battery
+  - platform: ping
+    host: !secret host_blinds_server_ip
+    name: Blinds Server
+
+weather:
+  - platform: openweathermap
+    api_key: !secret owm_api_key
+
+mqtt:
+  broker: !secret host_mqtt_broker_ip
+  username: !sercet mqtt_username
+  password: !secret mqtt_password
+  discovery: true
+  discovery_prefix: homeassistant
+
+
+vacuum:
+  - platform: mqtt
+    name: "walle"
+    supported_features:
+      - turn_on
+      - turn_off
+      - pause
+      - stop
+      - return_home
+      - battery
+      - status
+      - locate
+      - clean_spot
+      - fan_speed
+      - send_command
+    command_topic: "vacuum/command"
+    battery_level_topic: "vacuum/state"
+    battery_level_template: "{{ value_json.battery_level }}"
+    charging_topic: "vacuum/state"
+    charging_template: "{{ value_json.charging }}"
+    cleaning_topic: "vacuum/state"
+    cleaning_template: "{{ value_json.cleaning }}"
+    docked_topic: "vacuum/state"
+    docked_template: "{{ value_json.docked }}"
+    error_topic: "vacuum/state"
+    error_template: "{{ value_json.error }}"
+    fan_speed_topic: "vacuum/state"
+    fan_speed_template: "{{ value_json.fan_speed }}"
+    set_fan_speed_topic: "vacuum/set_fan_speed"
+    fan_speed_list:
+      - min
+      - medium
+      - high
+      - max
+    send_command_topic: 'vacuum/send_command'
+
+input_boolean:
+  blinds_east:
+    name: Blinds east down
+    initial: 'off'
+    icon: mdi:wheather-sunny-alert
+
+sensor: !include sensors.yaml
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml

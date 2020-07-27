@@ -1,0 +1,60 @@
+test_notification:
+  alias: Test notification
+  sequence:
+  - service: input_boolean.turn_on
+    entity_id: input_boolean.blinds_east_down
+  - service: notify.notify
+    data:
+      title: Triggered setting on
+      message: testing notification message {% if is_state('input_boolean.blinds_east_down',
+        'on') %}on{% else %}off{% endif %}!
+test_boolean:
+  alias: Test boolean
+  sequence:
+  - data:
+      message: testing notification message {% if is_state('input_boolean.blinds_east_down',
+        'on') %}on{% else %}off{% endif %}!
+      title: Triggered
+    service: notify.notify
+open_east_blinds:
+  alias: Open East blinds
+  sequence:
+  - device_id: 980e7ba5644d487494e6914842357ebc
+    domain: cover
+    entity_id: cover.kueche_tuer
+    type: open
+  - device_id: dddb503d37ee47c794de0b12fb514621
+    domain: cover
+    entity_id: cover.kueche_fenster
+    type: open
+  - device_id: fd28bd40809f49689c4364af769e7d8e
+    domain: cover
+    entity_id: cover.wohnen_gartentur
+    type: open
+  - device_id: bd3c665e320d4c7ebaebeffab1a1960a
+    domain: cover
+    entity_id: cover.sonia_tuer
+    type: open
+  - service: notify.notify
+    data:
+      title: Opening East Blinds
+      message: Opening east blinds through script Open east blinds
+open_west_blinds:
+  alias: Open west blinds
+  sequence:
+  - device_id: 449ce4ebace746c7bf196af0c6d8a18e
+    domain: cover
+    entity_id: cover.wohnen_tv_tur
+    type: open
+  - device_id: fd28bd40809f49689c4364af769e7d8e
+    domain: cover
+    entity_id: cover.wohnen_gartentur
+    type: open
+  - device_id: 056710a59d4145a481a7a869206575c4
+    domain: cover
+    entity_id: cover.sonia_fenster
+    type: open
+  - device_id: cdb911d6ebbc4aa282548a1ef4e46330
+    domain: cover
+    entity_id: cover.anahi_fenster
+    type: open

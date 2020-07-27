@@ -1,0 +1,6 @@
+config/.storage/auth
+config/secrets.yaml
+config/home-assistant.log
+config/home-assistant*
+config/.storage/
+config/.*

@@ -1,0 +1,23 @@
+- id: '1592851985395'
+  name: Too Hot Morning
+  entities:
+    cover.kueche_fenster:
+      current_position: 100
+      friendly_name: kueche fenster
+      state: open
+      supported_features: 15
+    cover.kueche_tuer:
+      current_position: 100
+      friendly_name: kueche tuer
+      state: open
+      supported_features: 15
+    cover.sonia_tuer:
+      current_position: 0
+      friendly_name: 'Sonia Tuer '
+      state: closed
+      supported_features: 15
+    cover.wohnen_gartentur:
+      current_position: 100
+      friendly_name: Wohnen Gartentür
+      state: open
+      supported_features: 15

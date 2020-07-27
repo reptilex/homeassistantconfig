@@ -1,0 +1,216 @@
+- id: '1592409831833'
+  alias: Shut blinds east  when too hot after 9:30
+  description: ''
+  trigger:
+  - above: '4000'
+    below: '8000'
+    entity_id: sensor.solar_yield
+    for: 00:05:00
+    platform: numeric_state
+  - at: 09:00:09
+    platform: time
+  condition:
+  - after: '9:00'
+    before: '13:20'
+    condition: time
+  - above: '24'
+    condition: numeric_state
+    entity_id: sensor.owm_temperature
+  - condition: state
+    entity_id: input_boolean.blinds_east_down
+    state: 'off'
+  - above: '4000'
+    condition: numeric_state
+    entity_id: sensor.solar_yield
+  action:
+  - device_id: bd3c665e320d4c7ebaebeffab1a1960a
+    domain: cover
+    entity_id: cover.sonia_tuer
+    position: 20
+    type: set_position
+  - device_id: fd28bd40809f49689c4364af769e7d8e
+    domain: cover
+    entity_id: cover.wohnen_gartentur
+    position: 20
+    type: set_position
+  - device_id: dddb503d37ee47c794de0b12fb514621
+    domain: cover
+    entity_id: cover.kueche_fenster
+    position: 20
+    type: set_position
+  - device_id: 980e7ba5644d487494e6914842357ebc
+    domain: cover
+    entity_id: cover.kueche_tuer
+    position: 20
+    type: set_position
+  - data: {}
+    entity_id: input_boolean.blinds_east_down
+    service: input_boolean.turn_on
+  - data:
+      message: Closing East Blinds due to Solaryield above 3500 and after 9:00
+      title: East Blinds above 3500 yield 5 min
+    service: notify.notify
+- id: '1592491460276'
+  alias: Shut blinds west when hot after 13:30
+  description: ''
+  trigger:
+  - above: '4000'
+    entity_id: sensor.solar_yield
+    for: 00:05:00
+    platform: numeric_state
+  - at: '13:30'
+    platform: time
+  condition:
+  - after: '13:30'
+    condition: time
+  - above: '24'
+    condition: numeric_state
+    entity_id: sensor.owm_temperature
+  - above: '4000'
+    condition: numeric_state
+    entity_id: sensor.solar_yield
+  - condition: state
+    entity_id: input_boolean.blinds_west_down
+    state: 'off'
+  action:
+  - device_id: 449ce4ebace746c7bf196af0c6d8a18e
+    domain: cover
+    entity_id: cover.wohnen_tv_tur
+    position: 20
+    type: set_position
+  - device_id: 92e7125f5c3344d3970a09e64563bf61
+    domain: cover
+    entity_id: cover.wohnen_terrasse
+    position: 20
+    type: set_position
+  - device_id: cdb911d6ebbc4aa282548a1ef4e46330
+    domain: cover
+    entity_id: cover.anahi_fenster
+    position: 20
+    type: set_position
+  - device_id: 92e7125f5c3344d3970a09e64563bf61
+    domain: cover
+    entity_id: cover.wohnen_terrasse
+    position: 20
+    type: set_position
+  - device_id: 056710a59d4145a481a7a869206575c4
+    domain: cover
+    entity_id: cover.sonia_fenster
+    position: 20
+    type: set_position
+  - data: {}
+    entity_id: input_boolean.blinds_west_down
+    service: input_boolean.turn_on
+- id: '1592566081594'
+  alias: Test triggers
+  description: ''
+  trigger:
+  - at: '21:41:00'
+    platform: time
+  condition: []
+  action:
+  - data:
+      message: trigger the time already!!
+      title: testing above 3500 yield 60 sec
+    service: notify.notify
+  initial_state: true
+- id: '1592852434061'
+  alias: Roll blinds up east when too hot after 13:20
+  description: ''
+  trigger:
+  - at: '13:25:00'
+    platform: time
+  condition:
+  - condition: state
+    entity_id: input_boolean.blinds_east_down
+    state: 'on'
+  action:
+  - device_id: bd3c665e320d4c7ebaebeffab1a1960a
+    domain: cover
+    entity_id: cover.sonia_tuer
+    position: 100
+    type: set_position
+  - device_id: fd28bd40809f49689c4364af769e7d8e
+    domain: cover
+    entity_id: cover.wohnen_gartentur
+    position: 100
+    type: set_position
+  - device_id: 980e7ba5644d487494e6914842357ebc
+    domain: cover
+    entity_id: cover.kueche_tuer
+    position: 100
+    type: set_position
+  - device_id: dddb503d37ee47c794de0b12fb514621
+    domain: cover
+    entity_id: cover.kueche_fenster
+    position: 100
+    type: set_position
+  - data: {}
+    entity_id: input_boolean.blinds_east_down
+    service: input_boolean.turn_off
+  - data:
+      message: Opening east blinds if they were closed
+      title: Triggered Open East blinds
+    service: notify.notify
+- id: '1592896685281'
+  alias: Reset Hotness booleans with sundown
+  description: ''
+  trigger:
+  - event: sunset
+    platform: sun
+  condition: []
+  action:
+  - entity_id: input_boolean.blinds_east_down
+    service: input_boolean.turn_off
+  - data: {}
+    entity_id: input_boolean.blinds_west_down
+    service: input_boolean.turn_off
+- id: '1595081608693'
+  alias: Tell me wall-e is done
+  description: ''
+  trigger:
+  - device_id: 7a59e30a9b5d4c36bfb45bd47523e0b8
+    domain: vacuum
+    entity_id: vacuum.walle
+    platform: device
+    type: docked
+  condition: []
+  action:
+  - data:
+      message: Wall-e is done
+      title: Walle-e is done
+    service: notify.notify
+- id: '1595418614216'
+  alias: New Automation
+  description: ''
+  trigger:
+  - at: '17:30'
+    platform: time
+  condition:
+  - condition: state
+    entity_id: input_boolean.blinds_west_down
+    state: 'on'
+  action:
+  - device_id: cdb911d6ebbc4aa282548a1ef4e46330
+    domain: cover
+    entity_id: cover.anahi_fenster
+    position: 100
+    type: set_position
+  - device_id: 056710a59d4145a481a7a869206575c4
+    domain: cover
+    entity_id: cover.sonia_fenster
+    position: 100
+    type: set_position
+  - device_id: 449ce4ebace746c7bf196af0c6d8a18e
+    domain: cover
+    entity_id: cover.wohnen_tv_tur
+    position: 100
+    type: set_position
+  - device_id: 92e7125f5c3344d3970a09e64563bf61
+    domain: cover
+    entity_id: cover.wohnen_terrasse
+    position: 100
+    type: set_position
+  - data: {}
+    entity_id: input_boolean.blinds_west_down
+    service: input_boolean.turn_off
