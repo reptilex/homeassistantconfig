@@ -4,3 +4,8 @@ config/home-assistant.log
 config/home-assistant*
 config/.storage/
 config/.*
+
+config/ip_bans.yaml
+config/secrets.yaml
+config/known_devices.yaml
+config/zone.yaml
