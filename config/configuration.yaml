@@ -41,7 +41,7 @@ weather:
 
 mqtt:
   broker: !secret host_mqtt_broker_ip
-  username: !sercet mqtt_username
+  username: !secret mqtt_username
   password: !secret mqtt_password
   discovery: true
   discovery_prefix: homeassistant
