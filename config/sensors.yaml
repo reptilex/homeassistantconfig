@@ -139,6 +139,10 @@
         device_class: power
         unit_of_measurement: W
       house_consumption:
+        value_template: '{{ states.sensor.solarsensors.attributes["total_home_consumption"] | round(0) }}'
+        device_class: power
+        unit_of_measurement: W
+      house_energy:
         value_template: '{{ states.sensor.solarsensors.attributes["current_phase_1_powermeter"] * states.sensor.solarsensors.attributes["current_phase_1_powermeter"] +  states.sensor.solarsensors.attributes["current_phase_2_powermeter"] * states.sensor.solarsensors.attributes["current_phase_2_powermeter"] + states.sensor.solarsensors.attributes["current_phase_3_powermeter"] * states.sensor.solarsensors.attributes["current_phase_3_powermeter"] | round(0) }}'
         device_class: power
         unit_of_measurement: W
