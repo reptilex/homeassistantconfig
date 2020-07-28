@@ -3,48 +3,146 @@
     name: solarsensors
     value_template: 'ok'
     json_attributes:
-      - timestamp
-      - datetime
-      - batteryCharge
-      - batteryConsumption
-      - batteryCharging
-      - solarConsumption
-      - solarYield
-      - gridConsumption
-      - gridFeedIn
-      - houseConsumption
-      - inverterState
+      - modbus_unit_id
+      - inverter_article_number
+      - inverter_serial_number
+      - number_of_bidirectional_converter
+      - number_of_ac_phases
+      - number_of_pv_strings
+      - hardware_version
+      - software_version_maincontroller
+      - software_version_io_controller
+      - power_id
+      - inverter_state
+      - total_dc_power
+      - state_of_energy_manager3
+      - home_own_consumption_from_battery
+      - home_own_consumption_from_grid
+      - total_home_consumption_battery
+      - total_home_consumption_grid
+      - total_home_consumption_pv
+      - home_own_consumption_from_pv
+      - total_home_consumption
+      - isolation_resistance
+      - power_limit_from_evu
+      - total_home_consumption_rate
+      - worktime
+      - actual_cos
+      - grid_frequency
+      - current_phase_1
+      - active_power_phase_1
+      - voltage_phase_1
+      - current_phase_2
+      - active_power_phase_2
+      - voltage_phase_2
+      - current_phase_3
+      - active_power_phase_3
+      - voltage_phase_3
+      - total_ac_active_power
+      - total_ac_reactive_power
+      - total_ac_apparent_power
+      - battery_charge_current
+      - number_of_battery_cycles
+      - actual_battery_charge_discharge_current
+      - pssb_fuse_state5
+      - battery_ready_flag
+      - act_state_of_charge
+      - battery_temperature
+      - battery_voltage
+      - cos_powermeter
+      - frequency_powermeter
+      - current_phase_1_powermeter
+      - active_power_phase_1_powermeter
+      - reactive_power_phase_1_powermeter
+      - apparent_power_phase_1_powermeter
+      - voltage_phase_1_powermeter
+      - current_phase_2_powermeter
+      - active_power_phase_2_powermeter
+      - reactive_power_phase_2_powermeter
+      - apparent_power_phase_2_powermeter
+      - voltage_phase_2_powermeter
+      - current_phase_3_powermeter
+      - active_power_phase_3_powermeter
+      - reactive_power_phase_3_powermeter
+      - apparent_power_phase_3_powermeter
+      - voltage_phase_3_powermeter
+      - total_active_power_powermeter_home_consumption
+      - total_reactive_power_powermeter
+      - total_apparent_power_powermeter
+      - current_dc1
+      - power_dc1
+      - voltage_dc1
+      - current_dc2
+      - power_dc2
+      - voltage_dc2
+      - current_dc3
+      - power_dc3
+      - voltage_dc3
+      - total_yield
+      - daily_yield
+      - yearly_yield
+      - monthly_yield
+      - inverter_network_name
+      - ip_enable
+      - manual_ip_auto_ip
+      - ip_address
+      - ip_subnetmask
+      - ip_gateway
+      - ip_auto_dns
+      - ip_dns1
+      - ip_dns2
+      - battery_gross_capacity
+      - battery_actual_soc
+      - firmware_maincontroller
+      - battery_manufacturer
+      - battery_model_id
+      - battery_serial_number
+      - work_capacity
+      - inverter_max_power
+      - inverter_peak_generation_power_scale_factor4
+      - inverter_manufacturer
+      - inverter_model_id
+      - inverter_serial_number_2
+      - inverter_generation_power_actual
+      - power_scale_factor4
+      - generation_energy
+      - energy_scale_factor4
+      - actual_battery_charge_discharge_power
+      - battery_firmware
+      - battery_type6
+      - productname
+      - power
   - platform: template
     sensors:
       solar_yield:
-        value_template: '{{ states.sensor.solarsensors.attributes["solarYield"] | round(0) }}'
+        value_template: '{{ states.sensor.solarsensors.attributes["power_dc1"] + states.sensor.solarsensors.attributes["power_dc2"] | round(0) }}'
         device_class: power
         unit_of_measurement: W
       battery_charge:
-        value_template: '{{ states.sensor.solarsensors.attributes["batteryCharge"] | round(0) }}'
+        value_template: '{{ states.sensor.solarsensors.attributes["act_state_of_charge"] | round(0) }}'
         unit_of_measurement: '%'
       battery_consumption:
-        value_template: '{{   states.sensor.solarsensors.attributes["batteryConsumption"] | round(0) }}'
+        value_template: '{{ states.sensor.solarsensors.attributes["total_dc_power"] - states.sensor.solarsensors.attributes["power_dc1"] - states.sensor.solarsensors.attributes["power_dc2"] | round(0) }}'
         device_class: power
         unit_of_measurement: W
       grid_consumption:
-        value_template: '{{ states.sensor.solarsensors.attributes["gridConsumption"] | round(0) }}'
+        value_template: '{{ states.sensor.solarsensors.attributes["home_own_consumption_from_grid"] | round(0) }}'
         device_class: power
         unit_of_measurement: W
       grid_feed_in:
-        value_template: '{{ states.sensor.solarsensors.attributes["gridFeedIn"] | round(0) }}'
+        value_template: '{{ states.sensor.solarsensors.attributes["inverter_generation_power_actual"] - states.sensor.solarsensors.attributes["total_active_power_powermeter_home_consumption"] | round(0) }}'
         device_class: power
         unit_of_measurement: W
       solar_consumption:
-        value_template: '{{ states.sensor.solarsensors.attributes["solarConsumption"] | round(0) }}'
+        value_template: '{{ states.sensor.solarsensors.attributes["home_own_consumption_from_pv"] | round(0) }}'
         device_class: power
         unit_of_measurement: W
       house_consumption:
-        value_template: '{{ states.sensor.solarsensors.attributes["houseConsumption"] | round(0) }}'
+        value_template: '{{ states.sensor.solarsensors.attributes["current_phase_1_powermeter"] * states.sensor.solarsensors.attributes["current_phase_1_powermeter"] +  states.sensor.solarsensors.attributes["current_phase_2_powermeter"] * states.sensor.solarsensors.attributes["current_phase_2_powermeter"] + states.sensor.solarsensors.attributes["current_phase_3_powermeter"] * states.sensor.solarsensors.attributes["current_phase_3_powermeter"] | round(0) }}'
         device_class: power
         unit_of_measurement: W
       inverter_state:
-        value_template: '{{ states.sensor.solarsensors.attributes["inverterState"] | round(0) }}'
+        value_template: '{{ states.sensor.solarsensors.attributes["inverter_state"] | round(0) }}'
   - platform: rest
     resource: !secret heater_url
     name: heatersensors
