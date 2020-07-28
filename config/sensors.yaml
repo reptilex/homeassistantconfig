@@ -3,6 +3,7 @@
     name: solarsensors
     value_template: 'ok'
     json_attributes:
+      - modbus_enable
       - modbus_unit_id
       - inverter_article_number
       - inverter_serial_number
