@@ -11,7 +11,7 @@ default_config:
 # Text to speech
 tts:
   - platform: google_translate
-3333
+
 binary_sensor:
   - platform: ping
     host: !secret host_modbus_server_ip

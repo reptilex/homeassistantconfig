@@ -236,3 +236,8 @@
         device_class: battery
         unit_of_measurement: '%'
 
+  - platform: integration
+    source: sensor.house_consumption
+    name: power_home_consumption
+    unit_prefix: k
+    round: 2
