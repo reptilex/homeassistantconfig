@@ -104,6 +104,6 @@ utility_meter:
   solar_generation_daily:
     source: sensor.solar_yield
     cycle: daily
-  power_home_consumption_daily:
-    source: sensor.house_consumption
+  power_home_energy_daily:
+    source: sensor.house_energy
     cycle: daily
