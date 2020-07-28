@@ -139,7 +139,7 @@
         device_class: power
         unit_of_measurement: W
       house_consumption:
-        value_template: '{{ states.sensor.solarsensors.attributes["total_home_consumption"] | round(0) }}'
+        value_template: '{{ states.sensor.solarsensors.attributes["total_active_power_powermeter_home_consumption"] | round(0) }}'
         device_class: power
         unit_of_measurement: W
       house_energy:
