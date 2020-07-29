@@ -131,7 +131,7 @@
         device_class: power
         unit_of_measurement: W
       grid_feed_in:
-        value_template: '{{ states.sensor.solarsensors.attributes["inverter_generation_power_actual"] - states.sensor.solarsensors.attributes["total_active_power_powermeter_home_consumption"] | round(0) }}'
+        value_template: '{{ states.sensor.solarsensors.attributes["inverter_generation_power_actual"] | int - states.sensor.solarsensors.attributes["total_active_power_powermeter_home_consumption"] | int }}'
         device_class: power
         unit_of_measurement: W
       solar_consumption:
@@ -143,7 +143,10 @@
         device_class: power
         unit_of_measurement: W
       house_energy:
-        value_template: '{{ states.sensor.solarsensors.attributes["current_phase_1_powermeter"] * states.sensor.solarsensors.attributes["current_phase_1_powermeter"] +  states.sensor.solarsensors.attributes["current_phase_2_powermeter"] * states.sensor.solarsensors.attributes["current_phase_2_powermeter"] + states.sensor.solarsensors.attributes["current_phase_3_powermeter"] * states.sensor.solarsensors.attributes["current_phase_3_powermeter"] | round(0) }}'
+        value_template: "{% set phase1 =  state_attr('sensor.solarsensors', 'current_phase_1_powermeter') * state_attr('sensor.solarsensors', 'active_power_phase_1_powermeter') %}
+                        {% set phase2 =  state_attr('sensor.solarsensors', 'current_phase_2_powermeter')  * state_attr('sensor.solarsensors', 'active_power_phase_2_powermeter')%}
+                        {% set phase3 =  state_attr('sensor.solarsensors', 'current_phase_3_powermeter')  * state_attr('sensor.solarsensors', 'active_power_phase_3_powermeter')%}
+                        {% set phase_sum = (phase1 + phase2 + phase3) | int %}"
         device_class: power
         unit_of_measurement: W
       inverter_state:
