@@ -98,7 +98,7 @@ scene: !include scenes.yaml
 
 
 utility_meter:
-  solar_generation_daily:
+  solar_yield_daily:
     source: sensor.integer_solar_yield
     cycle: daily
   power_home_energy_daily:
