@@ -347,3 +347,8 @@
     name: integer_power_home_consumption
     unit_prefix: k
     round: 2
+  - platform: integration
+    source: sensor.house_energy
+    name: integer_house_energy
+    unit_prefix: k
+    round: 2
