@@ -352,5 +352,10 @@
     name: integer_house_energy
     unit_prefix: k
     round: 2
+  - platform: integration
+    source: sensor.solar_yield
+    name: integer_solar_yield
+    unit_prefix: k
+    round: 2
 
 
