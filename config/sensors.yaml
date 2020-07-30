@@ -143,9 +143,9 @@
         device_class: power
         unit_of_measurement: W
       house_energy:
-        value_template: "{% set phase1 =  state_attr('sensor.solarsensors', 'current_phase_1_powermeter') %}
-                        {% set phase2 =  state_attr('sensor.solarsensors', 'current_phase_2_powermeter') %}
-                        {% set phase3 =  state_attr('sensor.solarsensors', 'current_phase_3_powermeter') %}
+        value_template: "{% set phase1 =  state_attr('sensor.solarsensors', 'active_power_phase_1_powermeter') %}
+                        {% set phase2 =  state_attr('sensor.solarsensors', 'active_power_phase_2_powermeter') %}
+                        {% set phase3 =  state_attr('sensor.solarsensors', 'active_power_phase_3_powermeter') %}
                         {{(phase1 + phase2 + phase3) | int }}"
         device_class: power
         unit_of_measurement: W
@@ -352,3 +352,5 @@
     name: integer_house_energy
     unit_prefix: k
     round: 2
+
+
