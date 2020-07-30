@@ -343,7 +343,7 @@
         unit_of_measurement: '%'
 
   - platform: integration
-    source: sensor.house_consumption
+    source: sensor.integer_house_consumption
     name: integer_power_home_consumption
     unit_prefix: k
     round: 2
@@ -357,5 +357,19 @@
     name: integer_solar_yield
     unit_prefix: k
     round: 2
-
+  - platform: integration
+    source: sensor.stromz_brauchwasser
+    name: integer_stromz_brauchwasser
+    unit_prefix: k
+    round: 2
+  - platform: integration 
+    source: sensor.stromz_heizung
+    name: integer_stromz_heizung
+    unit_prefix: k
+    round: 2
+  - platform: integration
+    source: sensor.stromz_gesamt
+    name: integer_stromz_gesamt
+    unit_prefix: k
+    round: 2
 
