@@ -343,7 +343,7 @@
         unit_of_measurement: '%'
 
   - platform: integration
-    source: sensor.integer_house_consumption
+    source: sensor.house_consumption
     name: integer_power_home_consumption
     unit_prefix: k
     round: 2
