@@ -358,18 +358,8 @@
     unit_prefix: k
     round: 2
   - platform: integration
-    source: sensor.stromz_brauchwasser
-    name: integer_stromz_brauchwasser
-    unit_prefix: k
-    round: 2
-  - platform: integration 
-    source: sensor.stromz_heizung
-    name: integer_stromz_heizung
-    unit_prefix: k
-    round: 2
-  - platform: integration
-    source: sensor.stromz_gesamt
-    name: integer_stromz_gesamt
+    source: sensor.stromz_leistung
+    name: integer_stromz_leistung
     unit_prefix: k
     round: 2
 
