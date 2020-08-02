@@ -128,7 +128,7 @@ utility_meter:
 
 
   power_heliotherm_daily:
-    source: sensor.integer_stromz_leistung
+    source: sensor.stromz_leistung
     cycle: daily
   power_water_daily:
     source: sensor.stromz_brauchwasser
@@ -140,7 +140,7 @@ utility_meter:
     source: sensor.stromz_gesamt
     cycle: daily
   power_heliotherm_monthly:
-    source: sensor.integer_stromz_leistung
+    source: sensor.stromz_leistung
     cycle: monthly
   power_water_monthly:
     source: sensor.stromz_brauchwasser
@@ -152,7 +152,7 @@ utility_meter:
     source: sensor.stromz_gesamt
     cycle: monthly
   power_heliotherm_yearly:
-    source: sensor.integer_stromz_leistung
+    source: sensor.stromz_leistung
     cycle: yearly
   power_water_yearly:
     source: sensor.stromz_brauchwasser
