@@ -74,7 +74,7 @@ Light - Navy Blue:
   ### Labels ###
   label-badge-background-color: "#FFFFFF"
   label-badge-text-color: "#395274"
-  label-badge-red: "#FF8888"
+  label-badge-red: "#B24444"
   ### Cards ###
   paper-card-background-color: "#FFFFFF"
   paper-listbox-background-color: var(--primary-background-color)
