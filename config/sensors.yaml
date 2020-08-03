@@ -355,8 +355,8 @@
   - platform: integration
     source: sensor.solar_yield
     name: integer_solar_yield
+    method: left
     unit_prefix: k
-    round: 2
   - platform: integration
     source: sensor.stromz_leistung
     name: integer_stromz_leistung
