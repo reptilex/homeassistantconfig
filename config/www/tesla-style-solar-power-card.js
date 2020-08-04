@@ -123,6 +123,9 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
 .acc_left {
   vertical-align: top;
 }
+.acc_right {
+  vertical-align: top;
+}
 .acc_top, .acc_bottom {
     margin:auto;
 }
