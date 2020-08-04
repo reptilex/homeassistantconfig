@@ -5,6 +5,6 @@ resources:
     type: js
   - url: /local/slider-entity-row.js
     type: js
-  - url: /local/tesla-style-solar-power-card.js?v=0
+  - url: /local/tesla-style-solar-power-card.js
     type: js
   
