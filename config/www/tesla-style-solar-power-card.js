@@ -34,6 +34,16 @@ class AnimatedConsumptionCard extends HTMLElement {
 
     this.config = config;
 
+    this.topIcon = 'mdi:solar-panel-large';
+    if (config.top_icon !== undefined) {
+      this.topIcon = config.top_icon;
+    }
+
+    this.bottomIcon = 'mdi:transmission-tower';
+    if (config.bottom_icon !== undefined) {
+      this.bottomIcon = config.bottom_icon;
+    }
+
     this.leftIcon = 'mdi:electron-framework';
     if (config.left_icon !== undefined) {
       this.leftIcon = config.left_icon;
