@@ -34,6 +34,8 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
 
     this.config = config;
 
+    this.solarEntity = config.solar_entity;
+
     this.topIcon = 'mdi:solar-panel-large';
     if (config.top_icon !== undefined) {
       this.topIcon = config.top_icon;
