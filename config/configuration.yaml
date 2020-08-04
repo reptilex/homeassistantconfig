@@ -2,7 +2,7 @@
 # Configure a default setup of Home Assistant (frontend, api, etc)
 homeassistant:
   time_zone: Europe/Berlin
-  elevation: 54
+  elevation: 52
 default_config:
 
 #logger:
