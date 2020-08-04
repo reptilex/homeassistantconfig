@@ -4,4 +4,7 @@ resources:
   - url: /local/state-element.js?v=0
     type: js
   - url: /local/slider-entity-row.js
-    type: module
+    type: js
+  - url: /local/tesla-style-solar-power-card.js?v=0
+    type: js
+  
