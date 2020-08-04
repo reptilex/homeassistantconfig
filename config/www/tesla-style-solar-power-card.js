@@ -129,8 +129,11 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
 .acc_right {
   vertical-align: top;
 }
-.acc_top acc_container, .acc_bottom .acc_container{
+.acc_top .acc_container, .acc_bottom .acc_container{
     margin:auto;
+}
+br.clear {
+  clear:both;
 }
 </style>
 <div class="tesla-style-power-card">
@@ -166,10 +169,11 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
         </div>
     </div>
 </div>
+<br class="clear">
   <div class="acc_bottom">
-  <div class="acc_container">
-        <ha-icon class="acc_icon" icon="${ this.bottomIcon }"></ha-icon>
-  </div>
+    <div class="acc_container">
+          <ha-icon class="acc_icon" icon="${ this.bottomIcon }"></ha-icon>
+    </div>
   </div>
 </div>
     `;
