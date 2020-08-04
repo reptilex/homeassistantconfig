@@ -119,7 +119,12 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
 }
 </style>
 <div class="tesla-style-power-card">
-<div>
+  <div class="acc_top">
+      <div class="acc_container">
+            <ha-icon class="acc_icon" icon="${ this.topIcon }"></ha-icon>
+      </div>
+  </div>
+<div class="center">
     <div class="acc_td">
         <div class="acc_container">
               <ha-icon class="acc_icon" icon="${ this.leftIcon }"></ha-icon>
@@ -146,6 +151,11 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
         </div>
     </div>
 </div>
+  <div class="acc_bottom">
+  <div class="acc_container">
+        <ha-icon class="acc_icon" icon="${ this.bottomIcon }"></ha-icon>
+  </div>
+  </div>
 </div>
     `;
 
