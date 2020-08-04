@@ -3,7 +3,7 @@ config/secrets.yaml
 config/home-assistant.log
 config/home-assistant*
 config/.storage/
-config/.*
+config/.
 
 config/ip_bans.yaml
 config/secrets.yaml
