@@ -120,7 +120,7 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
     vertical-align: top;
 }
 .acc_center .acc_td{
-  display:block;
+  float:left;
   width:auto;
 }
 .acc_left {
@@ -129,9 +129,8 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
 .acc_right {
   vertical-align: top;
 }
-.acc_top, .acc_bottom {
+.acc_top acc_container, .acc_bottom .acc_container{
     margin:auto;
-    width:auto;
 }
 </style>
 <div class="tesla-style-power-card">
