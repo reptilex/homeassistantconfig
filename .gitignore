@@ -11,3 +11,4 @@ config/known_devices.yaml
 config/zone.yaml
 
 testconfig.sh
+curlup.txt
