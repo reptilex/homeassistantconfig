@@ -82,7 +82,7 @@ class AnimatedConsumptionCard extends HTMLElement {
     content.innerHTML = `
 <style>
 .acc_container {
-    height: 82px;
+    height: 83px;
     width: 80px;
     border: 1px solid black;
     border-radius: 100px;
