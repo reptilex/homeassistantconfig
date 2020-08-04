@@ -1,4 +1,4 @@
-class AnimatedConsumptionCard extends HTMLElement {
+class TeslaSolarPowerCard extends HTMLElement {
 
   set hass(hass) {
 
@@ -18,7 +18,7 @@ class AnimatedConsumptionCard extends HTMLElement {
       <div class="acc_error">
         <b>${err}</b>
         <br><br>
-        type: 'custom:animated-consumption-card'
+        type: 'custom:tesla-solar-power-card'
       </div>`;
       this.style.padding = '8px';
       this.style.backgroundColor = '#ff353d';
@@ -39,12 +39,12 @@ class AnimatedConsumptionCard extends HTMLElement {
       this.topIcon = config.top_icon;
     }
 
-    this.bottomIcon = 'mdi:transmission-tower';
+    this.bottomIcon = 'mdi:battery-charging-50';
     if (config.bottom_icon !== undefined) {
       this.bottomIcon = config.bottom_icon;
     }
 
-    this.leftIcon = 'mdi:electron-framework';
+    this.leftIcon = 'mdi:transmission-tower';
     if (config.left_icon !== undefined) {
       this.leftIcon = config.left_icon;
     }
@@ -254,4 +254,4 @@ class AnimatedConsumptionCard extends HTMLElement {
 
 }
 
-customElements.define('animated-consumption-card', AnimatedConsumptionCard);
+customElements.define('tesla-style-solar-power-card', TeslaSolarPowerCard);
