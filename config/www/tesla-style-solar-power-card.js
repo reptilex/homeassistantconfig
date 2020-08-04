@@ -1,4 +1,4 @@
-class TeslaSolarPowerCard extends HTMLElement {
+class TeslaStyleSolarPowerCard extends HTMLElement {
 
   set hass(hass) {
 
@@ -18,7 +18,7 @@ class TeslaSolarPowerCard extends HTMLElement {
       <div class="acc_error">
         <b>${err}</b>
         <br><br>
-        type: 'custom:tesla-solar-power-card'
+        type: 'custom:tesla-style-solar-power-card'
       </div>`;
       this.style.padding = '8px';
       this.style.backgroundColor = '#ff353d';
@@ -254,4 +254,4 @@ class TeslaSolarPowerCard extends HTMLElement {
 
 }
 
-customElements.define('tesla-style-solar-power-card', TeslaSolarPowerCard);
+customElements.define('tesla-style-solar-power-card', TeslaStyleSolarPowerCard);
