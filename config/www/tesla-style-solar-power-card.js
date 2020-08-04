@@ -180,6 +180,9 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
     const entityId = this.config.entity;
     const state = hass.states[entityId];
 
+    const entityIdSolar = this.config.entitySolar;
+    const stateSolar = hass.states[entityIdSolar];
+
     if (state) {
         var valueStr = state.state;
         const unit_of_measurement = state.attributes.unit_of_measurement;
