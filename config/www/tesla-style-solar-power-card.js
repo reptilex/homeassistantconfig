@@ -39,7 +39,8 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
         this.maxPosition = 500;
         this.value = 0;
         this.unit_of_measurement = '';
-        this.accText = undefined;
+        this.accText = document.createElement('div');
+        this.accText.className = 'accText';
         this.entity = null;
       }
     }
