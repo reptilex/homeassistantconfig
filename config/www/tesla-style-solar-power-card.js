@@ -287,7 +287,7 @@ br.clear {
   updateProperties(hass) {
 
     for (var prop in this.SolarCardEntities) {
-      if (Object.prototype.hasOwnProperty.call(this.SolarCardEntitie, prop)) {
+      if (Object.prototype.hasOwnProperty.call(this.SolarCardEntities, prop)) {
         console.log(prop);
         this.value = this.getStateValue(hass, prop);
         this.unit_of_measurement = 'kW';
