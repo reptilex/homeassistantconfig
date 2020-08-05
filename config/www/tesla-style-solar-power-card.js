@@ -35,7 +35,7 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
     this.config = config;
 
     this.SolarCardEntities = {
-      houseConsumption: config.house_consumption_entity,
+      houseConsumptionVar: config.house_consumption_entity,
       //solarYield: config.solar_yield_entity,
       //gridConsumption: config.grid_consumption_entity,
       //gridFeed: config.grid_feed_entity,
@@ -312,10 +312,10 @@ br.clear {
     this.SolarYieldSpeed = this.getSpeed(this.value);
   }
 
-  getStateValue(hass, EntityId){
-    const entityId = EntityId;
+  getStateValue(hass, entityId){
     const state = hass.states[entityId];
-  console.log(state);
+    
+    console.log(state);
     if (state) {
         var valueStr = state.state;
         const unit_of_measurement = state.attributes.unit_of_measurement;
