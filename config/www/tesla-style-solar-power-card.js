@@ -94,8 +94,8 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
     content.innerHTML = `
 <style>
 .acc_container {
-    height: 80px;
-    width: 80px;
+    height: 50px;
+    width: 50px;
     border: 1px solid black;
     border-radius: 100px;
     padding: 22px;
@@ -103,9 +103,9 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
     border-color: var(--primary-text-color);
 }
 .acc_icon {
-    --mdc-icon-size: 80px;
-    height: 80px;
-    width: 80px;
+    --mdc-icon-size: 50px;
+    height: 50px;
+    width: 50px;
 }
 .acc_text_container {
     position: relative;
