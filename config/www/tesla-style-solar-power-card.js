@@ -160,7 +160,7 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
   padding-left: 46%;
 }
 
-.solar_yield{
+.battery{
   margin: auto;
   padding-top: 50%;
   height: 59%;
@@ -217,7 +217,7 @@ br.clear {
         ${houseConsumptionLine}
       </svg>
     </div>
-    <div class="acc_line batter_yield">
+    <div class="acc_line battery">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="20px"
