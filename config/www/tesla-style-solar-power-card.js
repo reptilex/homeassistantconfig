@@ -271,7 +271,7 @@ br.clear {
     this.solarYieldCircle.setAttributeNS(null, "cy", this.startPosition);
     this.solarYieldCircle.setAttributeNS(null, "cx", "20");
     this.solarYieldCircle.setAttributeNS(null, "fill", this.circleColor);
-    this.querySelectorAll(".grid_consumption svg").item(0).appendChild(this.solarYieldCircle);
+    this.querySelectorAll(".solar_yield svg").item(0).appendChild(this.solarYieldCircle);
     this.contentIsCreated = true;
   }
 
