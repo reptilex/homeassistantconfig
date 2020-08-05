@@ -224,7 +224,7 @@ br.clear {
     this.gridConsumptionCircle.setAttributeNS(null, "cx", this.startPosition);
     this.gridConsumptionCircle.setAttributeNS(null, "cy", "20");
     this.gridConsumptionCircle.setAttributeNS(null, "fill", this.circleColor);
-    this.querySelectorAll(".grid_consumption svg").item(0).appendChild(this.houseConsumptionCircle);
+    this.querySelectorAll(".grid_consumption svg").item(0).appendChild(this.gridConsumptionCircle);
 
     this.contentIsCreated = true;
   }
