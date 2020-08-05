@@ -1,6 +1,7 @@
 class TeslaStyleSolarPowerCard extends HTMLElement {
 
   set hass(hass) {
+    this.hass = hass;
 
     if (!this.contentIsCreated) {
       this.createContent();
@@ -12,7 +13,7 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
     }
 
     try {
-      this.updateProperties(hass);
+      this.updateProperties();
     } catch (err) {
       this.innerHTML = `
       <div class="acc_error">
@@ -34,7 +35,12 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
 
     this.config = config;
 
-    this.solarEntity = config.solar_entity;
+    this.SolarCardEntities.houseConsumption.entity = config.house_consumption_entity;
+    this.SolarCardEntities.solarYield.entity = config.solar_yield_entity;
+    this.SolarCardEntities.gridConsumption.entity = config.grid_consumption_entity;
+    this.SolarCardEntities.gridFeed.entity = config.grid_feed_entity;
+    this.SolarCardEntities.batteryConsumption.entity = config.battery_consumption_entity;
+    this.SolarCardEntities.batteryCharge.entity = config.battery_charge_entity;
 
     this.topIcon = 'mdi:solar-panel-large';
     if (config.top_icon !== undefined) {
@@ -65,6 +71,7 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
     if (config.circle_color !== undefined) {
       this.circleColor = config.circle_color;
     }
+    this.goodColor = "#13ae13";
 
     this.contentIsCreated = false;
 
@@ -77,6 +84,7 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
 
     this.accText = undefined;
     this.houseConsumptionCircle = undefined;
+    this.solarYieldCircle = undefined;
   }
 
   createContent(hass) {
@@ -156,7 +164,7 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
 .solar_yield{
   margin: auto;
   padding-top: 0px;
-  height: 59%;    
+  height: 100%;    
   padding-left: 45%;
 }
 
@@ -182,7 +190,7 @@ br.clear {
         xmlns="http://www.w3.org/2000/svg"
         width="20px"
         height="100%"
-        viewBox="0 0 40 500"
+        viewBox="0 0 40 700"
         preserveAspectRatio="xMinYMax slice"
       >
         ${solarYieldLine}
@@ -270,20 +278,41 @@ br.clear {
     this.solarYieldCircle.setAttributeNS(null, "r", "10");
     this.solarYieldCircle.setAttributeNS(null, "cy", this.startPosition);
     this.solarYieldCircle.setAttributeNS(null, "cx", "20");
-    this.solarYieldCircle.setAttributeNS(null, "fill", this.circleColor);
+    this.solarYieldCircle.setAttributeNS(null, "fill", this.goodColor);
     this.querySelectorAll(".solar_yield svg").item(0).appendChild(this.solarYieldCircle);
     this.contentIsCreated = true;
   }
 
-  updateProperties(hass) {
+  updateProperties() {
 
-    var value;
+    for (var prop in this.SolarCardEntities) {
+      if (Object.prototype.hasOwnProperty.call(obj, prop)) {
+        console.log(prop);
+        prop.value = this.getStateValue(hass, prop.entity);
+        prop.unit_of_measurement = 'kW';
+        prop.accText.innerHTML = prop.value + ' ' + prop.unit_of_measurement;
+        prop.speed = this.getSpeed(prop.value);
+        if (prop.speed === 0) {
+          prop.currentPosition = this.startPosition;
+        }
+      }
+    }
+    console.log(this.SolarCardEntities);
+    /*
+    this.value = this.getStateValue(hass, this.config.entity);
+    this.unit_of_measurement = 'kW';
+    this.accText.innerHTML = this.value + ' ' + this.unit_of_measurement;
+    this.speed = this.getSpeed(this.value);
+    if (this.speed === 0) {
+      this.currentPosition = this.startPosition;
+    }
+    */
+    this.SolarYieldSpeed = this.getSpeed(this.value);
+  }
 
-    const entityId = this.config.entity;
-    const state = hass.states[entityId];
-
-    const entityIdSolar = this.config.entitySolar;
-    const stateSolar = hass.states[entityIdSolar];
+  getStateValue(EntityId){
+    const entityId = EntityId;
+    const state = this.hass.states[entityId];
 
     if (state) {
         var valueStr = state.state;
@@ -304,16 +333,7 @@ br.clear {
         }
     }
 
-    this.value = value;
-    this.unit_of_measurement = 'kW';
-
-    this.accText.innerHTML = this.value + ' ' + this.unit_of_measurement;
-
-    this.speed = this.getSpeed(this.value);
-
-    if (this.speed === 0) {
-      this.currentPosition = this.startPosition;
-    }
+    return value;
   }
 
   updateCircle(timestamp) {
