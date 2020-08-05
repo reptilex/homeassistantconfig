@@ -149,7 +149,12 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
 .grid_consumption{
   padding-left: 95px;
   padding-right: 34%;
-  width:27%;
+  width:27%;∆
+}∆
+.solar_yield{
+  margin:auto;
+  padding-top:80px;
+  height:50%;
 }
 
 br.clear {
@@ -162,6 +167,18 @@ br.clear {
             <ha-icon class="acc_icon" icon="${ this.topIcon }"></ha-icon>
       </div>
   </div>
+  <div class="acc_line solar_yield">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="20px"
+        height="100%"
+        viewBox="0 0 40 500"
+        preserveAspectRatio="xMinYMax slice"
+      >
+        ${solarYieldLine}
+      </svg>
+    </div>
+    
 <div class="acc_center">
     <div class="acc_td acc_left">
         <div class="acc_container">
@@ -188,17 +205,6 @@ br.clear {
         preserveAspectRatio="xMinYMax slice"
       >
         ${houseConsumptionLine}
-      </svg>
-    </div>
-    <div class="acc_line solar_yield">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="100%"
-        height="20px"
-        viewBox="0 0 40 500"
-        preserveAspectRatio="xMinYMax slice"
-      >
-        ${solarYieldLine}
       </svg>
     </div>
     <div class="acc_td acc_right">
