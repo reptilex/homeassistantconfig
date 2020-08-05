@@ -289,11 +289,10 @@ br.clear {
     for (var prop in this.SolarCardEntities) {
       if (Object.prototype.hasOwnProperty.call(this.SolarCardEntitie, prop)) {
         console.log(prop);
-        var entityObj = Object;
         this.value = this.getStateValue(hass, prop);
         this.unit_of_measurement = 'kW';
-        this.accText.innerHTML = prop.value + ' ' + entityObj.unit_of_measurement;
-        this.speed = this.getSpeed(prop.value);
+        this.accText.innerHTML = this.value + ' ' + this.unit_of_measurement;
+        this.speed = this.getSpeed(this.value);
         if (this.speed === 0) {
           this.currentPosition = this.startPosition;
         }
