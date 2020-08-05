@@ -217,17 +217,6 @@ br.clear {
         ${houseConsumptionLine}
       </svg>
     </div>
-    <div class="acc_line battery">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="20px"
-        height="100%"
-        viewBox="0 0 40 500"
-        preserveAspectRatio="xMinYMax slice"
-      >
-        ${batteryLine}
-      </svg>
-    </div>
     <div class="acc_td acc_right">
         <div class="acc_icon_with_text">
             <div class="acc_container">
