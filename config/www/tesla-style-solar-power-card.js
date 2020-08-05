@@ -287,7 +287,7 @@ br.clear {
   updateProperties(hass) {
 
     for (var prop in this.SolarCardEntities) {
-      if (Object.prototype.hasOwnProperty.call(obj, prop)) {
+      if (Object.prototype.hasOwnProperty.call(this.SolarCardEntitie, prop)) {
         console.log(prop);
         var entityObj = Object;
         entityObj.entity = prop;
