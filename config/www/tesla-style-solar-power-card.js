@@ -134,14 +134,23 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
 .acc_top .acc_container, .acc_bottom .acc_container{
     margin:auto;
 }
-.acc_line_all_consumption{
+.acc_line{
   position:absolute;
-  padding-left: 48%;
-  padding-right: 40px;
-  z-index:10;
-  width:27%;
   padding-top:40px;
 }
+
+.house_consumption{
+  padding-left: 48%;
+  padding-right: 40px;
+  width:27%;
+}
+
+.grid_consumption{
+  padding-left: 95px;
+  padding-right: 34%;
+  width:27%;
+}
+
 br.clear {
   clear:both;
 }
@@ -158,7 +167,7 @@ br.clear {
               <ha-icon class="acc_icon" icon="${ this.leftIcon }"></ha-icon>
         </div>
     </div>
-    <div class="acc_line_all_consumption">
+    <div class="acc_line grid_consumption">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="100%"
@@ -169,7 +178,7 @@ br.clear {
         ${houseConsumptionLine}
       </svg>
     </div>
-    <div class="acc_line_all_consumption">
+    <div class="acc_line house_consumption">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="100%"
@@ -208,7 +217,7 @@ br.clear {
     this.accCircle.setAttributeNS(null, "cx", this.startPosition);
     this.accCircle.setAttributeNS(null, "cy", "20");
     this.accCircle.setAttributeNS(null, "fill", this.circleColor);
-    this.querySelectorAll("svg").item(0).appendChild(this.accCircle);
+    this.querySelectorAll(".house_consumption svg").item(0).appendChild(this.accCircle);
 
     this.contentIsCreated = true;
   }
