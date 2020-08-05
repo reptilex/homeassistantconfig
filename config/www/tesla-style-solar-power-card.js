@@ -32,16 +32,35 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
       throw new Error('You need to define "entity"');
     }
 
+    class sensorCardData {
+      constructor(){
+        this.speed = 0;
+        this.startPosition= -10;
+        this.maxPosition = 500;
+        this.value = 0;
+        this.unit_of_measurement = '';
+        this.accText = undefined;
+        this.entity = null;
+      }
+    }
+
     this.config = config;
 
-    this.SolarCardEntities = {
-      houseConsumptionVar: config.house_consumption_entity,
-      solarYield: config.solar_yield_entity,
-      //gridConsumption: config.grid_consumption_entity,
-      //gridFeed: config.grid_feed_entity,
-      //batteryConsumption: config.battery_consumption_entity,
-      //batteryCharge: config.battery_charge_entity
+    this.SolarCardData = {
+      houseConsumption: new sensorCardData(),
+      solarYield: new sensorCardData(),
+      gridConsumption: new sensorCardData(),
+      gridFeed: new sensorCardData(),
+      batteryConsumption: new sensorCardData(),
+      batteryCharge: new sensorCardData(),
     }
+
+    this.SolarCardData.houseConsumption.entity = config.house_consumption_entity;
+    this.SolarCardData.solarYield.entity = config.solar_yield_entity;
+    this.SolarCardData.gridConsumption.entity = config.grid_consumption_entity;
+    this.SolarCardData.gridFeed.entity = config.grid_feed_entity;
+    this.SolarCardData.batteryConsumption.entity = config.battery_consumption_entity;
+    this.SolarCardData.batteryCharge.entity = config.battery_charge_entity;
 
     this.topIcon = 'mdi:solar-panel-large';
     if (config.top_icon !== undefined) {
@@ -289,13 +308,13 @@ br.clear {
     for (var prop in this.SolarCardEntities) {
       if (Object.prototype.hasOwnProperty.call(this.SolarCardEntities, prop)) {
         console.log(prop);
-        this.value = this.getStateValue(hass, this.SolarCardEntities[prop]);
+        this.value = this.getStateValue(hass, this.SolarCardEntities[prop].entity);
         console.log(this.value);
-        this.unit_of_measurement = 'kW';
-        this.accText.innerHTML = this.value + ' ' + this.unit_of_measurement;
-        this.speed = this.getSpeed(this.value);
-        if (this.speed === 0) {
-          this.currentPosition = this.startPosition;
+        this.SolarCardEntities[prop].unit_of_measurement = 'kW';
+        this.SolarCardEntities[prop].accText.innerHTML = this.value + ' ' + this.unit_of_measurement;
+        this.SolarCardEntities[prop].speed = this.getSpeed(this.value);
+        if (this.SolarCardEntities[prop].speed === 0) {
+          this.SolarCardEntities[prop].currentPosition = this.startPosition;
         }
       }
     }
