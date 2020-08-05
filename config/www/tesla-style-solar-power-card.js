@@ -305,20 +305,20 @@ br.clear {
 
   updateProperties(hass) {
 
-    for (var prop in this.SolarCardEntities) {
-      if (Object.prototype.hasOwnProperty.call(this.SolarCardEntities, prop)) {
+    for (var prop in this.SolarCardData) {
+      if (Object.prototype.hasOwnProperty.call(this.SolarCardData, prop)) {
         console.log(prop);
-        this.SolarCardEntities[prop].value = this.getStateValue(hass, this.SolarCardEntities[prop].entity);
-        console.log(this.SolarCardEntities[prop].value);
-        this.SolarCardEntities[prop].unit_of_measurement = 'kW';
-        this.SolarCardEntities[prop].accText.innerHTML = this.value + ' ' + this.unit_of_measurement;
-        this.SolarCardEntities[prop].speed = this.getSpeed(this.value);
-        if (this.SolarCardEntities[prop].speed === 0) {
-          this.SolarCardEntities[prop].currentPosition = this.startPosition;
+        this.SolarCardData[prop].value = this.getStateValue(hass, this.SolarCardData[prop].entity);
+        console.log(this.SolarCardData[prop].value);
+        this.SolarCardData[prop].unit_of_measurement = 'kW';
+        this.SolarCardData[prop].accText.innerHTML = this.value + ' ' + this.unit_of_measurement;
+        this.SolarCardData[prop].speed = this.getSpeed(this.value);
+        if (this.SolarCardData[prop].speed === 0) {
+          this.SolarCardData[prop].currentPosition = this.startPosition;
         }
       }
     }
-    console.log(this.SolarCardEntities);
+    console.log(this.SolarCardData);
     /*
     this.value = this.getStateValue(hass, this.config.entity);
     this.unit_of_measurement = 'kW';
