@@ -157,14 +157,14 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
   margin: auto;
   padding-top: 0px;
   height: 59%;    
-  padding-left: 46%;
+  padding-left: 45%;
 }
 
 .battery{
   margin: auto;
   padding-top: 50px;
-  height: 50%;
-  padding-left: 46%;
+  height: 64%;
+  padding-left: 45%;
 }
 
 br.clear {
@@ -266,6 +266,12 @@ br.clear {
     this.gridConsumptionCircle.setAttributeNS(null, "fill", this.circleColor);
     this.querySelectorAll(".grid_consumption svg").item(0).appendChild(this.gridConsumptionCircle);
 
+    this.solarYieldCircle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
+    this.solarYieldCircle.setAttributeNS(null, "r", "10");
+    this.solarYieldCircle.setAttributeNS(null, "cy", this.startPosition);
+    this.solarYieldCircle.setAttributeNS(null, "cx", "20");
+    this.solarYieldCircle.setAttributeNS(null, "fill", this.circleColor);
+    this.querySelectorAll(".grid_consumption svg").item(0).appendChild(this.solarYieldCircle);
     this.contentIsCreated = true;
   }
 
@@ -336,6 +342,7 @@ br.clear {
 
     this.houseConsumptionCircle.setAttributeNS(null, "cx", this.currentPosition);
     this.gridConsumptionCircle.setAttributeNS(null, "cx", this.currentPosition);
+    this.solarYieldCircle.setAttributeNS(null, "cy", this.currentPosition);
 
     var obj = this;
     requestAnimationFrame(function(timestamp){
