@@ -35,12 +35,14 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
 
     this.config = config;
 
-    this.SolarCardEntities.houseConsumption.entity = config.house_consumption_entity;
-    this.SolarCardEntities.solarYield.entity = config.solar_yield_entity;
-    this.SolarCardEntities.gridConsumption.entity = config.grid_consumption_entity;
-    this.SolarCardEntities.gridFeed.entity = config.grid_feed_entity;
-    this.SolarCardEntities.batteryConsumption.entity = config.battery_consumption_entity;
-    this.SolarCardEntities.batteryCharge.entity = config.battery_charge_entity;
+    this.SolarCardEntities = {
+      houseConsumption: config.house_consumption_entity,
+      solarYield: config.solar_yield_entity,
+      gridConsumption: config.grid_consumption_entity,
+      gridFeed: config.grid_feed_entity,
+      batteryConsumption: config.battery_consumption_entity,
+      batteryCharge: config.battery_charge_entity
+    }
 
     this.topIcon = 'mdi:solar-panel-large';
     if (config.top_icon !== undefined) {
@@ -288,12 +290,14 @@ br.clear {
     for (var prop in this.SolarCardEntities) {
       if (Object.prototype.hasOwnProperty.call(obj, prop)) {
         console.log(prop);
-        prop.value = this.getStateValue(hass, prop.entity);
-        prop.unit_of_measurement = 'kW';
-        prop.accText.innerHTML = prop.value + ' ' + prop.unit_of_measurement;
-        prop.speed = this.getSpeed(prop.value);
-        if (prop.speed === 0) {
-          prop.currentPosition = this.startPosition;
+        var entityObj = Object;
+        entityObj.entity = prop;
+        entityObj.value = this.getStateValue(hass, prop);
+        entityObj.unit_of_measurement = 'kW';
+        entityObj.accText.innerHTML = prop.value + ' ' + entityObj.unit_of_measurement;
+        entityObj.speed = this.getSpeed(prop.value);
+        if (entityObj.speed === 0) {
+          entityObj.currentPosition = this.startPosition;
         }
       }
     }
