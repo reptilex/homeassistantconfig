@@ -90,6 +90,7 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
     if (true) {
       houseConsumptionLine = `<line x1="0" y1="20" x2="500" y2="20" style="stroke:var(--primary-text-color);" />`;
     }
+    var solarYieldLine = `<line x1="0" y1="0" x2="0" y2="200" style="stroke:var(--primary-text-color);" />`;
 
     content.innerHTML = `
 <style>
@@ -187,6 +188,17 @@ br.clear {
         preserveAspectRatio="xMinYMax slice"
       >
         ${houseConsumptionLine}
+      </svg>
+    </div>
+    <div class="acc_line solar_yield">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="100%"
+        height="20px"
+        viewBox="0 0 500 40"
+        preserveAspectRatio="xMinYMax slice"
+      >
+        ${solarYieldLine}
       </svg>
     </div>
     <div class="acc_td acc_right">
