@@ -295,6 +295,7 @@ br.clear {
     this.prevTimestamp = timestamp;
 
     this.houseConsumptionCircle.setAttributeNS(null, "cx", this.currentPosition);
+    this.gridConsumptionCircle.setAttributeNS(null, "cx", this.currentPosition);
 
     var obj = this;
     requestAnimationFrame(function(timestamp){
