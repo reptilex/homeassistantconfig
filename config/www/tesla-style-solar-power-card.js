@@ -162,8 +162,8 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
 
 .battery{
   margin: auto;
-  padding-top: 50%;
-  height: 59%;
+  padding-top: 50px;
+  height: 50%;
   padding-left: 46%;
 }
 
@@ -215,6 +215,18 @@ br.clear {
         preserveAspectRatio="xMinYMax slice"
       >
         ${houseConsumptionLine}
+      </svg>
+    </div>
+
+    <div class="acc_line battery">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="20px"
+        height="100%"
+        viewBox="0 0 40 500"
+        preserveAspectRatio="xMinYMax slice"
+      >
+        ${batteryLine}
       </svg>
     </div>
     <div class="acc_td acc_right">
