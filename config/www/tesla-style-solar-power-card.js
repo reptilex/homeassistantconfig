@@ -289,7 +289,7 @@ br.clear {
     for (var prop in this.SolarCardEntities) {
       if (Object.prototype.hasOwnProperty.call(this.SolarCardEntities, prop)) {
         console.log(prop);
-        this.value = this.getStateValue(hass, prop);
+        this.value = this.getStateValue(hass, this.SolarCardEntities[prop]);
         console.log(this.value);
         this.unit_of_measurement = 'kW';
         this.accText.innerHTML = this.value + ' ' + this.unit_of_measurement;
