@@ -315,7 +315,7 @@ br.clear {
   getStateValue(hass, EntityId){
     const entityId = EntityId;
     const state = hass.states[entityId];
-
+  console.log(state);
     if (state) {
         var valueStr = state.state;
         const unit_of_measurement = state.attributes.unit_of_measurement;
