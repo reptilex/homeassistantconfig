@@ -86,9 +86,9 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
     card.appendChild(content);
     this.appendChild(card);
 
-    var maybeALine = '';
+    var houseConumptionLine = '';
     if (this.showLine) {
-      maybeALine = `<line x1="0" y1="20" x2="500" y2="20" style="stroke:var(--primary-text-color);" />`;
+      houseConumptionLine = `<line x1="0" y1="20" x2="500" y2="20" style="stroke:var(--primary-text-color);" />`;
     }
 
     content.innerHTML = `
@@ -109,7 +109,7 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
 }
 .acc_text_container {
     position: relative;
-    left: 27px;
+    left: 14px;
     top: -29px;
     width: 70px;
 }
@@ -134,11 +134,13 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
 .acc_top .acc_container, .acc_bottom .acc_container{
     margin:auto;
 }
-.acc_line{
+.acc_line_all_consumption{
   position:absolute;
-  padding-left: 40px;
+  padding-left: 48%;
   padding-right: 40px;
-  z-index:1;
+  z-index:10;
+  width:27%;
+  padding-top:40px;
 }
 br.clear {
   clear:both;
@@ -156,7 +158,7 @@ br.clear {
               <ha-icon class="acc_icon" icon="${ this.leftIcon }"></ha-icon>
         </div>
     </div>
-    <div class="acc_td acc_line" style="width: 100%; padding-top: 50px;">
+    <div class="acc_line_all_consumption">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="100%"
@@ -164,7 +166,18 @@ br.clear {
         viewBox="0 0 500 40"
         preserveAspectRatio="xMinYMax slice"
       >
-        ${maybeALine}
+        ${houseConumptionLine}
+      </svg>
+    </div>
+    <div class="acc_line_all_consumption">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="100%"
+        height="20px"
+        viewBox="0 0 500 40"
+        preserveAspectRatio="xMinYMax slice"
+      >
+        ${houseConumptionLine}
       </svg>
     </div>
     <div class="acc_td acc_right">
