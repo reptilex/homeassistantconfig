@@ -76,7 +76,7 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
     this.unit_of_measurement = '';
 
     this.accText = undefined;
-    this.accCircle = undefined;
+    this.houseConsumptionCircle = undefined;
   }
 
   createContent(hass) {
@@ -140,9 +140,9 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
 }
 
 .house_consumption{
-  padding-left: 48%;
+  padding-left: 47%;
   padding-right: 40px;
-  width:27%;
+  width:28%;
 }
 
 .grid_consumption{
@@ -212,12 +212,19 @@ br.clear {
     this.accText.className = 'acc_text';
     card.querySelectorAll(".acc_text_container").item(0).appendChild(this.accText);
 
-    this.accCircle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
-    this.accCircle.setAttributeNS(null, "r", "10");
-    this.accCircle.setAttributeNS(null, "cx", this.startPosition);
-    this.accCircle.setAttributeNS(null, "cy", "20");
-    this.accCircle.setAttributeNS(null, "fill", this.circleColor);
-    this.querySelectorAll(".house_consumption svg").item(0).appendChild(this.accCircle);
+    this.houseConsumptionCircle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
+    this.houseConsumptionCircle.setAttributeNS(null, "r", "10");
+    this.houseConsumptionCircle.setAttributeNS(null, "cx", this.startPosition);
+    this.houseConsumptionCircle.setAttributeNS(null, "cy", "20");
+    this.houseConsumptionCircle.setAttributeNS(null, "fill", this.circleColor);
+    this.querySelectorAll(".house_consumption svg").item(0).appendChild(this.houseConsumptionCircle);
+
+    this.gridConsumptionCircle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
+    this.gridConsumptionCircle.setAttributeNS(null, "r", "10");
+    this.gridConsumptionCircle.setAttributeNS(null, "cx", this.startPosition);
+    this.gridConsumptionCircle.setAttributeNS(null, "cy", "20");
+    this.gridConsumptionCircle.setAttributeNS(null, "fill", this.circleColor);
+    this.querySelectorAll(".grid_consumption svg").item(0).appendChild(this.houseConsumptionCircle);
 
     this.contentIsCreated = true;
   }
@@ -287,7 +294,7 @@ br.clear {
 
     this.prevTimestamp = timestamp;
 
-    this.accCircle.setAttributeNS(null, "cx", this.currentPosition);
+    this.houseConsumptionCircle.setAttributeNS(null, "cx", this.currentPosition);
 
     var obj = this;
     requestAnimationFrame(function(timestamp){
