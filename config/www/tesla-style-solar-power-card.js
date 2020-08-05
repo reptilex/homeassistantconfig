@@ -1,7 +1,6 @@
 class TeslaStyleSolarPowerCard extends HTMLElement {
 
   set hass(hass) {
-    this.hass = hass;
 
     if (!this.contentIsCreated) {
       this.createContent();
@@ -13,7 +12,7 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
     }
 
     try {
-      this.updateProperties();
+      this.updateProperties(hass);
     } catch (err) {
       this.innerHTML = `
       <div class="acc_error">
@@ -285,7 +284,7 @@ br.clear {
     this.contentIsCreated = true;
   }
 
-  updateProperties() {
+  updateProperties(hass) {
 
     for (var prop in this.SolarCardEntities) {
       if (Object.prototype.hasOwnProperty.call(obj, prop)) {
@@ -314,9 +313,9 @@ br.clear {
     this.SolarYieldSpeed = this.getSpeed(this.value);
   }
 
-  getStateValue(EntityId){
+  getStateValue(hass, EntityId){
     const entityId = EntityId;
-    const state = this.hass.states[entityId];
+    const state = hass.states[entityId];
 
     if (state) {
         var valueStr = state.state;
