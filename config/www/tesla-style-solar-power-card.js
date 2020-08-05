@@ -127,10 +127,16 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
   vertical-align: top;
 }
 .acc_right {
-  vertical-align: top;
+  float:right;
 }
 .acc_top .acc_container, .acc_bottom .acc_container{
     margin:auto;
+}
+.acc_line{
+  position:absolute;
+  padding-left: 40px;
+  padding-right: 40px;
+  z-index:1;
 }
 br.clear {
   clear:both;
@@ -148,7 +154,7 @@ br.clear {
               <ha-icon class="acc_icon" icon="${ this.leftIcon }"></ha-icon>
         </div>
     </div>
-    <div class="acc_td" style="width: 100%; padding-top: 50px;">
+    <div class="acc_td acc_line" style="width: 100%; padding-top: 50px;">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="100%"
