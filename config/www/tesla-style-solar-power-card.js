@@ -86,9 +86,9 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
     card.appendChild(content);
     this.appendChild(card);
 
-    var houseConumptionLine = '';
-    if (this.showLine) {
-      houseConumptionLine = `<line x1="0" y1="20" x2="500" y2="20" style="stroke:var(--primary-text-color);" />`;
+    var houseConsumptionLine = '';
+    if (true) {
+      houseConsumptionLine = `<line x1="0" y1="20" x2="500" y2="20" style="stroke:var(--primary-text-color);" />`;
     }
 
     content.innerHTML = `
@@ -166,7 +166,7 @@ br.clear {
         viewBox="0 0 500 40"
         preserveAspectRatio="xMinYMax slice"
       >
-        ${houseConumptionLine}
+        ${houseConsumptionLine}
       </svg>
     </div>
     <div class="acc_line_all_consumption">
@@ -177,7 +177,7 @@ br.clear {
         viewBox="0 0 500 40"
         preserveAspectRatio="xMinYMax slice"
       >
-        ${houseConumptionLine}
+        ${houseConsumptionLine}
       </svg>
     </div>
     <div class="acc_td acc_right">
