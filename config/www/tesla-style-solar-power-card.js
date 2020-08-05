@@ -149,8 +149,8 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
 .grid_consumption{
   padding-left: 95px;
   padding-right: 34%;
-  width:27%;∆
-}∆
+  width:27%;
+}
 .solar_yield{
   margin:auto;
   padding-top:80px;
