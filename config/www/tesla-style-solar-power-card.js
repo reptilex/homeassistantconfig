@@ -290,13 +290,12 @@ br.clear {
       if (Object.prototype.hasOwnProperty.call(this.SolarCardEntitie, prop)) {
         console.log(prop);
         var entityObj = Object;
-        entityObj.entity = prop;
-        entityObj.value = this.getStateValue(hass, prop);
-        entityObj.unit_of_measurement = 'kW';
-        entityObj.accText.innerHTML = prop.value + ' ' + entityObj.unit_of_measurement;
-        entityObj.speed = this.getSpeed(prop.value);
-        if (entityObj.speed === 0) {
-          entityObj.currentPosition = this.startPosition;
+        this.value = this.getStateValue(hass, prop);
+        this.unit_of_measurement = 'kW';
+        this.accText.innerHTML = prop.value + ' ' + entityObj.unit_of_measurement;
+        this.speed = this.getSpeed(prop.value);
+        if (this.speed === 0) {
+          this.currentPosition = this.startPosition;
         }
       }
     }
