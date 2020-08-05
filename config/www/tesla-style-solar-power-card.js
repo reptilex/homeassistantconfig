@@ -49,18 +49,18 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
     this.SolarCardData = {
       houseConsumption: new sensorCardData(),
       solarYield: new sensorCardData(),
-      gridConsumption: new sensorCardData(),
-      gridFeed: new sensorCardData(),
-      batteryConsumption: new sensorCardData(),
-      batteryCharge: new sensorCardData(),
+      //gridConsumption: new sensorCardData(),
+      //gridFeed: new sensorCardData(),
+      //batteryConsumption: new sensorCardData(),
+      //batteryCharge: new sensorCardData(),
     }
 
     this.SolarCardData.houseConsumption.entity = config.house_consumption_entity;
     this.SolarCardData.solarYield.entity = config.solar_yield_entity;
-    this.SolarCardData.gridConsumption.entity = config.grid_consumption_entity;
-    this.SolarCardData.gridFeed.entity = config.grid_feed_entity;
-    this.SolarCardData.batteryConsumption.entity = config.battery_consumption_entity;
-    this.SolarCardData.batteryCharge.entity = config.battery_charge_entity;
+    //this.SolarCardData.gridConsumption.entity = config.grid_consumption_entity;
+    //this.SolarCardData.gridFeed.entity = config.grid_feed_entity;
+    //this.SolarCardData.batteryConsumption.entity = config.battery_consumption_entity;
+    //this.SolarCardData.batteryCharge.entity = config.battery_charge_entity;
 
     this.topIcon = 'mdi:solar-panel-large';
     if (config.top_icon !== undefined) {
