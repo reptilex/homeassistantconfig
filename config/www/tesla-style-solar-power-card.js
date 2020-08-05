@@ -319,6 +319,7 @@ br.clear {
         var valueStr = state.state;
         const unit_of_measurement = state.attributes.unit_of_measurement;
 
+        var value;
         if (unit_of_measurement === 'kW') {
           value = valueStr * 1;
         } else if (unit_of_measurement === 'W') {
