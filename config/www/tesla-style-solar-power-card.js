@@ -407,9 +407,8 @@ br.clear {
 
     this.prevTimestamp = timestamp;
 
-    entity.houseConsumptionCircle.setAttributeNS(null, "cx", entity.currentPosition);
-    entity.gridConsumptionCircle.setAttributeNS(null, "cx", entity.currentPosition);
-    entity.solarYieldCircle.setAttributeNS(null, "cy", entity.currentPosition);
+    entity.moveCircle(entity.currentPosition);
+    
 
     var obj = this;
     requestAnimationFrame(function(timestamp){
