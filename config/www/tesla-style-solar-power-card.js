@@ -44,7 +44,6 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
         this.accText.className = 'accText';
         this.entity = null;
         this.circleColor = "var(--primary-color)";
-        this.circle = null;
         this.prevTimestamp = undefined;
       }
 
@@ -70,6 +69,7 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
       entity.circle.setAttributeNS(null, "cx", entity.currentPosition);
     }
     this.solarCardElements.solarYield.entity = config.solar_yield_entity;
+    this.solarCardElements.solarYield.circleColor = "green";
     this.solarCardElements.solarYield.moveCircle = function(nextPosition, entity){
       entity.circle.setAttributeNS(null, "cy", entity.currentPosition);
     }
@@ -306,7 +306,7 @@ br.clear {
     circle.setAttributeNS(null, "r", "10");
     circle.setAttributeNS(null, "cx", this.solarCardElements.solarYield.startPosition);
     circle.setAttributeNS(null, "cy", "20");
-    circle.setAttributeNS(null, "fill", this.solarCardElements.solarYield.goodColor);
+    circle.setAttributeNS(null, "fill", this.solarCardElements.solarYield.circleColor);
     this.querySelectorAll(".solar_yield svg").item(0).appendChild(circle);
 
     this.contentIsCreated = true;
