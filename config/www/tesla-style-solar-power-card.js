@@ -388,7 +388,7 @@ br.clear {
 
     if (this.prevTimestamp === undefined) {
       entity.prevTimestamp = timestamp;
-    }
+    }+
 
     var timePassed = timestamp - this.prevTimestamp;
     var deltaPosition = entity.speed * timePassed;
