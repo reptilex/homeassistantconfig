@@ -106,18 +106,7 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
     }
     this.goodColor = "#13ae13";
 
-    this.contentIsCreated = false;
-
-    this.speed = 0;
-    this.startPosition = -10;
-    this.maxPosition = 500;
-
-    this.value = 0;
-    this.unit_of_measurement = '';
-
-    this.accText = undefined;
-    this.houseConsumptionCircle = undefined;
-    this.solarYieldCircle = undefined;
+    this.contentIsCreated = false
   }
 
   createContent(hass) {
@@ -309,21 +298,21 @@ br.clear {
     this.gridConsumptionCircle.setAttributeNS(null, "fill", this.circleColor);
     this.querySelectorAll(".grid_consumption svg").item(0).appendChild(this.gridConsumptionCircle);*/
 
-    /*this.solarCardElements.solarYield.circle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
+    this.solarCardElements.solarYield.circle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
     var circle = this.solarCardElements.solarYield.circle;
     circle.setAttributeNS(null, "r", "10");
     circle.setAttributeNS(null, "cx", this.startPosition);
     circle.setAttributeNS(null, "cy", "20");
     circle.setAttributeNS(null, "fill", this.goodColor);
-    this.querySelectorAll(".solar_yield svg").item(0).appendChild(circle);*/
+    this.querySelectorAll(".solar_yield svg").item(0).appendChild(circle);
 
     this.contentIsCreated = true;
   }
 
   updateProperties(hass) {
-    console.log("calling this.updateProperties");
     for (var prop in this.solarCardElements) {
       if (Object.prototype.hasOwnProperty.call(this.solarCardElements, prop)) {
+        console.log("calling this.updateProperties "+ prop);
         this.solarCardElements[prop].value = this.getStateValue(hass, this.solarCardElements[prop].entity);
         this.solarCardElements[prop].unit_of_measurement = 'kW';
         this.solarCardElements[prop].accText.innerHTML = this.solarCardElements[prop].value + ' ' + this.solarCardElements[prop].unit_of_measurement;
@@ -357,7 +346,7 @@ br.clear {
           value = Math.round(value * 1000) / 1000
         }
     }
-    console.log(entityId +"entity value: " + value);
+    console.log(entityId +" entity value: " + value);
     return value;
   }
 
