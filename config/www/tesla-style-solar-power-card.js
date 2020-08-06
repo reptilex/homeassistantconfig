@@ -63,11 +63,11 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
 
     this.solarCardElements.houseConsumption.entity = config.house_consumption_entity;
     this.solarCardElements.houseConsumption.moveCircle = function(nextPosition){
-      this.circle.setAttributeNS(null, "cx", entity.currentPosition);
+      this.circle.setAttributeNS(null, "cx", this.currentPosition);
     }
     this.solarCardElements.solarYield.entity = config.solar_yield_entity;
     this.solarCardElements.solarYield.moveCircle = function(nextPosition){
-      this.circle.setAttributeNS(null, "cy", entity.currentPosition);
+      this.circle.setAttributeNS(null, "cy", this.currentPosition);
     }
     //this.solarCardElements.gridConsumption.entity = config.grid_consumption_entity;
     //this.solarCardElements.gridFeed.entity = config.grid_feed_entity;
