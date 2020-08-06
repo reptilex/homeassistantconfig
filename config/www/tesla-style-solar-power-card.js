@@ -127,6 +127,7 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
     
     //Set sizes for stylesheet
     this.multiplier = Math.round(this.clientWidth/100);
+    console.log("clientWidth in config"+this.clientWidth);
     console.log("multimplier in config"+this.multiplier);
     this.iconSize = this.multiplier * 8;
     this.iconPadding = this.multiplier * 6;
