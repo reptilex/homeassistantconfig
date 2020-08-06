@@ -310,6 +310,7 @@ br.clear {
   }
 
   updateProperties(hass) {
+    console.log("calling this.updateProperties " + this.solarCardElements);
     for (var prop in this.solarCardElements) {
       if (Object.prototype.hasOwnProperty.call(this.solarCardElements, prop)) {
         console.log("calling this.updateProperties "+ prop);
