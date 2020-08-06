@@ -368,7 +368,7 @@ br.clear {
   }
 
   updateOneCircle(timestamp, entity) {
-    console.log('updatingOneCircle speed:' + entity.speed + " timestamp:"+this.prevTimestamp+" prevTimesteamp"+this.prevTimestamp);
+    //console.log('updatingOneCircle speed:' + entity.speed + " timestamp:"+this.prevTimestamp+" prevTimesteamp"+this.prevTimestamp);
     //console.log('updatingOneCircle beg pos:' + entity.currentPosition);
     if (this.clientWidth !== 0) {
       entity.maxPosition = 2 * this.clientWidth - 570;
@@ -392,7 +392,7 @@ br.clear {
 
     this.prevTimestamp = timestamp;
 
-    //console.log('updatingOneCircle end pos:', entity);
+    //console.log('updatingOneCircle end pos:' + entity.currentPosition);
     entity.moveCircle(entity.currentPosition, entity);
   }
 
