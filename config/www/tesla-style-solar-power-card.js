@@ -357,7 +357,7 @@ br.clear {
           value = Math.round(value * 1000) / 1000
         }
     }
-    console.log("entity value: " + value);
+    console.log(entityId +"entity value: " + value);
     return value;
   }
 
