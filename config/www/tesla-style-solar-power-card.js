@@ -332,17 +332,6 @@ br.clear {
         }
       }
     }
-    console.log(this.solarCardElements);
-    /*
-    this.value = this.getStateValue(hass, this.config.entity);
-    this.unit_of_measurement = 'kW';
-    this.accText.innerHTML = this.value + ' ' + this.unit_of_measurement;
-    this.speed = this.getSpeed(this.value);
-    if (this.speed === 0) {
-      this.currentPosition = this.startPosition;
-    }
-    */
-    this.SolarYieldSpeed = this.getSpeed(this.value);
   }
 
   getStateValue(hass, entityId){
@@ -367,7 +356,7 @@ br.clear {
           value = Math.round(value * 1000) / 1000
         }
     }
-
+    console.log("entity value: " + value);
     return value;
   }
 
@@ -386,7 +375,7 @@ br.clear {
   }
 
   updateOneCircle(timestamp, entity) {
-    console.log('updatingOneCircle');
+    console.log('updatingOneCircle pos:' + entity.currentPosition);
     if (entity.clientWidth !== 0) {
       entity.maxPosition = 2 * this.clientWidth - 570;
     }
