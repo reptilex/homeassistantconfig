@@ -55,7 +55,7 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
 
     this.solarCardElements = {
       houseConsumption: new sensorCardData(),
-      //solarYield: new sensorCardData(),
+      solarYield: new sensorCardData(),
       //gridConsumption: new sensorCardData(),
       //gridFeed: new sensorCardData(),
       //batteryConsumption: new sensorCardData(),
@@ -66,10 +66,10 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
     this.solarCardElements.houseConsumption.moveCircle = function(nextPosition, entity){
       entity.circle.setAttributeNS(null, "cx", entity.currentPosition);
     }
-    /*this.solarCardElements.solarYield.entity = config.solar_yield_entity;
+    this.solarCardElements.solarYield.entity = config.solar_yield_entity;
     this.solarCardElements.solarYield.moveCircle = function(nextPosition, entity){
       entity.circle.setAttributeNS(null, "cy", entity.currentPosition);
-    }*/
+    }
     //this.solarCardElements.gridConsumption.entity = config.grid_consumption_entity;
     //this.solarCardElements.gridFeed.entity = config.grid_feed_entity;
     //this.solarCardElements.batteryConsumption.entity = config.battery_consumption_entity;
