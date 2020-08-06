@@ -81,7 +81,7 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
     this.solarCardElements.gridFeed.entity = config.grid_feed_in_entity;
     this.solarCardElements.gridFeed.circleColor = "#326342";
     this.solarCardElements.gridFeed.moveCircle = function(nextPosition, entity){
-      entity.circle.setAttributeNS(null, "cy", entity.currentPosition);
+      entity.circle.setAttributeNS(null, "cx", entity.currentPosition);
     }
     this.solarCardElements.batteryConsumption.entity = config.battery_consumption_entity;
     this.solarCardElements.batteryConsumption.circleColor = "#326342";
@@ -360,6 +360,7 @@ br.clear {
         }
       }
     }
+    console.log(this.solarCardElements);
   }
 
   getStateValue(hass, entityId){
