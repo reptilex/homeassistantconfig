@@ -382,7 +382,7 @@ br.clear {
       entity.currentPosition = entity.startPosition;
     }
 
-    if (this.prevTimestamp === undefined) {
+    if (entity.prevTimestamp === undefined) {
       entity.prevTimestamp = timestamp;
     }
 
