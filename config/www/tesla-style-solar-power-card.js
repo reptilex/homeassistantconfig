@@ -44,6 +44,7 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
         this.accText.className = 'accText';
         this.entity = null;
         this.circle = null;
+        this.prevTimestamp = undefined;
       }
 
       moveCircle(nextPosition){
@@ -382,10 +383,10 @@ br.clear {
     }
 
     if (this.prevTimestamp === undefined) {
-      this.prevTimestamp = timestamp;
+      entity.prevTimestamp = timestamp;
     }
 
-    var timePassed = timestamp - this.prevTimestamp;
+    var timePassed = timestamp - entity.prevTimestamp;
     var deltaPosition = entity.speed * timePassed;
     entity.currentPosition += deltaPosition;
 
@@ -393,7 +394,7 @@ br.clear {
       entity.currentPosition = entity.startPosition;
     }
 
-    this.prevTimestamp = timestamp;
+    entity.prevTimestamp = timestamp;
 
     console.log('updatingOneCircle end pos:' + entity.currentPosition);
     entity.moveCircle(entity.currentPosition, entity);
