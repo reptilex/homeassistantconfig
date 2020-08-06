@@ -356,10 +356,10 @@ br.clear {
   }
 
   updateAllCircles(timestamp){
-    console.log("timestamp alone: " + timestamp);
+    //console.log("timestamp alone: " + timestamp);
     for (var prop in this.solarCardElements) {
       if (Object.prototype.hasOwnProperty.call(this.solarCardElements, prop)) {
-        console.log("calling this.updateAllCircles "+ prop);
+        //console.log("calling this.updateAllCircles "+ prop);
         this.updateOneCircle(timestamp, this.solarCardElements[prop])
       }
     }
@@ -398,7 +398,7 @@ br.clear {
 
     entity.prevTimestamp = timestamp;
 
-    console.log('updatingOneCircle end pos:' + entity.currentPosition);
+    //console.log('updatingOneCircle end pos:' + entity.currentPosition);
     entity.moveCircle(entity.currentPosition, entity);
   }
 
