@@ -125,12 +125,6 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
       this.circleColor = config.circle_color;
     }
     
-    //Set sizes for stylesheet
-    this.multiplier = Math.round(this.clientWidth/100);
-    console.log("clientWidth in config"+this.clientWidth);
-    console.log("multimplier in config"+this.multiplier);
-    this.iconSize = this.multiplier * 8;
-    this.iconPadding = this.multiplier * 6;
 
     this.contentIsCreated = false
   }
@@ -141,6 +135,14 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
     content.style.padding = '16px';
     card.appendChild(content);
     this.appendChild(card);
+
+
+    //Set sizes for stylesheet
+    this.multiplier = Math.round(this.clientWidth/100);
+    console.log("clientWidth in config"+this.clientWidth);
+    console.log("multimplier in config"+this.multiplier);
+    this.iconSize = this.multiplier * 8;
+    this.iconPadding = this.multiplier * 6;
 
     var houseConsumptionLine = '';
     if (true) {
