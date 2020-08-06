@@ -310,12 +310,11 @@ br.clear {
   }
 
   updateProperties(hass) {
-    console.log("calling this.updateProperties solarCard Elements")
-    console.log(this.solarCardElements);
-    
+    //console.log("calling this.updateProperties solarCard Elements")
+    //console.log(this.solarCardElements);
+
     for (var prop in this.solarCardElements) {
       if (Object.prototype.hasOwnProperty.call(this.solarCardElements, prop)) {
-        console.log("calling this.updateProperties "+ prop);
         this.solarCardElements[prop].value = this.getStateValue(hass, this.solarCardElements[prop].entity);
         this.solarCardElements[prop].unit_of_measurement = 'kW';
         this.solarCardElements[prop].accText.innerHTML = this.solarCardElements[prop].value + ' ' + this.solarCardElements[prop].unit_of_measurement;
@@ -356,6 +355,7 @@ br.clear {
   updateAllCircles(timestamp){
     for (var prop in this.solarCardElements) {
       if (Object.prototype.hasOwnProperty.call(this.solarCardElements, prop)) {
+        console.log("calling this.updateAllCircles "+ prop);
         this.updateOneCircle(timestamp, this.solarCardElements[prop])
       }
     }
