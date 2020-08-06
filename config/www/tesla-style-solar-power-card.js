@@ -326,10 +326,10 @@ br.clear {
       if (Object.prototype.hasOwnProperty.call(this.solarCardElements, prop)) {
         this.solarCardElements[prop].value = this.getStateValue(hass, this.solarCardElements[prop].entity);
         this.solarCardElements[prop].unit_of_measurement = 'kW';
-        this.solarCardElements[prop].accText.innerHTML = this.value + ' ' + this.unit_of_measurement;
-        this.solarCardElements[prop].speed = this.getSpeed(this.value);
+        this.solarCardElements[prop].accText.innerHTML = this.solarCardElements[prop].value + ' ' + this.solarCardElements[prop].unit_of_measurement;
+        this.solarCardElements[prop].speed = this.getSpeed(this.solarCardElements[prop].value);
         if (this.solarCardElements[prop].speed === 0) {
-          this.solarCardElements[prop].currentPosition = this.startPosition;
+          this.solarCardElements[prop].currentPosition = this.solarCardElements[prop].startPosition;
         }
       }
     }
