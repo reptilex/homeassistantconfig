@@ -6,7 +6,7 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
 
       var obj = this;
       requestAnimationFrame(function(timestamp){
-        console.log(' in hass client Width:' + this.clientWidth);
+        console.log(' in hass client Width:' + obj.clientWidth);
         obj.updateAllCircles(timestamp);
       });
     }
