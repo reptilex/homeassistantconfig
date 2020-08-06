@@ -69,7 +69,7 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
       entity.circle.setAttributeNS(null, "cx", entity.currentPosition);
     }
     this.solarCardElements.solarYield.entity = config.solar_yield_entity;
-    this.solarCardElements.solarYield.circleColor = "green";
+    this.solarCardElements.solarYield.circleColor = "#326342";
     this.solarCardElements.solarYield.moveCircle = function(nextPosition, entity){
       entity.circle.setAttributeNS(null, "cy", entity.currentPosition);
     }
