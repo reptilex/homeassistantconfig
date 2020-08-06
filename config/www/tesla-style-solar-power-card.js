@@ -30,6 +30,7 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
     if (!config.entity) {
       throw new Error('You need to define "entity"');
     }
+    this.config = config;
 
     class sensorCardData {
       constructor(){
@@ -52,7 +53,6 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
       }
     }
 
-    this.config = config;
     this.counter = 1;
 
     this.solarCardElements = {
@@ -123,7 +123,11 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
     if (config.circle_color !== undefined) {
       this.circleColor = config.circle_color;
     }
-    this.goodColor = "#13ae13";
+    
+    //Set sizes for stylesheet
+    this.multiplier = Math.round(this.clientWidth/100);
+    this.iconSize = this.multiplier * 8;
+    this.iconPadding = this.multiplier * 6;
 
     this.contentIsCreated = false
   }
@@ -146,18 +150,16 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
     content.innerHTML = `
 <style>
 .acc_container {
-    height: 50px;
-    width: 50px;
+    height: `+this.iconSize+`px;
+    width: `+this.iconSize+`px;
     border: 1px solid black;
     border-radius: 100px;
-    padding: 22px;
+    padding: `+this.iconPadding+`px;
     color: var(--primary-text-color);
     border-color: var(--primary-text-color);
 }
 .acc_icon {
-    --mdc-icon-size: 50px;
-    height: 50px;
-    width: 50px;
+    --mdc-icon-size: `+this.iconSize+`px;
 }
 .acc_text_container {
     position: relative;
