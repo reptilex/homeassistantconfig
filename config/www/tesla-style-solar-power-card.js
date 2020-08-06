@@ -363,8 +363,8 @@ br.clear {
 
     if(this.counter < 1000){
       var obj = this;
+      this.counter++;
       requestAnimationFrame(function(timestamp){
-        this.counter++;
         obj.updateAllCircles(timestamp);
       });
     }
