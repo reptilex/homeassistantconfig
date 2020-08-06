@@ -372,7 +372,7 @@ br.clear {
   updateAllCircles(timestamp){
     for (var prop in this.solarCardElements) {
       if (Object.prototype.hasOwnProperty.call(this.solarCardElements, prop)) {
-        updateOneCircle(timestamp, this.solarCardElements[prop])
+        this.updateOneCircle(timestamp, this.solarCardElements[prop])
       }
     }
 
