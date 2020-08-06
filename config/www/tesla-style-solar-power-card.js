@@ -308,12 +308,14 @@ br.clear {
     this.gridConsumptionCircle.setAttributeNS(null, "fill", this.circleColor);
     this.querySelectorAll(".grid_consumption svg").item(0).appendChild(this.gridConsumptionCircle);*/
 
-    this.solarYieldCircle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
-    this.solarYieldCircle.setAttributeNS(null, "r", "10");
-    this.solarYieldCircle.setAttributeNS(null, "cy", this.startPosition);
-    this.solarYieldCircle.setAttributeNS(null, "cx", "20");
-    this.solarYieldCircle.setAttributeNS(null, "fill", this.goodColor);
-    this.querySelectorAll(".solar_yield svg").item(0).appendChild(this.solarYieldCircle);
+    this.solarCardElements.solarYield.circle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
+    var circle = this.solarCardElements.solarYield.circle;
+    circle.setAttributeNS(null, "r", "10");
+    circle.setAttributeNS(null, "cx", this.startPosition);
+    circle.setAttributeNS(null, "cy", "20");
+    circle.setAttributeNS(null, "fill", this.goodColor);
+    this.querySelectorAll(".solar_yield svg").item(0).appendChild(circle);
+    
     this.contentIsCreated = true;
   }
 
