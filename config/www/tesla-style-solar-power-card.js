@@ -2,10 +2,10 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
 
   set hass(hass) {
     var card = document.getElementsByTagName("tesla-style-solar-power-card");
-    var computedStyle =  window.getComputedStyle(card);
-    var cardWidth = computedStyle.width;
+    //var computedStyle =  window.getComputedStyle(card);
+    //var cardWidth = computedStyle.width;
 
-    console.log("computedStyle:" + cardWidth)
+    console.log("computedStyle:" + card);
     if (!this.contentIsCreated) {
       this.createContent();
 
