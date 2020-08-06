@@ -36,6 +36,7 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
       constructor(){
         this.speed = 0;
         this.startPosition= -10;
+        this.currentPosition = this.startPosition;
         this.maxPosition = 500;
         this.value = 0;
         this.unit_of_measurement = '';
