@@ -376,7 +376,7 @@ br.clear {
   }
 
   updateOneCircle(timestamp, entity) {
-    console.log('updatingOneCircle pos:' + entity.currentPosition);
+    console.log('updatingOneCircle beg pos:' + entity.currentPosition);
     if (entity.clientWidth !== 0) {
       entity.maxPosition = 2 * this.clientWidth - 570;
     }
@@ -399,6 +399,7 @@ br.clear {
 
     this.prevTimestamp = timestamp;
 
+    console.log('updatingOneCircle end pos:' + entity.currentPosition);
     entity.moveCircle(entity.currentPosition, entity);
   }
 
