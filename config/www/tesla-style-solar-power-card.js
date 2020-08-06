@@ -36,7 +36,7 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
       constructor(){
         this.speed = 0;
         this.startPosition= -10;
-        this.currentPosition = this.startPosition;
+        this.currentPosition = -10;
         this.maxPosition = 500;
         this.value = 0;
         this.unit_of_measurement = '';
@@ -377,8 +377,8 @@ br.clear {
 
   updateOneCircle(timestamp, entity) {
     console.log('updatingOneCircle speed:' + entity.speed + " timestamp:"+this.prevTimestamp+" prevTimesteamp"+this.prevTimestamp);
-    //console.log('updatingOneCircle beg pos:' + entity.currentPosition);
-    if (entity.clientWidth !== 0) {
+    console.log('updatingOneCircle beg pos:' + entity.currentPosition);
+    if (this.clientWidth !== 0) {
       entity.maxPosition = 2 * this.clientWidth - 570;
     }
 
@@ -387,7 +387,7 @@ br.clear {
     }
 
     if (this.prevTimestamp === undefined) {
-      entity.prevTimestamp = timestamp;
+      this.prevTimestamp = timestamp;
     }
 
     var timePassed = timestamp - this.prevTimestamp;
@@ -400,7 +400,7 @@ br.clear {
 
     this.prevTimestamp = timestamp;
 
-    console.log('updatingOneCircle end pos:', entity);
+    //console.log('updatingOneCircle end pos:', entity);
     entity.moveCircle(entity.currentPosition, entity);
   }
 
