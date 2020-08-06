@@ -377,7 +377,7 @@ br.clear {
     console.log('updatingOneCircle speed:' + entity.speed + " maxpos:" + entity.maxPosition);
     //console.log('updatingOneCircle beg pos:' + entity.currentPosition);
     if (this.clientWidth !== 0) {
-      entity.maxPosition = 2 * this.clientWidth - 570;
+      //entity.maxPosition = 2 * this.clientWidth - 570;
     }
 
     if (entity.currentPosition === undefined) {
