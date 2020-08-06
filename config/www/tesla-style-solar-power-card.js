@@ -321,7 +321,7 @@ br.clear {
   }
 
   updateProperties(hass) {
-
+    console.log("calling this.updateProperties");
     for (var prop in this.solarCardElements) {
       if (Object.prototype.hasOwnProperty.call(this.solarCardElements, prop)) {
         this.solarCardElements[prop].value = this.getStateValue(hass, this.solarCardElements[prop].entity);
