@@ -363,7 +363,7 @@ br.clear {
       }
     }
 
-    if(this.counter < 100){
+    if(this.counter < 1000){
       var obj = this;
       this.counter++;
       requestAnimationFrame(function(timestamp){
