@@ -355,6 +355,7 @@ br.clear {
   }
 
   updateAllCircles(timestamp){
+    console.log("timestamp alone: " + timestamp);
     for (var prop in this.solarCardElements) {
       if (Object.prototype.hasOwnProperty.call(this.solarCardElements, prop)) {
         console.log("calling this.updateAllCircles "+ prop);
