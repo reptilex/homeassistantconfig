@@ -45,6 +45,7 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
         this.entity = null;
         this.circleColor = "var(--primary-color)";
         this.prevTimestamp = undefined;
+        this.backwardsMovement = false;
       }
 
       moveCircle(nextPosition){
@@ -80,6 +81,7 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
     }
     this.solarCardElements.gridFeed.entity = config.grid_feed_in_entity;
     this.solarCardElements.gridFeed.circleColor = "#326342";
+    this.solarCardElements.gridFeed.backwardsMovement = true;
     this.solarCardElements.gridFeed.moveCircle = function(nextPosition, entity){
       entity.circle.setAttributeNS(null, "cx", entity.currentPosition);
     }
@@ -414,20 +416,31 @@ br.clear {
       //entity.maxPosition = 2 * this.clientWidth - 570;
     }
 
-    if (entity.currentPosition === undefined) {
-      entity.currentPosition = entity.startPosition;
-    }
-
     if (entity.prevTimestamp === undefined) {
       entity.prevTimestamp = timestamp;
     }
 
     var timePassed = timestamp - entity.prevTimestamp;
     var deltaPosition = entity.speed * timePassed;
-    entity.currentPosition += deltaPosition;
+    if(!entity.backwardsMovement){
+      if (entity.currentPosition === undefined) {
+        entity.currentPosition = entity.startPosition;
+      }
 
-    if (entity.currentPosition > entity.maxPosition) {
-      entity.currentPosition = entity.startPosition;
+      entity.currentPosition += deltaPosition;
+
+      if (entity.currentPosition > entity.maxPosition) {
+        entity.currentPosition = entity.startPosition;
+      }
+    } else {
+      if (entity.currentPosition === undefined) {
+        entity.currentPosition = entity.maxPosition;
+      }
+      entity.currentPosition -= deltaPosition;
+
+      if (entity.currentPosition < entity.startPosition) {
+        entity.currentPosition = entity.maxPosition;
+      }
     }
 
     entity.prevTimestamp = timestamp;
