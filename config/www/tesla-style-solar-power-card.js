@@ -141,20 +141,6 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
     card.appendChild(content);
     this.appendChild(card);
 
-
-
-    //Set sizes for stylesheet
-    this.multiplier = Math.round(this.clientWidth/100);
-    console.log("this",this);
-    console.log("scrollWidth in config"+this.scrollWidth);
-    console.log("offsetWidth in config"+this.offsetWidth);
-    console.log("multimplier in config"+this.multiplier);
-
-    
-
-    throw new Error("my error message");
-
-
     this.iconSize = this.multiplier * 8;
     this.iconPadding = this.multiplier * 6;
 
@@ -280,7 +266,7 @@ br.clear {
     <div class="acc_line house_consumption">
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        width="100%"
+        width="50%"
         height="20px"
         viewBox="0 0 500 40"
         preserveAspectRatio="xMinYMax slice"
@@ -293,7 +279,7 @@ br.clear {
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="20px"
-        height="100%"
+        height="50%"
         viewBox="0 0 40 500"
         preserveAspectRatio="xMinYMax slice"
       >
