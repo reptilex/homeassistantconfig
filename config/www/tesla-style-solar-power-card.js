@@ -6,7 +6,7 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
     //var cardWidth = computedStyle.width;
 
     console.log("computedStyle:");
-    console.log(card.offsetWidth);
+    console.log(card);
     if (!this.contentIsCreated) {
       this.createContent();
 
