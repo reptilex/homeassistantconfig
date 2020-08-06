@@ -52,6 +52,7 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
     }
 
     this.config = config;
+    this.counter = 1;
 
     this.solarCardElements = {
       //houseConsumption: new sensorCardData(),
@@ -360,11 +361,13 @@ br.clear {
       }
     }
 
-
-    var obj = this;
-    requestAnimationFrame(function(timestamp){
-      obj.updateAllCircles(timestamp);
-    });
+    if(this.counter < 1000){
+      var obj = this;
+      requestAnimationFrame(function(timestamp){
+        this.counter++;
+        obj.updateAllCircles(timestamp);
+      });
+    }
   }
 
   updateOneCircle(timestamp, entity) {
