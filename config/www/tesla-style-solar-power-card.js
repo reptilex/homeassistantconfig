@@ -42,12 +42,17 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
         this.accText = document.createElement('div');
         this.accText.className = 'accText';
         this.entity = null;
+        this.circle = null;
+      }
+
+      moveCircle(nextPosition){
+          //overridden by each element
       }
     }
 
     this.config = config;
 
-    this.SolarCardData = {
+    this.solarCardElements = {
       houseConsumption: new sensorCardData(),
       solarYield: new sensorCardData(),
       //gridConsumption: new sensorCardData(),
@@ -56,12 +61,18 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
       //batteryCharge: new sensorCardData(),
     }
 
-    this.SolarCardData.houseConsumption.entity = config.house_consumption_entity;
-    this.SolarCardData.solarYield.entity = config.solar_yield_entity;
-    //this.SolarCardData.gridConsumption.entity = config.grid_consumption_entity;
-    //this.SolarCardData.gridFeed.entity = config.grid_feed_entity;
-    //this.SolarCardData.batteryConsumption.entity = config.battery_consumption_entity;
-    //this.SolarCardData.batteryCharge.entity = config.battery_charge_entity;
+    this.solarCardElements.houseConsumption.entity = config.house_consumption_entity;
+    this.solarCardElements.houseConsumption.moveCircle = function(nextPosition){
+      this.circle.setAttributeNS(null, "cx", entity.currentPosition);
+    }
+    this.solarCardElements.solarYield.entity = config.solar_yield_entity;
+    this.solarCardElements.solarYield.moveCircle = function(nextPosition){
+      this.circle.setAttributeNS(null, "cy", entity.currentPosition);
+    }
+    //this.solarCardElements.gridConsumption.entity = config.grid_consumption_entity;
+    //this.solarCardElements.gridFeed.entity = config.grid_feed_entity;
+    //this.solarCardElements.batteryConsumption.entity = config.battery_consumption_entity;
+    //this.solarCardElements.batteryCharge.entity = config.battery_charge_entity;
 
     this.topIcon = 'mdi:solar-panel-large';
     if (config.top_icon !== undefined) {
@@ -281,19 +292,21 @@ br.clear {
     this.accText.className = 'acc_text';
     card.querySelectorAll(".acc_text_container").item(0).appendChild(this.accText);
 
-    this.houseConsumptionCircle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
-    this.houseConsumptionCircle.setAttributeNS(null, "r", "10");
-    this.houseConsumptionCircle.setAttributeNS(null, "cx", this.startPosition);
-    this.houseConsumptionCircle.setAttributeNS(null, "cy", "20");
-    this.houseConsumptionCircle.setAttributeNS(null, "fill", this.circleColor);
-    this.querySelectorAll(".house_consumption svg").item(0).appendChild(this.houseConsumptionCircle);
+    
+    this.solarCardElements.houseConsumption.circle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
+    var circle = this.solarCardElements.houseConsumption.circle;
+    circle.setAttributeNS(null, "r", "10");
+    circle.setAttributeNS(null, "cx", this.startPosition);
+    circle.setAttributeNS(null, "cy", "20");
+    circle.setAttributeNS(null, "fill", this.circleColor);
+    this.querySelectorAll(".house_consumption svg").item(0).appendChild(circle);
 
-    this.gridConsumptionCircle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
+    /*this.gridConsumptionCircle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
     this.gridConsumptionCircle.setAttributeNS(null, "r", "10");
     this.gridConsumptionCircle.setAttributeNS(null, "cx", this.startPosition);
     this.gridConsumptionCircle.setAttributeNS(null, "cy", "20");
     this.gridConsumptionCircle.setAttributeNS(null, "fill", this.circleColor);
-    this.querySelectorAll(".grid_consumption svg").item(0).appendChild(this.gridConsumptionCircle);
+    this.querySelectorAll(".grid_consumption svg").item(0).appendChild(this.gridConsumptionCircle);*/
 
     this.solarYieldCircle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
     this.solarYieldCircle.setAttributeNS(null, "r", "10");
@@ -306,20 +319,18 @@ br.clear {
 
   updateProperties(hass) {
 
-    for (var prop in this.SolarCardData) {
-      if (Object.prototype.hasOwnProperty.call(this.SolarCardData, prop)) {
-        console.log(prop);
-        this.SolarCardData[prop].value = this.getStateValue(hass, this.SolarCardData[prop].entity);
-        console.log(this.SolarCardData[prop].value);
-        this.SolarCardData[prop].unit_of_measurement = 'kW';
-        this.SolarCardData[prop].accText.innerHTML = this.value + ' ' + this.unit_of_measurement;
-        this.SolarCardData[prop].speed = this.getSpeed(this.value);
-        if (this.SolarCardData[prop].speed === 0) {
-          this.SolarCardData[prop].currentPosition = this.startPosition;
+    for (var prop in this.solarCardElements) {
+      if (Object.prototype.hasOwnProperty.call(this.solarCardElements, prop)) {
+        this.solarCardElements[prop].value = this.getStateValue(hass, this.solarCardElements[prop].entity);
+        this.solarCardElements[prop].unit_of_measurement = 'kW';
+        this.solarCardElements[prop].accText.innerHTML = this.value + ' ' + this.unit_of_measurement;
+        this.solarCardElements[prop].speed = this.getSpeed(this.value);
+        if (this.solarCardElements[prop].speed === 0) {
+          this.solarCardElements[prop].currentPosition = this.startPosition;
         }
       }
     }
-    console.log(this.SolarCardData);
+    console.log(this.solarCardElements);
     /*
     this.value = this.getStateValue(hass, this.config.entity);
     this.unit_of_measurement = 'kW';
@@ -359,33 +370,47 @@ br.clear {
     return value;
   }
 
-  updateCircle(timestamp) {
-
-    if (this.clientWidth !== 0) {
-      this.maxPosition = 2 * this.clientWidth - 570;
+  updateAllCircles(timestamp){
+    for (var prop in this.solarCardElements) {
+      if (Object.prototype.hasOwnProperty.call(this.solarCardElements, prop)) {
+        updateOneCircle(timestamp, this.solarCardElements[prop])
+      }
     }
 
-    if (this.currentPosition === undefined) {
-      this.currentPosition = this.startPosition;
+
+    var obj = this;
+    requestAnimationFrame(function(timestamp){
+      obj.updateAllCircles(timestamp);
+    });
+  }
+
+  updateOneCircle(timestamp, entity) {
+
+    if (entity.clientWidth !== 0) {
+      entity.maxPosition = 2 * this.clientWidth - 570;
+    }
+
+    if (entity.currentPosition === undefined) {
+      entity.currentPosition = entity.startPosition;
     }
 
     if (this.prevTimestamp === undefined) {
-      this.prevTimestamp = timestamp;
+      entity.prevTimestamp = timestamp;
     }
 
     var timePassed = timestamp - this.prevTimestamp;
-    var deltaPosition = this.speed * timePassed;
-    this.currentPosition += deltaPosition;
+    var deltaPosition = entity.speed * timePassed;
+    entity.currentPosition += deltaPosition;
 
-    if (this.currentPosition > this.maxPosition) {
-        this.currentPosition = this.startPosition;
+    if (entity.currentPosition > entity.maxPosition) {
+      entity.currentPosition = entity.startPosition;
     }
 
     this.prevTimestamp = timestamp;
 
-    this.houseConsumptionCircle.setAttributeNS(null, "cx", this.currentPosition);
-    this.gridConsumptionCircle.setAttributeNS(null, "cx", this.currentPosition);
-    this.solarYieldCircle.setAttributeNS(null, "cy", this.currentPosition);
+    entity.houseConsumptionCircle.setAttributeNS(null, "cx", entity.currentPosition);
+    entity.gridConsumptionCircle.setAttributeNS(null, "cx", entity.currentPosition);
+    entity.solarYieldCircle.setAttributeNS(null, "cy", entity.currentPosition);
 
     var obj = this;
     requestAnimationFrame(function(timestamp){
@@ -405,8 +430,8 @@ br.clear {
     // 0.001    0.02
     // 15       2
 
-    if (this.value > 0) {
-      speed = 0.1320 * this.value + 0.02;
+    if (value > 0) {
+      speed = 0.1320 * value + 0.02;
     }
 
     return speed;
