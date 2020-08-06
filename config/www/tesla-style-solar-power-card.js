@@ -54,7 +54,7 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
 
     this.solarCardElements = {
       houseConsumption: new sensorCardData(),
-      solarYield: new sensorCardData(),
+      //solarYield: new sensorCardData(),
       //gridConsumption: new sensorCardData(),
       //gridFeed: new sensorCardData(),
       //batteryConsumption: new sensorCardData(),
@@ -65,10 +65,10 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
     this.solarCardElements.houseConsumption.moveCircle = function(nextPosition, entity){
       entity.circle.setAttributeNS(null, "cx", entity.currentPosition);
     }
-    this.solarCardElements.solarYield.entity = config.solar_yield_entity;
+    /*this.solarCardElements.solarYield.entity = config.solar_yield_entity;
     this.solarCardElements.solarYield.moveCircle = function(nextPosition, entity){
       entity.circle.setAttributeNS(null, "cy", entity.currentPosition);
-    }
+    }*/
     //this.solarCardElements.gridConsumption.entity = config.grid_consumption_entity;
     //this.solarCardElements.gridFeed.entity = config.grid_feed_entity;
     //this.solarCardElements.batteryConsumption.entity = config.battery_consumption_entity;
@@ -308,13 +308,13 @@ br.clear {
     this.gridConsumptionCircle.setAttributeNS(null, "fill", this.circleColor);
     this.querySelectorAll(".grid_consumption svg").item(0).appendChild(this.gridConsumptionCircle);*/
 
-    this.solarCardElements.solarYield.circle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
+    /*this.solarCardElements.solarYield.circle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
     var circle = this.solarCardElements.solarYield.circle;
     circle.setAttributeNS(null, "r", "10");
     circle.setAttributeNS(null, "cx", this.startPosition);
     circle.setAttributeNS(null, "cy", "20");
     circle.setAttributeNS(null, "fill", this.goodColor);
-    this.querySelectorAll(".solar_yield svg").item(0).appendChild(circle);
+    this.querySelectorAll(".solar_yield svg").item(0).appendChild(circle);*/
 
     this.contentIsCreated = true;
   }
@@ -387,7 +387,6 @@ br.clear {
 
   updateOneCircle(timestamp, entity) {
     console.log('updatingOneCircle');
-    console.log(entity);
     if (entity.clientWidth !== 0) {
       entity.maxPosition = 2 * this.clientWidth - 570;
     }
