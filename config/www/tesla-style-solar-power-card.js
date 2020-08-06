@@ -62,7 +62,7 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
     }
 
     this.solarCardElements.houseConsumption.entity = config.house_consumption_entity;
-    this.solarCardElements.houseConsumption.moveCircle = function(nextPosition){
+    this.solarCardElements.houseConsumption.moveCircle = function(nextPosition, entity){
       entity.circle.setAttributeNS(null, "cx", entity.currentPosition);
     }
     this.solarCardElements.solarYield.entity = config.solar_yield_entity;
