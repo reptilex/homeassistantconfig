@@ -315,7 +315,7 @@ br.clear {
     circle.setAttributeNS(null, "cy", "20");
     circle.setAttributeNS(null, "fill", this.goodColor);
     this.querySelectorAll(".solar_yield svg").item(0).appendChild(circle);
-    
+
     this.contentIsCreated = true;
   }
 
@@ -415,7 +415,7 @@ br.clear {
 
     var obj = this;
     requestAnimationFrame(function(timestamp){
-      obj.updateCircle(timestamp);
+      obj.updateAllCircles(timestamp);
     });
   }
 
