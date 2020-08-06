@@ -304,8 +304,8 @@ br.clear {
     this.solarCardElements.solarYield.circle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
     var circle = this.solarCardElements.solarYield.circle;
     circle.setAttributeNS(null, "r", "10");
-    circle.setAttributeNS(null, "cx", this.solarCardElements.solarYield.startPosition);
-    circle.setAttributeNS(null, "cy", "20");
+    circle.setAttributeNS(null, "cx", "20");
+    circle.setAttributeNS(null, "cy", this.solarCardElements.solarYield.startPosition);
     circle.setAttributeNS(null, "fill", this.solarCardElements.solarYield.circleColor);
     this.querySelectorAll(".solar_yield svg").item(0).appendChild(circle);
 
