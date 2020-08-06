@@ -412,8 +412,9 @@ br.clear {
   updateOneCircle(timestamp, entity) {
     //console.log('updatingOneCircle speed:' + entity.speed + " maxpos:" + entity.maxPosition);
     //console.log('updatingOneCircle beg pos:' + entity.currentPosition);
+    console.log('client Width:' + this.clientWidth);
     if (this.clientWidth !== 0) {
-      //entity.maxPosition = 2 * this.clientWidth - 570;
+      entity.maxPosition = 2 * this.clientWidth - 570;
     }
 
     if (entity.prevTimestamp === undefined) {
