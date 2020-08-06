@@ -43,6 +43,7 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
         this.accText = document.createElement('div');
         this.accText.className = 'accText';
         this.entity = null;
+        this.circleColor = "var(--primary-color)";
         this.circle = null;
         this.prevTimestamp = undefined;
       }
