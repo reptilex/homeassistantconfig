@@ -364,13 +364,13 @@ br.clear {
       }
     }
 
-    if(this.counter < 1000){
+    //if(this.counter < 1000){
       var obj = this;
-      this.counter++;
+      //this.counter++;
       requestAnimationFrame(function(timestamp){
         obj.updateAllCircles(timestamp);
       });
-    }
+    //}
   }
 
   updateOneCircle(timestamp, entity) {
