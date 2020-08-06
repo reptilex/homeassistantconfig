@@ -288,9 +288,9 @@ br.clear {
     this.solarCardElements.houseConsumption.circle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
     var circle = this.solarCardElements.houseConsumption.circle;
     circle.setAttributeNS(null, "r", "10");
-    circle.setAttributeNS(null, "cx", this.startPosition);
+    circle.setAttributeNS(null, "cx", this.solarCardElements.houseConsumption.startPosition);
     circle.setAttributeNS(null, "cy", "20");
-    circle.setAttributeNS(null, "fill", this.circleColor);
+    circle.setAttributeNS(null, "fill", this.solarCardElements.houseConsumption.circleColor);
     this.querySelectorAll(".house_consumption svg").item(0).appendChild(circle);
 
     /*this.gridConsumptionCircle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
@@ -303,9 +303,9 @@ br.clear {
     this.solarCardElements.solarYield.circle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
     var circle = this.solarCardElements.solarYield.circle;
     circle.setAttributeNS(null, "r", "10");
-    circle.setAttributeNS(null, "cx", this.startPosition);
+    circle.setAttributeNS(null, "cx", this.solarCardElements.solarYield.startPosition);
     circle.setAttributeNS(null, "cy", "20");
-    circle.setAttributeNS(null, "fill", this.goodColor);
+    circle.setAttributeNS(null, "fill", this.solarCardElements.solarYield.goodColor);
     this.querySelectorAll(".solar_yield svg").item(0).appendChild(circle);
 
     this.contentIsCreated = true;
