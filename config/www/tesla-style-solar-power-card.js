@@ -141,8 +141,9 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
     this.appendChild(card);
 
 
+
     //Set sizes for stylesheet
-    console.log('client hass:' + hass);
+    console.log('client this:' + this);
     this.multiplier = Math.round(this.clientWidth/100);
     console.log("clientWidth in config"+this.clientWidth);
     console.log("multimplier in config"+this.multiplier);
