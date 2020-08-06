@@ -144,8 +144,7 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
 
 
     //Set sizes for stylesheet
-    console.log('client this:' + this);
-    console.log(this);
+    console.log(' in updateProperties clientWidth:' + this.clientWidth);
     this.multiplier = Math.round(this.clientWidth/100);
     console.log("clientWidth in config"+this.clientWidth);
     console.log("multimplier in config"+this.multiplier);
@@ -365,6 +364,7 @@ br.clear {
   updateProperties(hass) {
     //console.log("calling this.updateProperties solarCard Elements")
     //console.log(this.solarCardElements);
+    console.log(' in updateProperties clientWidth:' + this.clientWidth);
 
     for (var prop in this.solarCardElements) {
       if (Object.prototype.hasOwnProperty.call(this.solarCardElements, prop)) {
@@ -407,6 +407,7 @@ br.clear {
   }
 
   updateAllCircles(timestamp){
+    console.log(' in updateProperties clientWidth:' + this.clientWidth);
     //console.log("timestamp alone: " + timestamp);
     for (var prop in this.solarCardElements) {
       if (Object.prototype.hasOwnProperty.call(this.solarCardElements, prop)) {
