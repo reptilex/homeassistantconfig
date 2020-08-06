@@ -400,7 +400,7 @@ br.clear {
 
     this.prevTimestamp = timestamp;
 
-    //console.log('updatingOneCircle end pos:' + entity.currentPosition);
+    console.log('updatingOneCircle end pos:' + entity);
     entity.moveCircle(entity.currentPosition, entity);
   }
 
