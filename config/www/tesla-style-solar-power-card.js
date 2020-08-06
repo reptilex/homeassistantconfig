@@ -55,7 +55,7 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
     this.counter = 1;
 
     this.solarCardElements = {
-      //houseConsumption: new sensorCardData(),
+      houseConsumption: new sensorCardData(),
       solarYield: new sensorCardData(),
       //gridConsumption: new sensorCardData(),
       //gridFeed: new sensorCardData(),
@@ -63,10 +63,10 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
       //batteryCharge: new sensorCardData(),
     }
 
-    //this.solarCardElements.houseConsumption.entity = config.house_consumption_entity;
-    /*this.solarCardElements.houseConsumption.moveCircle = function(nextPosition, entity){
+    this.solarCardElements.houseConsumption.entity = config.house_consumption_entity;
+    this.solarCardElements.houseConsumption.moveCircle = function(nextPosition, entity){
       entity.circle.setAttributeNS(null, "cx", entity.currentPosition);
-    }*/
+    }
     this.solarCardElements.solarYield.entity = config.solar_yield_entity;
     this.solarCardElements.solarYield.moveCircle = function(nextPosition, entity){
       entity.circle.setAttributeNS(null, "cy", entity.currentPosition);
@@ -284,13 +284,13 @@ br.clear {
     card.querySelectorAll(".acc_text_container").item(0).appendChild(this.accText);
 
     
-   /* this.solarCardElements.houseConsumption.circle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
+    this.solarCardElements.houseConsumption.circle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
     var circle = this.solarCardElements.houseConsumption.circle;
     circle.setAttributeNS(null, "r", "10");
     circle.setAttributeNS(null, "cx", this.startPosition);
     circle.setAttributeNS(null, "cy", "20");
     circle.setAttributeNS(null, "fill", this.circleColor);
-    this.querySelectorAll(".house_consumption svg").item(0).appendChild(circle);*/
+    this.querySelectorAll(".house_consumption svg").item(0).appendChild(circle);
 
     /*this.gridConsumptionCircle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
     this.gridConsumptionCircle.setAttributeNS(null, "r", "10");
@@ -361,7 +361,7 @@ br.clear {
       }
     }
 
-    if(this.counter < 1000){
+    if(this.counter < 100){
       var obj = this;
       this.counter++;
       requestAnimationFrame(function(timestamp){
