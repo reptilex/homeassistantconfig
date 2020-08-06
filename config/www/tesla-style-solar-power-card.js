@@ -5,6 +5,9 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
       this.createContent();
 
       var obj = this;
+
+      console.log(' in hass client Width:' + this.clientWidth);
+
       requestAnimationFrame(function(timestamp){
         console.log(' in hass client Width:' + obj.clientWidth);
         obj.updateAllCircles(timestamp);
@@ -139,7 +142,7 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
 
 
     //Set sizes for stylesheet
-    console.log('client Width:' + this.clientWidth);
+    console.log('client Width:' + card.clientWidth);
     this.multiplier = Math.round(this.clientWidth/100);
     console.log("clientWidth in config"+this.clientWidth);
     console.log("multimplier in config"+this.multiplier);
