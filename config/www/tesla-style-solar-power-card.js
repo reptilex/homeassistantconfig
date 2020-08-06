@@ -399,12 +399,6 @@ br.clear {
     this.prevTimestamp = timestamp;
 
     entity.moveCircle(entity.currentPosition, entity);
-    
-
-    var obj = this;
-    requestAnimationFrame(function(timestamp){
-      obj.updateAllCircles(timestamp);
-    });
   }
 
   getSpeed(value) {
