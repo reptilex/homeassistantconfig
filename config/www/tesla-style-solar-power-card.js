@@ -130,7 +130,7 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
       this.circleColor = config.circle_color;
     }
     
-
+    this.oldWidth = 0;
     this.contentIsCreated = false
   }
 
@@ -408,6 +408,10 @@ br.clear {
         this.updateOneCircle(timestamp, this.solarCardElements[prop])
       }
     }
+    
+    if(this.oldWidth != this.clientWidth) {
+      this.changeStylesDependingOnWidth(this.clientWidth);
+    }
 
     //if(this.counter < 1000){
       var obj = this;
@@ -416,6 +420,13 @@ br.clear {
         obj.updateAllCircles(timestamp);
       });
     //}
+  }
+
+  changeStylesDependingOnWidth(newWidth){
+    this.oldWidth = newWidth;
+    var pixelMultiplier = Math.round(newWidth / 100);
+    document.getElementsByClassName("acc_icon").style.iconSize = 10*pixelMultiplier;
+    console.log("changed icon size to: " + 10*pixelMultiplier);
   }
 
   updateOneCircle(timestamp, entity) {
