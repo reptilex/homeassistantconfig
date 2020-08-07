@@ -496,3 +496,6 @@ br.clear {
 }
 
 customElements.define('tesla-style-solar-power-card', TeslaStyleSolarPowerCard);
+document.addEventListener("DOMContentLoaded", function(event) {
+  console.log("now we are lloadad");
+});
