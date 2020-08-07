@@ -426,6 +426,7 @@ br.clear {
     this.oldWidth = newWidth;
     var pixelMultiplier = Math.round(newWidth / 100);
     var icons = document.getElementsByClassName("acc_icon");
+    console.log(document);
     console.log(icons);
     icons.style.iconSize = 10*pixelMultiplier;
     
