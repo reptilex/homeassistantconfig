@@ -409,7 +409,7 @@ br.clear {
       }
     }
 
-    if(this.oldWidth != this.clientWidth) {
+    if(this.oldWidth != this.clientWidth && document.readyState === "complete") {
       this.changeStylesDependingOnWidth(this.clientWidth);
     }
 
