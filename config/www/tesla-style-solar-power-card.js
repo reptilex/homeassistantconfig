@@ -425,10 +425,10 @@ br.clear {
   changeStylesDependingOnWidth(newWidth){
     this.oldWidth = newWidth;
     var pixelMultiplier = Math.round(newWidth / 100);
-    var icons = document.getElementsByClassName("acc_container");
+    var icons = document.getElementsByClassName("column");
     console.log(document);
     console.log(icons);
-    icons.style.iconSize = 10*pixelMultiplier;
+    //icons.style.iconSize = 10*pixelMultiplier;
     
     console.log("changed icon size to: " + 10*pixelMultiplier);
   }
