@@ -430,7 +430,7 @@ br.clear {
     console.log(icons);
     //icons.style.iconSize = 10*pixelMultiplier;
     
-    console.log("changed icon size to: " + 10*pixelMultiplier);
+    console.log("testing query selector: " + document.readyState);
   }
 
   updateOneCircle(timestamp, entity) {
