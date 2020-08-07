@@ -425,7 +425,7 @@ br.clear {
   changeStylesDependingOnWidth(newWidth){
     this.oldWidth = newWidth;
     var pixelMultiplier = Math.round(newWidth / 100);
-    var icons = document.querySelector(".column");
+    var icons = document.querySelector(".drawer");
     console.log(document);
     console.log(icons);
     //icons.style.iconSize = 10*pixelMultiplier;
