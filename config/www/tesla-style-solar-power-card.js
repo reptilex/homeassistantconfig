@@ -155,16 +155,16 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
     content.innerHTML = `
 <style>
 .acc_container {
-    height: 50px;
-    width: 50px;
+    height: 40px;
+    width: 40px;
     border: 1px solid black;
     border-radius: 100px;
-    padding: `+this.iconPadding+`px;
+    padding: 22px;
     color: var(--primary-text-color);
     border-color: var(--primary-text-color);
 }
 .acc_icon {
-    --mdc-icon-size: 50px;
+    --mdc-icon-size: 40px;
 }
 .acc_text_container {
     position: relative;
