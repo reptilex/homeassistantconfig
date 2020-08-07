@@ -408,7 +408,7 @@ br.clear {
         this.updateOneCircle(timestamp, this.solarCardElements[prop])
       }
     }
-    
+
     if(this.oldWidth != this.clientWidth) {
       this.changeStylesDependingOnWidth(this.clientWidth);
     }
@@ -425,7 +425,10 @@ br.clear {
   changeStylesDependingOnWidth(newWidth){
     this.oldWidth = newWidth;
     var pixelMultiplier = Math.round(newWidth / 100);
-    document.getElementsByClassName("acc_icon").style.iconSize = 10*pixelMultiplier;
+    var icons = document.getElementsByClassName("acc_icon");
+    console.log(icons);
+    icons.style.iconSize = 10*pixelMultiplier;
+    
     console.log("changed icon size to: " + 10*pixelMultiplier);
   }
 
