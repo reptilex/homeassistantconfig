@@ -445,6 +445,8 @@ br.clear {
         listObj[currentIndex].shadowRoot.querySelector('ha-svg-icon').style["width"] = 10 * pixelMultiplier + 'px';       
       }
     );
+
+    console.log('chekcing clientHeight ' + this.clientHeight);
     //icons.style.iconSize = 10*pixelMultiplier;
     
     //console.log("testing query selector: " + document.readyState);
