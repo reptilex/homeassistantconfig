@@ -441,10 +441,8 @@ br.clear {
     icons.forEach(
       function(currentValue, currentIndex, listObj){
         console.log(listObj[currentIndex]);
-        var iconObj = listObj[currentIndex].shadowRoot.querySelector('ha-svg-icon');
-        console.log(iconObj);
-        iconObj.style["height"] = 10 * pixelMultiplier + 'px';       
-        iconObj.style["width"] = 10 * pixelMultiplier + 'px';       
+        listObj[currentIndex].shadowRoot.querySelector('ha-svg-icon').style["height"] = 10 * pixelMultiplier + 'px';       
+        listObj[currentIndex].shadowRoot.querySelector('ha-svg-icon').style["width"] = 10 * pixelMultiplier + 'px';       
       }
     );
     //icons.style.iconSize = 10*pixelMultiplier;
