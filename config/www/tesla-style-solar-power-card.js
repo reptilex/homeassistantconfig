@@ -448,9 +448,9 @@ br.clear {
       }
     );
 
-    this.cardRoot.querySelector('.gridConsumption').style['height'] = '10px';
-    this.cardRoot.querySelector('.gridConsumption').style['width'] = 20 * pixelMultiplier + 'px';
-    this.cardRoot.querySelector('.gridConsumption').style['margin-left'] = 20 * pixelMultiplier + 'px';
+    this.cardRoot.querySelector('.grid_consumption').style['height'] = '10px';
+    this.cardRoot.querySelector('.grid_consumption').style['width'] = 20 * pixelMultiplier + 'px';
+    this.cardRoot.querySelector('.grid_onsumption').style['margin-left'] = 20 * pixelMultiplier + 'px';
 
     //console.log('chekcing clientHeight ' + this.clientHeight);
     //icons.style.iconSize = 10*pixelMultiplier;
