@@ -426,15 +426,16 @@ br.clear {
   changeStylesDependingOnWidth(newWidth){
     this.oldWidth = newWidth;
     this.pixelMultiplier = Math.round(newWidth / 100);
+    var pixelMultiplier = this.pixelMultiplier;
     //console.log(document);
     this.cardRoot = document.querySelector('home-assistant').shadowRoot.querySelector('home-assistant-main').shadowRoot.querySelector('ha-panel-lovelace').shadowRoot.querySelector('hui-root').shadowRoot.querySelector('hui-view').shadowRoot.querySelector('tesla-style-solar-power-card ha-card');
 
     var iconContainer = this.cardRoot.querySelectorAll('.acc_container');
     iconContainer.forEach(
       function(currentValue, currentIndex, iconObj){
-        iconObj[currentIndex].style["height"] = 10 * this.pixelMultiplier + 'px';
-        iconObj[currentIndex].style["width"] = 10 * this.pixelMultiplier + 'px';
-        iconObj[currentIndex].style["padding"] = 7 * this.pixelMultiplier + 'px';        
+        iconObj[currentIndex].style["height"] = 10 * pixelMultiplier + 'px';
+        iconObj[currentIndex].style["width"] = 10 * pixelMultiplier + 'px';
+        iconObj[currentIndex].style["padding"] = 7 * pixelMultiplier + 'px';        
       }
     );
 
@@ -442,14 +443,14 @@ br.clear {
     icons.forEach(
       function(currentValue, currentIndex, listObj){
         console.log(listObj[currentIndex]);
-        listObj[currentIndex].shadowRoot.querySelector('ha-svg-icon').style["height"] = 10 * this.pixelMultiplier + 'px';       
-        listObj[currentIndex].shadowRoot.querySelector('ha-svg-icon').style["width"] = 10 * this.pixelMultiplier + 'px';       
+        listObj[currentIndex].shadowRoot.querySelector('ha-svg-icon').style["height"] = 10 * pixelMultiplier + 'px';       
+        listObj[currentIndex].shadowRoot.querySelector('ha-svg-icon').style["width"] = 10 * pixelMultiplier + 'px';       
       }
     );
 
     this.cardRoot.querySelector('.gridConsumption').style['height'] = '10px';
-    this.cardRoot.querySelector('.gridConsumption').style['width'] = 20 * this.pixelMultiplier + 'px';
-    this.cardRoot.querySelector('.gridConsumption').style['margin-left'] = 20 * this.pixelMultiplier + 'px';
+    this.cardRoot.querySelector('.gridConsumption').style['width'] = 20 * pixelMultiplier + 'px';
+    this.cardRoot.querySelector('.gridConsumption').style['margin-left'] = 20 * pixelMultiplier + 'px';
 
     //console.log('chekcing clientHeight ' + this.clientHeight);
     //icons.style.iconSize = 10*pixelMultiplier;
