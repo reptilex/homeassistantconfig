@@ -432,6 +432,7 @@ br.clear {
     console.log(icons);
     icons.forEach(
       function(currentValue, currentIndex, icon){
+        console.log('iterating through icons ' + currentIndex);
         console.log(icon);
         icon.style.height = 10 * pixelMultiplier;
         icon.style.width = 10 * pixelMultiplier;
