@@ -431,12 +431,14 @@ br.clear {
     var icons = this.cardRoot.querySelectorAll('.acc_container');
     console.log(icons);
     icons.forEach(
-      function(currentValue, currentIndex, icon){
+      function(currentValue, currentIndex, iconObj){
         console.log('iterating through icons ' + currentIndex);
-        console.log(icon);
-        icon.style.height = 10 * pixelMultiplier;
-        icon.style.width = 10 * pixelMultiplier;
-        icon.style.padding = 7 * pixelMultiplier;
+        console.log(' icon start');
+        console.log(iconObj);
+        console.log(' icon end');
+        iconObj.style.height = 10 * pixelMultiplier;
+        iconObj.style.width = 10 * pixelMultiplier;
+        iconObj.style.padding = 7 * pixelMultiplier;
       }
     );
     //icons.style.iconSize = 10*pixelMultiplier;
