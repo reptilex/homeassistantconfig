@@ -231,7 +231,7 @@ br.clear {
 <div class="tesla-style-power-card">
   <div class="acc_top">
       <div class="acc_container">
-            <div class="acc_icon" icon="${ this.topIcon }"></ha-icon>
+            <ha-icon class="acc_icon" icon="${ this.topIcon }"></ha-icon>
       </div>
   </div>
   <div class="acc_line solar_yield">
@@ -249,7 +249,7 @@ br.clear {
 <div class="acc_center">
     <div class="acc_td acc_left">
         <div class="acc_container">
-              <div class="acc_icon" icon="${ this.leftIcon }"></ha-icon>
+              <ha-icon class="acc_icon" icon="${ this.leftIcon }"></ha-icon>
         </div>
     </div>
     <div class="acc_line grid_consumption">
@@ -289,7 +289,7 @@ br.clear {
     <div class="acc_td acc_right">
         <div class="acc_icon_with_text">
             <div class="acc_container">
-                <div class="acc_icon" icon="${ this.rightIcon }"></ha-icon>
+                <ha-icon class="acc_icon" icon="${ this.rightIcon }"></ha-icon>
             </div>
             <div class="acc_text_container">
             </div>
@@ -299,7 +299,7 @@ br.clear {
 <br class="clear">
   <div class="acc_bottom">
     <div class="acc_container">
-          <div class="acc_icon" icon="${ this.bottomIcon }"></ha-icon>
+          <ha-icon class="acc_icon" icon="${ this.bottomIcon }"></ha-icon>
     </div>
   </div>
 </div>
@@ -428,7 +428,7 @@ br.clear {
     //console.log(document);
     this.cardShadowRoot = document.querySelector('home-assistant').shadowRoot.querySelector('home-assistant-main').shadowRoot.querySelector('ha-panel-lovelace').shadowRoot.querySelector('hui-root').shadowRoot.querySelector('hui-view').shadowRoot.querySelector('tesla-style-solar-power-card ha-card').shadowRoot;
 
-    var icons = this.cardShadowRoot;
+    var icons = this.cardShadowRoot.querySelectorAll('ha-icon');
     console.log(icons);
     //icons.style.iconSize = 10*pixelMultiplier;
     
