@@ -342,14 +342,14 @@ br.clear {
     circle.setAttributeNS(null, "fill", this.solarCardElements.gridFeed.circleColor);
     this.querySelectorAll(".grid_consumption svg").item(0).appendChild(circle);
 
-    this.solarCardElements.batteryConsumption.circle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
+    /*this.solarCardElements.batteryConsumption.circle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
     var circle = this.solarCardElements.batteryConsumption.circle;
     circle.setAttributeNS(null, "r", "10");
     circle.setAttributeNS(null, "cx", "20");
     circle.setAttributeNS(null, "cy", this.solarCardElements.batteryConsumption.startPosition);
     circle.setAttributeNS(null, "fill", this.solarCardElements.batteryConsumption.circleColor);
     this.querySelectorAll(".battery svg").item(0).appendChild(circle);
-
+  */
     
 
     this.contentIsCreated = true;
@@ -462,7 +462,7 @@ br.clear {
     //console.log('updatingOneCircle beg pos:' + entity.currentPosition);
     //console.log('client Width:' + this.clientWidth);
     if (this.clientWidth !== 0) {
-      entity.maxPosition = 20 * this.pixelMultiplier;
+      entity.maxPosition = 20 * entity.maxPosition;
     }
 
     if (entity.prevTimestamp === undefined) {
