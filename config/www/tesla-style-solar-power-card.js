@@ -428,18 +428,19 @@ br.clear {
     //console.log(document);
     this.cardRoot = document.querySelector('home-assistant').shadowRoot.querySelector('home-assistant-main').shadowRoot.querySelector('ha-panel-lovelace').shadowRoot.querySelector('hui-root').shadowRoot.querySelector('hui-view').shadowRoot.querySelector('tesla-style-solar-power-card ha-card');
 
-    var icons = this.cardRoot.querySelectorAll('.acc_container');
-    icons.forEach(
+    var iconContainer = this.cardRoot.querySelectorAll('.acc_container');
+    iconContainer.forEach(
       function(currentValue, currentIndex, iconObj){
-        console.log('iterating through icons ' + currentIndex + " multiplier " + pixelMultiplier);
-        console.log(' icon start' + iconObj[currentIndex].style["height"]);
         iconObj[currentIndex].style["height"] = 10 * pixelMultiplier + 'px';
-        //iconObj[currentIndex].setAttribute("style","height:" + 10 * pixelMultiplier + "px");
         iconObj[currentIndex].style["width"] = 10 * pixelMultiplier + 'px';
-        iconObj[currentIndex].style["padding"] = 7 * pixelMultiplier + 'px';
-        
-        console.log(iconObj[currentIndex]);
-        console.log(' icon end ' + iconObj[currentIndex].style["height"]);
+        iconObj[currentIndex].style["padding"] = 7 * pixelMultiplier + 'px';        
+      }
+    );
+
+    var icons = this.cardRoot.querySelectorAll('ha-icon');
+    iconContainer.forEach(
+      function(currentValue, currentIndex, iconObj){
+        iconObj[currentIndex].style["font-size"] = 10 * pixelMultiplier + 'px';       
       }
     );
     //icons.style.iconSize = 10*pixelMultiplier;
