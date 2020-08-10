@@ -340,7 +340,7 @@ br.clear {
     circle.setAttributeNS(null, "cx", this.solarCardElements.gridFeed.startPosition);
     circle.setAttributeNS(null, "cy", "20");
     circle.setAttributeNS(null, "fill", this.solarCardElements.gridFeed.circleColor);
-    this.querySelectorAll(".grid_feed svg").item(0).appendChild(circle);
+    this.querySelectorAll(".grid_consumption svg").item(0).appendChild(circle);
 
     this.solarCardElements.batteryConsumption.circle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
     var circle = this.solarCardElements.batteryConsumption.circle;
