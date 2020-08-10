@@ -7,10 +7,10 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
 
       var obj = this;
 
-      console.log(' in hass client Width:' + this.clientWidth);
+      //console.log(' in hass client Width:' + this.clientWidth);
 
       requestAnimationFrame(function(timestamp){
-        console.log(' in hass client Width:' + obj.clientWidth);
+        //console.log(' in hass client Width:' + obj.clientWidth);
         obj.updateAllCircles(timestamp);
       });
     }
@@ -32,7 +32,7 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
   }
 
   setConfig(config) {
-    console.log("setting config");
+    //console.log("setting config");
     if (!config.entity) {
       throw new Error('You need to define "entity"');
     }
@@ -357,7 +357,7 @@ br.clear {
   updateProperties(hass) {
     //console.log("calling this.updateProperties solarCard Elements")
     //console.log(this.solarCardElements);
-    console.log(' in updateProperties clientWidth:' + this.clientWidth);
+    //console.log(' in updateProperties clientWidth:' + this.clientWidth);
 
     for (var prop in this.solarCardElements) {
       if (Object.prototype.hasOwnProperty.call(this.solarCardElements, prop)) {
@@ -400,7 +400,7 @@ br.clear {
   }
 
   updateAllCircles(timestamp){
-    console.log(' in updateAllCircles clientWidth:' + this.clientWidth);
+    //console.log(' in updateAllCircles clientWidth:' + this.clientWidth);
     //console.log("timestamp alone: " + timestamp);
     for (var prop in this.solarCardElements) {
       if (Object.prototype.hasOwnProperty.call(this.solarCardElements, prop)) {
@@ -430,7 +430,7 @@ br.clear {
     console.log(icons);
     //icons.style.iconSize = 10*pixelMultiplier;
     
-    console.log("testing query selector: " + document.readyState);
+    //console.log("testing query selector: " + document.readyState);
   }
 
   updateOneCircle(timestamp, entity) {
