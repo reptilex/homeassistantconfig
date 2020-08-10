@@ -130,8 +130,6 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
       this.circleColor = config.circle_color;
     }
     
-    this.cardShadowRoot = document.querySelector('home-assistant').shadowRoot.querySelector('home-assistant-main').shadowRoot.querySelector('ha-panel-lovelace').shadowRoot.querySelector('hui-root').shadowRoot.querySelector('hui-view').shadowRoot.querySelector('tesla-style-solar-power-card ha-card').shadowRoot;
-
     this.oldWidth = 0;
     this.contentIsCreated = false
   }
@@ -429,6 +427,8 @@ br.clear {
     var pixelMultiplier = Math.round(newWidth / 100);
     var icons = this.cardShadowRoot.getElementsByClassName(".acc_icon");
     //console.log(document);
+    this.cardShadowRoot = document.querySelector('home-assistant').shadowRoot.querySelector('home-assistant-main').shadowRoot.querySelector('ha-panel-lovelace').shadowRoot.querySelector('hui-root').shadowRoot.querySelector('hui-view').shadowRoot.querySelector('tesla-style-solar-power-card ha-card').shadowRoot;
+
     console.log(icons);
     //icons.style.iconSize = 10*pixelMultiplier;
     
