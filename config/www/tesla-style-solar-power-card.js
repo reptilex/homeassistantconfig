@@ -37,13 +37,14 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
       throw new Error('You need to define "entity"');
     }
     this.config = config;
+    this.pixelMultiplier = 3;
 
     class sensorCardData {
       constructor(){
         this.speed = 0;
         this.startPosition= -10;
         this.currentPosition = -10;
-        this.maxPosition = 500;
+        this.maxPosition = this.pixelMultiplier * 10;
         this.value = 0;
         this.unit_of_measurement = '';
         this.accText = document.createElement('div');
@@ -239,7 +240,7 @@ br.clear {
         xmlns="http://www.w3.org/2000/svg"
         width="20px"
         height="100%"
-        viewBox="0 0 40 500"
+        viewBox="0 0 40 `+ this.pixelMultiplier * 10 + `"
         preserveAspectRatio="xMinYMax slice"
       >
         ${solarYieldLine}
@@ -257,7 +258,7 @@ br.clear {
         xmlns="http://www.w3.org/2000/svg"
         width="100%"
         height="20px"
-        viewBox="0 0 500 40"
+        viewBox="0 0 `+ this.pixelMultiplier * 10 + ` 40"
         preserveAspectRatio="xMinYMax slice"
       >
         ${houseConsumptionLine}
@@ -268,7 +269,7 @@ br.clear {
         xmlns="http://www.w3.org/2000/svg"
         width="50%"
         height="20px"
-        viewBox="0 0 500 40"
+        viewBox="0 0 `+ this.pixelMultiplier * 10 + ` 40"
         preserveAspectRatio="xMinYMax slice"
       >
         ${houseConsumptionLine}
@@ -280,7 +281,7 @@ br.clear {
         xmlns="http://www.w3.org/2000/svg"
         width="20px"
         height="50%"
-        viewBox="0 0 40 500"
+        viewBox="0 0 40 `+ this.pixelMultiplier * 10 + `"
         preserveAspectRatio="xMinYMax slice"
       >
         ${batteryLine}
@@ -424,16 +425,16 @@ br.clear {
 
   changeStylesDependingOnWidth(newWidth){
     this.oldWidth = newWidth;
-    var pixelMultiplier = Math.round(newWidth / 100);
+    this.pixelMultiplier = Math.round(newWidth / 100);
     //console.log(document);
     this.cardRoot = document.querySelector('home-assistant').shadowRoot.querySelector('home-assistant-main').shadowRoot.querySelector('ha-panel-lovelace').shadowRoot.querySelector('hui-root').shadowRoot.querySelector('hui-view').shadowRoot.querySelector('tesla-style-solar-power-card ha-card');
 
     var iconContainer = this.cardRoot.querySelectorAll('.acc_container');
     iconContainer.forEach(
       function(currentValue, currentIndex, iconObj){
-        iconObj[currentIndex].style["height"] = 10 * pixelMultiplier + 'px';
-        iconObj[currentIndex].style["width"] = 10 * pixelMultiplier + 'px';
-        iconObj[currentIndex].style["padding"] = 7 * pixelMultiplier + 'px';        
+        iconObj[currentIndex].style["height"] = 10 * this.pixelMultiplier + 'px';
+        iconObj[currentIndex].style["width"] = 10 * this.pixelMultiplier + 'px';
+        iconObj[currentIndex].style["padding"] = 7 * this.pixelMultiplier + 'px';        
       }
     );
 
@@ -441,12 +442,16 @@ br.clear {
     icons.forEach(
       function(currentValue, currentIndex, listObj){
         console.log(listObj[currentIndex]);
-        listObj[currentIndex].shadowRoot.querySelector('ha-svg-icon').style["height"] = 10 * pixelMultiplier + 'px';       
-        listObj[currentIndex].shadowRoot.querySelector('ha-svg-icon').style["width"] = 10 * pixelMultiplier + 'px';       
+        listObj[currentIndex].shadowRoot.querySelector('ha-svg-icon').style["height"] = 10 * this.pixelMultiplier + 'px';       
+        listObj[currentIndex].shadowRoot.querySelector('ha-svg-icon').style["width"] = 10 * this.pixelMultiplier + 'px';       
       }
     );
 
-    console.log('chekcing clientHeight ' + this.clientHeight);
+    this.cardRoot.querySelector('.gridConsumption').style['height'] = '10px';
+    this.cardRoot.querySelector('.gridConsumption').style['width'] = 20 * this.pixelMultiplier + 'px';
+    this.cardRoot.querySelector('.gridConsumption').style['margin-left'] = 40 * this.pixelMultiplier + 'px';
+
+    //console.log('chekcing clientHeight ' + this.clientHeight);
     //icons.style.iconSize = 10*pixelMultiplier;
     
     //console.log("testing query selector: " + document.readyState);
@@ -457,7 +462,7 @@ br.clear {
     //console.log('updatingOneCircle beg pos:' + entity.currentPosition);
     //console.log('client Width:' + this.clientWidth);
     if (this.clientWidth !== 0) {
-      entity.maxPosition = 2 * this.clientWidth - 570;
+      entity.maxPosition = 20 * this.pixelMultiplier;
     }
 
     if (entity.prevTimestamp === undefined) {
