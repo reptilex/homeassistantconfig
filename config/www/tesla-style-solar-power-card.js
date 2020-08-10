@@ -430,11 +430,13 @@ br.clear {
 
     var icons = this.cardRoot.querySelectorAll('.acc_container');
     console.log(icons);
-    for(var icon in icons){
-      icon.style.height = 10 * pixelMultiplier;
-      icon.style.width = 10 * pixelMultiplier;
-      icon.style.padding = 7 * pixelMultiplier;
-    }
+    icons.forEach(
+      function(currentValue, currentIndex, icon){
+        icon.style.height = 10 * pixelMultiplier;
+        icon.style.width = 10 * pixelMultiplier;
+        icon.style.padding = 7 * pixelMultiplier;
+      }
+    );
     //icons.style.iconSize = 10*pixelMultiplier;
     
     //console.log("testing query selector: " + document.readyState);
