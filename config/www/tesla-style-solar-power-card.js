@@ -428,7 +428,7 @@ br.clear {
     //console.log(document);
     this.cardShadowRoot = document.querySelector('home-assistant').shadowRoot.querySelector('home-assistant-main').shadowRoot.querySelector('ha-panel-lovelace').shadowRoot.querySelector('hui-root').shadowRoot.querySelector('hui-view').shadowRoot.querySelector('tesla-style-solar-power-card ha-card');
 
-    var icons = this.cardShadowRoot.querySelectorAll('.acc-container');
+    var icons = this.cardRoot.querySelectorAll('.acc_container');
     console.log(icons);
     //icons.style.iconSize = 10*pixelMultiplier;
     
