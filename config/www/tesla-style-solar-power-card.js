@@ -440,7 +440,9 @@ br.clear {
     var icons = this.cardRoot.querySelectorAll('ha-icon');
     icons.forEach(
       function(currentValue, currentIndex, listObj){
+        console.log(listObj[currentIndex]);
         iconObj = listObj[currentIndex].shadowRoot.querySelector('ha-svg-icon');
+        console.log(iconObj);
         iconObj.style["height"] = 10 * pixelMultiplier + 'px';       
         iconObj.style["width"] = 10 * pixelMultiplier + 'px';       
       }
