@@ -438,9 +438,9 @@ br.clear {
     );
 
     var icons = this.cardRoot.querySelectorAll('ha-icon');
-    iconContainer.forEach(
-      function(currentValue, currentIndex, iconObj){
-        iconObj[currentIndex].style["font-size"] = 10 * pixelMultiplier + 'px';       
+    icons.forEach(
+      function(currentValue, currentIndex, listObj){
+        listObj[currentIndex].style["font-size"] = 10 * pixelMultiplier + 'px';       
       }
     );
     //icons.style.iconSize = 10*pixelMultiplier;
