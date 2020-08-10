@@ -435,9 +435,9 @@ br.clear {
         console.log(' icon start');
         console.log(iconObj[currentIndex]);
         console.log(' icon end');
-        iconObj[currentIndex].style.height = 10 * pixelMultiplier;
-        iconObj[currentIndex].style.width = 10 * pixelMultiplier;
-        iconObj[currentIndex].style.padding = 7 * pixelMultiplier;
+        iconObj[currentIndex].style['height'] = 10 * pixelMultiplier;
+        iconObj[currentIndex].style['width'] = 10 * pixelMultiplier;
+        iconObj[currentIndex].style['padding'] = 7 * pixelMultiplier;
         console.log(iconObj[currentIndex]);
       }
     );
