@@ -433,10 +433,10 @@ br.clear {
       function(currentValue, currentIndex, iconObj){
         console.log('iterating through icons ' + currentIndex + " multiplier " + pixelMultiplier);
         console.log(' icon start' + iconObj[currentIndex].style["height"]);
-        iconObj[currentIndex].style["height"] = 10 * pixelMultiplier;
-        iconObj[currentIndex].setAttribute("style","height:" + 10 * pixelMultiplier + "px");
+        iconObj[currentIndex].style["height"] = 10 * pixelMultiplier + 'px';
+        //iconObj[currentIndex].setAttribute("style","height:" + 10 * pixelMultiplier + "px");
         iconObj[currentIndex].style["width"] = 10 * pixelMultiplier + 'px';
-        iconObj[currentIndex].style["padding"] = 7 * pixelMultiplier;
+        iconObj[currentIndex].style["padding"] = 7 * pixelMultiplier + 'px';
         
         console.log(iconObj[currentIndex]);
         console.log(' icon end ' + iconObj[currentIndex].style["height"]);
