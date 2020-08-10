@@ -231,7 +231,7 @@ br.clear {
 <div class="tesla-style-power-card">
   <div class="acc_top">
       <div class="acc_container">
-            <ha-icon class="acc_icon" icon="${ this.topIcon }"></ha-icon>
+            <div class="acc_icon" icon="${ this.topIcon }"></ha-icon>
       </div>
   </div>
   <div class="acc_line solar_yield">
@@ -249,7 +249,7 @@ br.clear {
 <div class="acc_center">
     <div class="acc_td acc_left">
         <div class="acc_container">
-              <ha-icon class="acc_icon" icon="${ this.leftIcon }"></ha-icon>
+              <div class="acc_icon" icon="${ this.leftIcon }"></ha-icon>
         </div>
     </div>
     <div class="acc_line grid_consumption">
@@ -289,7 +289,7 @@ br.clear {
     <div class="acc_td acc_right">
         <div class="acc_icon_with_text">
             <div class="acc_container">
-                <ha-icon class="acc_icon" icon="${ this.rightIcon }"></ha-icon>
+                <div class="acc_icon" icon="${ this.rightIcon }"></ha-icon>
             </div>
             <div class="acc_text_container">
             </div>
@@ -299,7 +299,7 @@ br.clear {
 <br class="clear">
   <div class="acc_bottom">
     <div class="acc_container">
-          <ha-icon class="acc_icon" icon="${ this.bottomIcon }"></ha-icon>
+          <div class="acc_icon" icon="${ this.bottomIcon }"></ha-icon>
     </div>
   </div>
 </div>
