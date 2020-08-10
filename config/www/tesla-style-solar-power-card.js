@@ -146,10 +146,10 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
 
     var houseConsumptionLine = '';
     if (true) {
-      houseConsumptionLine = `<line x1="0" y1="20" x2="500" y2="20" style="stroke:var(--primary-text-color);" />`;
+      houseConsumptionLine = '';//`<line x1="0" y1="20" x2="500" y2="20" style="stroke:var(--primary-text-color);" />`;
     }
-    var solarYieldLine = `<line x1="0" y1="0" x2="0" y2="200" style="stroke:var(--primary-text-color);" />`;
-    var batteryLine = `<line x1="0" y1="0" x2="0" y2="200" style="stroke:var(--primary-text-color);" />`;
+    var solarYieldLine = '';//`<line x1="0" y1="0" x2="0" y2="200" style="stroke:var(--primary-text-color);" />`;
+    var batteryLine = '';//`<line x1="0" y1="0" x2="0" y2="200" style="stroke:var(--primary-text-color);" />`;
 
 
     content.innerHTML = `
@@ -239,7 +239,7 @@ br.clear {
         xmlns="http://www.w3.org/2000/svg"
         width="20px"
         height="100%"
-        viewBox="0 0 40 700"
+        viewBox="0 0 40 500"
         preserveAspectRatio="xMinYMax slice"
       >
         ${solarYieldLine}
