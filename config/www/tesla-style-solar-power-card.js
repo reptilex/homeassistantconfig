@@ -1,4 +1,5 @@
 class TeslaStyleSolarPowerCard extends HTMLElement {
+  cardRoot;
 
   set hass(hass) {
     if (!this.contentIsCreated) {
@@ -37,15 +38,15 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
       throw new Error('You need to define "entity"');
     }
     this.config = config;
-    this.pixelMultiplier = 3;
-    var pixelMultiplier = this.pixelMultiplier;
+    this.pxRate = 3;
+    var pxRate = this.pxRate;
 
     class sensorCardData {
       constructor(){
         this.speed = 0;
         this.startPosition= -10;
         this.currentPosition = -10;
-        this.maxPosition = pixelMultiplier * 10;
+        this.maxPosition = pxRate * 10;
         this.value = 0;
         this.unit_of_measurement = '';
         this.accText = document.createElement('div');
@@ -70,44 +71,35 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
       solarConsumption: new sensorCardData(),
       gridConsumption: new sensorCardData(),
       batteryConsumption: new sensorCardData(),
-      //solarYield: new sensorCardData(),
-      gridFeed: new sensorCardData(),
-      //batteryCharge: new sensorCardData(),
+      solarYield: new sensorCardData(),
+      gridFeedIn: new sensorCardData(),
+      batteryCharge: new sensorCardData(),
+      batteryCharging: new sensorCardData(),
     }
 
     this.solarCardElements.houseConsumption.entity = config.house_consumption_entity;
-    this.solarCardElements.houseConsumption.moveCircle = function(nextPosition, entity){
-      entity.circle.setAttributeNS(null, "cx", entity.currentPosition);
-    }
-    /*this.solarCardElements.solarYield.entity = config.solar_yield_entity;
-    this.solarCardElements.solarYield.circleColor = "#326342";
-    this.solarCardElements.solarYield.moveCircle = function(nextPosition, entity){
-      entity.circle.setAttributeNS(null, "cy", entity.currentPosition);
-    }*/
+
+    this.solarCardElements.solarYield.entity = config.solar_yield_entity;
+
     this.solarCardElements.gridConsumption.entity = config.grid_consumption_entity;
     this.solarCardElements.gridConsumption.circleColor = "#326342";
-    this.solarCardElements.gridConsumption.moveCircle = function(nextPosition, entity){
-      entity.circle.setAttributeNS(null, "cx", entity.currentPosition);
-    }
-    this.solarCardElements.gridFeed.entity = config.grid_feed_in_entity;
-    this.solarCardElements.gridFeed.circleColor = "#326342";
-    this.solarCardElements.gridFeed.moveCircle = function(nextPosition, entity){
-      entity.circle.setAttributeNS(null, "cx", entity.currentPosition);
-    }
+    
+    this.solarCardElements.gridFeedIn.entity = config.grid_feed_in_entity;
+    this.solarCardElements.gridFeedIn.circleColor = "#326342";
+    
     this.solarCardElements.batteryConsumption.entity = config.battery_consumption_entity;
     this.solarCardElements.batteryConsumption.circleColor = "#326342";
-    this.solarCardElements.batteryConsumption.moveCircle = function(nextPosition, entity){
-      entity.circle.setAttributeNS(null, "cy", entity.currentPosition);
-    }
+
+    this.solarCardElements.batteryCharging.entity = config.battery_charging_entity;
+    this.solarCardElements.batteryCharging.circleColor = "#326342";
+    
     this.solarCardElements.solarConsumption.entity = config.solar_consumption_entity;
     this.solarCardElements.solarConsumption.circleColor = "#326342";
-    this.solarCardElements.solarConsumption.moveCircle = function(nextPosition, entity){
-      entity.circle.setAttributeNS(null, "cy", entity.currentPosition);
-    }
+    
     //this.solarCardElements.gridConsumption.entity = config.grid_consumption_entity;
-    //this.solarCardElements.gridFeed.entity = config.grid_feed_entity;
-    //this.solarCardElements.batteryConsumption.entity = config.battery_consumption_entity;
-    //this.solarCardElements.batteryCharge.entity = config.battery_charge_entity;
+    //this.solarCardElements.gridFeedIn.entity = config.grid_feed_entity;
+    //this.solarCardElements.battery_consumption.entity = config.battery_consumption_consumption_entity;
+    //this.solarCardElements.barrery_charge.entity = config.battery_consumption_charge_entity;
 
     this.topIcon = 'mdi:solar-panel-large';
     if (config.top_icon !== undefined) {
@@ -157,8 +149,8 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
     if (true) {
       houseConsumptionLine = '';//`<line x1="0" y1="20" x2="500" y2="20" style="stroke:var(--primary-text-color);" />`;
     }
-    //var solarConsumptionLine = '<path id=SolarConsumptionLine d="M5,5 C5,109 5,105 105,105" />';//`<line x1="0" y1="0" x2="0" y2="200" style="stroke:var(--primary-text-color);" />`;
-    //var batteryLine = '<path id="batteryLine" d="M5,110 C5,5 5,5 110,5" />';//`<line x1="0" y1="0" x2="0" y2="200" style="stroke:var(--primary-text-color);" />`;
+    //var solar_consumption_line = '<path id=solar_consumption_line d="M5,5 C5,109 5,105 105,105" />';//`<line x1="0" y1="0" x2="0" y2="200" style="stroke:var(--primary-text-color);" />`;
+    //var battery_line = '<path id="battery_line" d="M5,110 C5,5 5,5 110,5" />';//`<line x1="0" y1="0" x2="0" y2="200" style="stroke:var(--primary-text-color);" />`;
 
 
     content.innerHTML = `
@@ -210,13 +202,21 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
 .acc_line{
   position:absolute;
 }
-
-.battery{
-}
-#batteryLine, #SolarConsumptionLine, #gridFeedInLine{
-  stroke:black;
+#battery_consumption_line, #solar_consumption_line, #grid_consumption_line, #battery_charging_line, #grid_feed_in_line{
+  stroke:var(--primary-color);
   fill:none;
+  stroke-width:2;
 }
+#grid_consumption_line{
+  stroke-width:1;
+}
+#solar_consumption_line, #grid_feed_in_line{
+  stroke:var(--success-color);
+}
+#battery_consumption_line, #battery_charging_line{
+  stroke:var(--warning-color);
+}
+
 
 br.clear {
   clear:both;
@@ -233,7 +233,7 @@ br.clear {
         xmlns="http://www.w3.org/2000/svg"
         width="20px"
         height="100%"
-        viewBox="0 0 40 `+ this.pixelMultiplier * 10 + `"
+        viewBox="0 0 40 `+ this.pxRate * 10 + `"
         preserveAspectRatio="xMinYMax slice"
       >
       </svg>
@@ -243,7 +243,7 @@ br.clear {
       xmlns="http://www.w3.org/2000/svg"
       width="20px"
       height="100%"
-      viewBox="0 0 40 `+ this.pixelMultiplier * 10 + `"
+      viewBox="0 0 40 `+ this.pxRate * 10 + `"
       preserveAspectRatio="xMinYMax slice"
     >
     </svg>
@@ -260,7 +260,7 @@ br.clear {
         xmlns="http://www.w3.org/2000/svg"
         width="100%"
         height="20px"
-        viewBox="0 0 `+ this.pixelMultiplier * 10 + ` 40"
+        viewBox="0 0 `+ this.pxRate * 10 + ` 40"
         preserveAspectRatio="xMinYMax slice"
       >
       </svg>
@@ -270,19 +270,27 @@ br.clear {
         xmlns="http://www.w3.org/2000/svg"
         width="50%"
         height="20px"
-        viewBox="0 0 `+ this.pixelMultiplier * 10 + ` 40"
+        viewBox="0 0 `+ this.pxRate * 10 + ` 40"
         preserveAspectRatio="xMinYMax slice"
       >
-        ${houseConsumptionLine}
       </svg>
     </div>
-
-    <div class="acc_line battery">
+    <div class="acc_line battery_charging">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="20px"
         height="50%"
-        viewBox="0 0 40 `+ this.pixelMultiplier * 10 + `"
+        viewBox="0 0 40 `+ this.pxRate * 10 + `"
+        preserveAspectRatio="xMinYMax slice"
+      >
+      </svg>
+    </div>
+    <div class="acc_line battery_consumption">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="20px"
+        height="50%"
+        viewBox="0 0 40 `+ this.pxRate * 10 + `"
         preserveAspectRatio="xMinYMax slice"
       >
         
@@ -311,67 +319,15 @@ br.clear {
     this.accText.className = 'acc_text';
     card.querySelectorAll(".acc_text_container").item(0).appendChild(this.accText);
 
-    this.solarCardElements.solarConsumption.circle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
-    this.solarCardElements.solarConsumption.line = this.solarLine;
-    var circle = this.solarCardElements.solarConsumption.circle;
-    circle.setAttributeNS(null, "r", "5");
-    circle.setAttributeNS(null, "cx", "5");
-    circle.setAttributeNS(null, "cy", this.solarCardElements.solarConsumption.startPosition);
-    circle.setAttributeNS(null, "fill", this.solarCardElements.solarConsumption.circleColor);
-    this.querySelectorAll(".solar_consumption svg").item(0).appendChild(circle);
-    this.solarCardElements.solarConsumption.line = document.createElementNS("http://www.w3.org/2000/svg", 'path');
-    this.solarCardElements.solarConsumption.line.setAttributeNS(null, "d", "M5,5 C5,109 5,105 105,105");
-    this.solarCardElements.solarConsumption.line.setAttributeNS(null, 'id', "SolarConsumptionLine");
-    this.querySelector(".solar_consumption svg").appendChild(this.solarCardElements.solarConsumption.line);
-    
-    this.solarCardElements.houseConsumption.circle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
-    var circle = this.solarCardElements.houseConsumption.circle;
-    circle.setAttributeNS(null, "r", "5");
-    circle.setAttributeNS(null, "cx", this.solarCardElements.houseConsumption.startPosition);
-    circle.setAttributeNS(null, "cy", "5");
-    circle.setAttributeNS(null, "fill", this.solarCardElements.houseConsumption.circleColor);
-    this.querySelectorAll(".house_consumption svg").item(0).appendChild(circle);
+    this.createCircleAndLine(this.solarCardElements.solarConsumption, "solar_consumption", "M5,5 C5,109 5,105 105,105");
 
-    this.solarCardElements.gridConsumption.circle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
-    var circle = this.solarCardElements.gridConsumption.circle;
-    circle.setAttributeNS(null, "r", "5");
-    circle.setAttributeNS(null, "cx", this.solarCardElements.gridConsumption.startPosition);
-    circle.setAttributeNS(null, "cy", "5");
-    circle.setAttributeNS(null, "fill", this.solarCardElements.gridConsumption.circleColor);
-    this.querySelectorAll(".grid_consumption svg").item(0).appendChild(circle);
-    this.solarCardElements.gridConsumption.line = document.createElementNS("http://www.w3.org/2000/svg", 'line');
-    this.solarCardElements.gridConsumption.line.setAttributeNS(null, "x1", "5");
-    this.solarCardElements.gridConsumption.line.setAttributeNS(null, "dy1", "5");
-    this.solarCardElements.gridConsumption.line.setAttributeNS(null, "x2", "100");
-    this.solarCardElements.gridConsumption.line.setAttributeNS(null, 'y2', "5");
-    this.solarCardElements.gridConsumption.line.setAttributeNS(null, 'id', "gridConsumptionLine");
-    this.querySelector(".grid_consumption svg").appendChild(this.solarCardElements.gridConsumption.line);
+    this.createCircleAndLine(this.solarCardElements.gridConsumption, "grid_consumption", "M100,10 C10,109 10,105 105,105");
 
-    this.solarCardElements.gridFeed.circle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
-    var circle = this.solarCardElements.gridFeed.circle;
-    circle.setAttributeNS(null, "r", "5");
-    circle.setAttributeNS(null, "cx", this.solarCardElements.gridFeed.startPosition);
-    circle.setAttributeNS(null, "cy", "5");
-    circle.setAttributeNS(null, "fill", this.solarCardElements.gridFeed.circleColor);
-    this.querySelector(".grid_feed_in svg").appendChild(circle);
-    this.solarCardElements.gridFeed.line = document.createElementNS("http://www.w3.org/2000/svg", 'path');
-    this.solarCardElements.gridFeed.line.setAttributeNS(null, "d", "M101,9 C100,101 99,106 10,102");
-    this.solarCardElements.gridFeed.line.setAttributeNS(null, 'id', "gridFeedInLine");
-    this.querySelector(".grid_feed_in svg").appendChild(this.solarCardElements.gridFeed.line);
+    this.createCircleAndLine(this.solarCardElements.batteryCharging, "battery_charging", "M10,10 C10,10 105,10 105,10");
 
-    this.solarCardElements.batteryConsumption.circle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
-    var circle = this.solarCardElements.batteryConsumption.circle;
-    circle.setAttributeNS(null, "r", "5");
-    circle.setAttributeNS(null, "cx", "5");
-    circle.setAttributeNS(null, "cy", this.solarCardElements.batteryConsumption.startPosition);
-    circle.setAttributeNS(null, "fill", this.solarCardElements.batteryConsumption.circleColor);
-    this.solarCardElements.batteryConsumption.line = document.createElementNS("http://www.w3.org/2000/svg", 'path');
-    this.solarCardElements.batteryConsumption.line.setAttributeNS(null, "d", "M1000,10 C10,109 10,105 105,105");
-    this.solarCardElements.batteryConsumption.line.setAttributeNS(null, 'id', "batteryLine");
-    this.querySelector(".battery svg").appendChild(this.solarCardElements.batteryConsumption.line);
+    this.createCircleAndLine(this.solarCardElements.gridFeedIn, "grid_feed_in", "M101,9 C100,101 99,106 10,102");
 
-    this.querySelectorAll(".battery svg").item(0).appendChild(circle);
-
+    this.createCircleAndLine(this.solarCardElements.batteryConsumption, "battery_consumption", "M100,10 C10,109 10,105 105,105");
     
 
     this.contentIsCreated = true;
@@ -396,108 +352,90 @@ br.clear {
     //console.log(this.solarCardElements);
   }
 
+  createCircleAndLine(entity, cssSelector, pathDAttribute){
+    entity.circle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
+    var circle = entity.circle;
+    circle.setAttributeNS(null, "r", "5");
+    circle.setAttributeNS(null, "cx", entity.startPosition);
+    circle.setAttributeNS(null, "cy", "5");
+    circle.setAttributeNS(null, "fill", entity.circleColor);
+    this.querySelector("." + cssSelector + " svg").appendChild(circle);
+    entity.line = document.createElementNS("http://www.w3.org/2000/svg", 'path');
+    entity.line.setAttributeNS(null, "d", pathDAttribute);
+    entity.line.setAttributeNS(null, 'id', cssSelector+"_line");
+    this.querySelector("." + cssSelector + " svg").appendChild(entity.line);
+  }
 
   changeStylesDependingOnWidth(newWidth){
     this.oldWidth = newWidth;
-    this.pixelMultiplier = newWidth / 100;
-    var pixelMultiplier = this.pixelMultiplier;
+    this.pxRate = newWidth / 100;
+    var pxRate = this.pxRate;
 
-    //console.log('width: ' + newWidth + ' multiplier:' + this.pixelMultiplier);
+    //console.log('width: ' + newWidth + ' multiplier:' + this.pxRate);
     this.cardRoot = document.querySelector('home-assistant').shadowRoot.querySelector('home-assistant-main').shadowRoot.querySelector('ha-panel-lovelace').shadowRoot.querySelector('hui-root').shadowRoot.querySelector('hui-view').shadowRoot.querySelector('tesla-style-solar-power-card ha-card');
 
 
-    this.cardRoot.querySelector('.tesla-style-solar-power-card').style['width'] = 90 * pixelMultiplier + 'px';
-    this.cardRoot.querySelector('.tesla-style-solar-power-card').style['height'] = 90 * pixelMultiplier + 'px';
+    this.cardRoot.querySelector('.tesla-style-solar-power-card').style['width'] = 90 * pxRate + 'px';
+    this.cardRoot.querySelector('.tesla-style-solar-power-card').style['height'] = 90 * pxRate + 'px';
 
 
     var iconContainer = this.cardRoot.querySelectorAll('.acc_container');
     iconContainer.forEach(
       function(currentValue, currentIndex, iconObj){
-        iconObj[currentIndex].style["height"] = 10 * pixelMultiplier + 'px';
-        iconObj[currentIndex].style["width"] = 10 * pixelMultiplier + 'px';
-        iconObj[currentIndex].style["padding"] = 7 * pixelMultiplier + 'px';        
+        iconObj[currentIndex].style["height"] = 10 * pxRate + 'px';
+        iconObj[currentIndex].style["width"] = 10 * pxRate + 'px';
+        iconObj[currentIndex].style["padding"] = 7 * pxRate + 'px';        
       }
     );
 
     var icons = this.cardRoot.querySelectorAll('ha-icon');
     icons.forEach(
       function(currentValue, currentIndex, listObj){
-        console.log(listObj[currentIndex]);
-        listObj[currentIndex].shadowRoot.querySelector('ha-svg-icon').style["height"] = 10 * pixelMultiplier + 'px';       
-        listObj[currentIndex].shadowRoot.querySelector('ha-svg-icon').style["width"] = 10 * pixelMultiplier + 'px';       
+        //console.log(listObj[currentIndex]);
+        listObj[currentIndex].shadowRoot.querySelector('ha-svg-icon').style["height"] = 10 * pxRate + 'px';       
+        listObj[currentIndex].shadowRoot.querySelector('ha-svg-icon').style["width"] = 10 * pxRate + 'px';       
       }
     );
 
-    this.cardRoot.querySelector('.acc_top').style['padding-bottom'] = 9 * pixelMultiplier + 'px';
-    this.cardRoot.querySelector('.acc_bottom').style['padding-top'] = 9 * pixelMultiplier + 'px';
+    this.cardRoot.querySelector('.acc_top').style['padding-bottom'] = 9 * pxRate + 'px';
+    this.cardRoot.querySelector('.acc_bottom').style['padding-top'] = 9 * pxRate + 'px';
 
-    let lineSize = 22 * pixelMultiplier;
+    let lineSize = 22 * pxRate;
 
-    this.cardRoot.querySelector('.house_consumption').style['height'] = '10px';
-    this.cardRoot.querySelector('.house_consumption').style['width'] = 22 * pixelMultiplier + 'px';
-    this.cardRoot.querySelector('.house_consumption').style['margin-left'] = 47 * pixelMultiplier + 'px';
-    this.cardRoot.querySelector('.house_consumption').style['margin-top'] = 11 * pixelMultiplier + 'px';
-    this.cardRoot.querySelector('.house_consumption svg').setAttribute('height', '10');
-    this.cardRoot.querySelector('.house_consumption svg').setAttribute('width', 22 * pixelMultiplier);
-    this.cardRoot.querySelector('.house_consumption svg').setAttribute("viewBox", "0 0 "+ 22 * pixelMultiplier + " 10"); 
-    this.solarCardElements.houseConsumption.maxPosition = 22 * pixelMultiplier;
+    this.correctDimensionsOfCircleLineAndContainer('battery_consumption', 23 * pxRate, 23 * pxRate, 44 * pxRate, 11 * pxRate, 'M5,'+ 22 * pxRate +' C10,10 10,10 '+22 * pxRate+',10');
 
-    this.cardRoot.querySelector('.battery').style['width'] = 23 * pixelMultiplier + 'px';
-    this.cardRoot.querySelector('.battery').style['height'] = 23 * pixelMultiplier + 'px';
-    this.cardRoot.querySelector('.battery').style['margin-left'] = 44 * pixelMultiplier + 'px';
-    this.cardRoot.querySelector('.battery').style['margin-top'] = 12 * pixelMultiplier + 'px';
-    this.cardRoot.querySelector('.battery svg').setAttribute('width', 22 * pixelMultiplier);
-    this.cardRoot.querySelector('.battery svg').setAttribute('height', 23 * pixelMultiplier);
-    this.cardRoot.querySelector('.battery svg').setAttribute("viewBox", "0 " + pixelMultiplier+ ' ' + 22 * pixelMultiplier + ' ' + 23 * pixelMultiplier); 
-    this.cardRoot.querySelector('#batteryLine').setAttribute('d','M5,'+ lineSize +' C10,10 10,10 '+lineSize+',10');
-    this.solarCardElements.batteryConsumption.maxPosition = 20 * pixelMultiplier;
+    this.correctDimensionsOfCircleLineAndContainer('solar_consumption', 23 * pxRate, 23 * pxRate, 44 * pxRate, -9.5 * pxRate, 'M5,5 C5,'+ lineSize +' 5,'+ lineSize +' '+lineSize+','+lineSize);
+  
+    this.correctDimensionsOfCircleLineAndContainer('grid_feed_in',23 * pxRate, 23 * pxRate, 23 * pxRate,  -9.5 * pxRate, 'M'+ lineSize +',5 C'+ lineSize +','+ lineSize +' '+ lineSize +','+ lineSize +' 5,'+ lineSize);
+    
+    this.correctDimensionsOfCircleLineAndContainer('grid_consumption', 2 * pxRate, 43.5 * pxRate, 23 * pxRate, 10 * pxRate, 'M5,5 C5,5 '+ lineSize * 2 +',5 '+ lineSize*2 +',5');
 
-
-    this.cardRoot.querySelector('.solar_consumption').style['width'] = 23 * pixelMultiplier + 'px';
-    this.cardRoot.querySelector('.solar_consumption').style['height'] = 23 * pixelMultiplier + 'px';
-    this.cardRoot.querySelector('.solar_consumption').style['margin-left'] = 44 * pixelMultiplier + 'px';
-    this.cardRoot.querySelector('.solar_consumption').style['margin-top'] = -9  * pixelMultiplier + 'px';
-    this.cardRoot.querySelector('.solar_consumption svg').setAttribute('width', 22 * pixelMultiplier);
-    this.cardRoot.querySelector('.solar_consumption svg').setAttribute('height', 23 * pixelMultiplier);
-    this.cardRoot.querySelector('.solar_consumption svg').setAttribute("viewBox", "0 " + pixelMultiplier + ' ' + 22 * pixelMultiplier + ' ' + 23 * pixelMultiplier); 
-    this.solarLine = this.cardRoot.querySelector('#SolarConsumptionLine');
-    this.solarLine.setAttribute('d','M5,5 C5,'+ lineSize +' 5,'+ lineSize +' '+lineSize+','+lineSize);
-    this.solarCardElements.batteryConsumption.maxPosition = 20 * pixelMultiplier;
-
-    this.cardRoot.querySelector('.grid_feed_in').style['width'] = 23 * pixelMultiplier + 'px';
-    this.cardRoot.querySelector('.grid_feed_in').style['height'] = 23 * pixelMultiplier + 'px';
-    this.cardRoot.querySelector('.grid_feed_in').style['margin-left'] = 24 * pixelMultiplier + 'px';
-    this.cardRoot.querySelector('.grid_feed_in').style['margin-top'] = 11  * pixelMultiplier + 'px';
-    this.cardRoot.querySelector('.grid_feed_in svg').setAttribute('width', 22 * pixelMultiplier);
-    this.cardRoot.querySelector('.grid_feed_in svg').setAttribute('height', 23 * pixelMultiplier);
-    this.cardRoot.querySelector('.grid_feed_in svg').setAttribute("viewBox", "0 " + pixelMultiplier + ' ' + 22 * pixelMultiplier + ' ' + 23 * pixelMultiplier); 
-    this.gridFeedInLine = this.cardRoot.querySelector('#gridFeedInLine');
-    this.gridFeedInLine.setAttribute('d','M'+ lineSize +',5 C'+ lineSize +','+ lineSize +' '+ lineSize +','+ lineSize +' 5,'+ lineSize);
-
-    this.cardRoot.querySelector('.grid_consumption').style['height'] = '10px';
-    this.cardRoot.querySelector('.grid_consumption').style['width'] = 44 * pixelMultiplier + 'px';
-    this.cardRoot.querySelector('.grid_consumption').style['margin-left'] = 10 * pixelMultiplier + 'px';
-    this.cardRoot.querySelector('.grid_consumption').style['margin-top'] = 22 * pixelMultiplier + 'px';
-    this.cardRoot.querySelector('.grid_consumption svg').setAttribute('height', '10');
-    this.cardRoot.querySelector('.grid_consumption svg').setAttribute('width', 22 * pixelMultiplier);
-    this.cardRoot.querySelector('.grid_consumption svg').setAttribute("viewBox", "0 0 "+ 44 * pixelMultiplier + " 10"); 
-    this.gridFeedInLine = this.cardRoot.querySelector('#gridConsumptionLine');
-    this.gridFeedInLine.setAttribute('x2',lineSize * 2 + 'px');
-    this.solarCardElements.houseConsumption.maxPosition = 22 * pixelMultiplier;
+    this.correctDimensionsOfCircleLineAndContainer('battery_charging',  44 * pxRate, 2 * pxRate, 44 * pxRate, -10 * pxRate, 'M5,5 C5,5 5,'+ lineSize * 2 +' 5,'+ lineSize*2);
 
     //console.log('chekcing clientHeight ' + this.clientHeight);
-    //icons.style.iconSize = 10*pixelMultiplier;
+    //icons.style.iconSize = 10*pxRate;
     
     //console.log("testing query selector: " + document.readyState);
   }
 
+  correctDimensionsOfCircleLineAndContainer(cssClass, height, width, left, top, pathDAttribute){
+    //console.log(cssClass);
+    this.cardRoot.querySelector("." + cssClass).style['height'] = height + 'px';
+    this.cardRoot.querySelector("." + cssClass).style['width'] = width + 'px';
+    this.cardRoot.querySelector("." + cssClass).style['margin-left'] = left + 'px';
+    this.cardRoot.querySelector("." + cssClass).style['margin-top'] = top + 'px';
+    this.cardRoot.querySelector("." + cssClass +' svg').setAttribute('height', height);
+    this.cardRoot.querySelector("." + cssClass +' svg').setAttribute('width', width);
+    this.cardRoot.querySelector("." + cssClass +' svg').setAttribute("viewBox", "0 0 "+ width + " " + height); 
+    this.cardRoot.querySelector("#" + cssClass +'_line').setAttribute('d',pathDAttribute);
+  }
 
   updateAllCircles(timestamp){
     //console.log(' in updateAllCircles clientWidth:' + this.clientWidth);
     //console.log("timestamp alone: " + timestamp);
     for (var prop in this.solarCardElements) {
       if (Object.prototype.hasOwnProperty.call(this.solarCardElements, prop)) {
-        console.log("calling this.updateAllCircles "+ prop);
+        //console.log("calling this.updateAllCircles "+ prop);
         this.updateOneCircle(timestamp, this.solarCardElements[prop])
       }
     }
@@ -519,6 +457,16 @@ br.clear {
     //console.log('updatingOneCircle speed:' + entity.speed + " maxpos:" + entity.maxPosition);
     //console.log('updatingOneCircle beg pos:' + entity.currentPosition);
     //console.log('client Width:' + this.clientWidth);
+
+    if(entity.line == undefined) return;
+
+    if(entity.speed == 0){
+      entity.circle.setAttribute('visibility', 'hidden');
+      return;
+    } else{
+      entity.circle.setAttribute('visibility', 'visible');
+    }
+
     if (this.clientWidth !== 0) {
       //entity.maxPosition = 2 * this.clientWidth - 570;
     }
@@ -552,18 +500,16 @@ br.clear {
 
     entity.prevTimestamp = timestamp;
     //console.log(entity.circle);
-    if(entity.line == undefined) return;
 
     let LineLength = entity.line.getTotalLength();
     let percentagePosition = entity.currentPosition / entity.maxPosition;
     let point = entity.line.getPointAtLength(LineLength * percentagePosition);
-    console.log('percentage position:' +  percentagePosition );
+    //console.log('percentage position:' +  percentagePosition );
     entity.circle.setAttributeNS(null, "cx", point.x);
     entity.circle.setAttributeNS(null, "cy", point.y);
 
     //console.log('updatingOneCircle end pos:' + entity.currentPosition + " poin.x: " + point.x + " solarLineLength:" + solarLineLength + " startpos:" + entity.startPosition);
     //entity.moveCircle(entity.currentPosition, entity);
-
 
   }
   
@@ -619,7 +565,7 @@ br.clear {
 
     if (value > 0) {
       //speed = 0.1320 * value + 0.02;
-      speed = 0.01320 * value + 0.02;
+      speed = 0.02 * value;
     }
 
     return speed;
@@ -628,6 +574,3 @@ br.clear {
 }
 
 customElements.define('tesla-style-solar-power-card', TeslaStyleSolarPowerCard);
-document.addEventListener("DOMContentLoaded", function(event) {
-  console.log("now we are lloadad");
-});

@@ -123,9 +123,23 @@
         value_template: '{{ states.sensor.solarsensors.attributes["act_state_of_charge"] | round(0) }}'
         unit_of_measurement: '%'
       battery_consumption:
-        value_template: '{{ states.sensor.solarsensors.attributes["total_dc_power"] - states.sensor.solarsensors.attributes["power_dc1"] - states.sensor.solarsensors.attributes["power_dc2"] | round(0) }}'
+        value_template: '{% set batter_cons = states.sensor.solarsensors.attributes["total_dc_power"] - states.sensor.solarsensors.attributes["power_dc1"] - states.sensor.solarsensors.attributes["power_dc2"] | round(0) %}
+                        {% if batter_cons > 0 %}
+                            {{ batter_cons }}
+                        {% else %}
+                            0
+                        {% endif %}'
         device_class: power
         unit_of_measurement: W
+      battery_charging:
+        value_template: '{% set batter_cons = states.sensor.solarsensors.attributes["total_dc_power"] - states.sensor.solarsensors.attributes["power_dc1"] - states.sensor.solarsensors.attributes["power_dc2"] | round(0) %}
+                        {% if batter_cons < 0 %}
+                            {{ batter_cons * -1 }}
+                        {% else %}
+                            0
+                        {% endif %}'
+        device_class: power
+        unit_of_measurement: W      
       grid_consumption:
         value_template: '{{ states.sensor.solarsensors.attributes["home_own_consumption_from_grid"] | round(0) }}'
         device_class: power
@@ -151,6 +165,9 @@
         unit_of_measurement: W
       inverter_state:
         value_template: '{{ states.sensor.solarsensors.attributes["inverter_state"] | round(0) }}'
+
+
+  
   - platform: rest
     resource: !secret heater_url
     name: heatersensors
