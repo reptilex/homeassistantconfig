@@ -44,8 +44,9 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
     class sensorCardData {
       constructor(){
         this.speed = 0;
-        this.startPosition= -10;
-        this.currentPosition = -10;
+        this.startPosition= 0;
+        this.currentPosition = 0;
+        this.currentDelta = 0;
         this.maxPosition = pxRate * 10;
         this.value = 0;
         this.unit_of_measurement = '';
@@ -57,10 +58,6 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
         this.prevTimestamp = undefined;
         this.backwardsMovement = false;
         this.line = null;
-      }
-
-      moveCircle(nextPosition){
-          //overridden by each element
       }
     }
 
@@ -402,13 +399,13 @@ br.clear {
 
     let lineSize = 22 * pxRate;
 
-    this.correctDimensionsOfCircleLineAndContainer('battery_consumption', 23 * pxRate, 23 * pxRate, 44 * pxRate, 11 * pxRate, 'M5,'+ 22 * pxRate +' C10,10 10,10 '+22 * pxRate+',10');
+    this.correctDimensionsOfCircleLineAndContainer('battery_consumption', 23 * pxRate, 23 * pxRate, 44 * pxRate, 10 * pxRate, 'M5,'+ 22 * pxRate +' C10,10 10,10 '+22 * pxRate+',10');
 
     this.correctDimensionsOfCircleLineAndContainer('solar_consumption', 23 * pxRate, 23 * pxRate, 44 * pxRate, -9.5 * pxRate, 'M5,5 C5,'+ lineSize +' 5,'+ lineSize +' '+lineSize+','+lineSize);
   
     this.correctDimensionsOfCircleLineAndContainer('grid_feed_in',23 * pxRate, 23 * pxRate, 23 * pxRate,  -9.5 * pxRate, 'M'+ lineSize +',5 C'+ lineSize +','+ lineSize +' '+ lineSize +','+ lineSize +' 5,'+ lineSize);
     
-    this.correctDimensionsOfCircleLineAndContainer('grid_consumption', 2 * pxRate, 43.5 * pxRate, 23 * pxRate, 10 * pxRate, 'M5,5 C5,5 '+ lineSize * 2 +',5 '+ lineSize*2 +',5');
+    this.correctDimensionsOfCircleLineAndContainer('grid_consumption', 2 * pxRate, 43.5 * pxRate, 23 * pxRate, 9.5 * pxRate, 'M5,5 C5,5 '+ lineSize * 2 +',5 '+ lineSize*2 +',5');
 
     this.correctDimensionsOfCircleLineAndContainer('battery_charging',  44 * pxRate, 2 * pxRate, 44 * pxRate, -10 * pxRate, 'M5,5 C5,5 5,'+ lineSize * 2 +' 5,'+ lineSize*2);
 
@@ -467,15 +464,11 @@ br.clear {
       entity.circle.setAttribute('visibility', 'visible');
     }
 
-    if (this.clientWidth !== 0) {
-      //entity.maxPosition = 2 * this.clientWidth - 570;
-    }
-
     if (entity.prevTimestamp === undefined) {
       entity.prevTimestamp = timestamp;
     }
 
-    var timePassed = timestamp - entity.prevTimestamp;
+    /*var timePassed = timestamp - entity.prevTimestamp;
     var deltaPosition = entity.speed * timePassed;
     if(!entity.backwardsMovement){
       if (entity.currentPosition === undefined) {
@@ -496,19 +489,35 @@ br.clear {
       if (entity.currentPosition < entity.startPosition) {
         entity.currentPosition = entity.maxPosition;
       }
-    }
+    }*/
 
-    entity.prevTimestamp = timestamp;
+
     //console.log(entity.circle);
 
     let LineLength = entity.line.getTotalLength();
-    let percentagePosition = entity.currentPosition / entity.maxPosition;
-    let point = entity.line.getPointAtLength(LineLength * percentagePosition);
+    
+    if (entity.prevTimestamp === undefined) {
+      entity.prevTimestamp = timestamp;
+    }
+    var timePassed = timestamp - entity.prevTimestamp;
+    var delta = entity.speed * timePassed;
+    entity.currentDelta += delta;
+
+    let percentageDelta = entity.currentDelta / LineLength;
+    
+    if (percentageDelta >= 1) {
+      entity.currentDelta = 0;
+      percentageDelta = 0.01;
+    }
+
+
+    let point = entity.line.getPointAtLength(LineLength * percentageDelta);
     //console.log('percentage position:' +  percentagePosition );
     entity.circle.setAttributeNS(null, "cx", point.x);
     entity.circle.setAttributeNS(null, "cy", point.y);
 
-    //console.log('updatingOneCircle end pos:' + entity.currentPosition + " poin.x: " + point.x + " solarLineLength:" + solarLineLength + " startpos:" + entity.startPosition);
+    entity.prevTimestamp = timestamp;
+    //console.log('updatingOneCircle end pos:' + entity.currentPosition + " poin.x: " + point.x + " LineLength:" + LineLength + " delta:" + entity.currentDelta + " percentageDelta:"+percentageDelta);
     //entity.moveCircle(entity.currentPosition, entity);
 
   }
@@ -565,7 +574,7 @@ br.clear {
 
     if (value > 0) {
       //speed = 0.1320 * value + 0.02;
-      speed = 0.02 * value;
+      speed = 0.06 * value;
     }
 
     return speed;
