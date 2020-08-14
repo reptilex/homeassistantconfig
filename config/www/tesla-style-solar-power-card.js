@@ -195,6 +195,7 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
   float:left;
   z-index:5;
 }
+
 .acc_right {
   float:right;
   z-index:5;
