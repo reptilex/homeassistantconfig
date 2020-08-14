@@ -145,7 +145,12 @@
         device_class: power
         unit_of_measurement: W
       grid_feed_in:
-        value_template: '{{ states.sensor.solarsensors.attributes["inverter_generation_power_actual"] | int - states.sensor.solarsensors.attributes["total_active_power_powermeter_home_consumption"] | int }}'
+        value_template: '{% set feed_in = states.sensor.solarsensors.attributes["inverter_generation_power_actual"] | int - states.sensor.solarsensors.attributes["total_active_power_powermeter_home_consumption"] | int %}
+                         {% if feed_in < 9000 %}
+                            {{ feed_in  }}
+                        {% else %}
+                            0
+                        {% endif %} '
         device_class: power
         unit_of_measurement: W
       solar_consumption:
