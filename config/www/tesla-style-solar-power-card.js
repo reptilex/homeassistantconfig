@@ -8,10 +8,7 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
 
       var obj = this;
 
-      //console.log(' in hass client Width:' + this.clientWidth);
-
       requestAnimationFrame(function(timestamp){
-        //console.log(' in hass client Width:' + obj.clientWidth);
         obj.updateAllCircles(timestamp);
       });
     }
@@ -33,7 +30,6 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
   }
 
   setConfig(config) {
-    //console.log("setting config");
     if (!config.entity) {
       throw new Error('You need to define "entity"');
     }
@@ -93,10 +89,9 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
     this.solarCardElements.solarConsumption.entity = config.solar_consumption_entity;
     this.solarCardElements.solarConsumption.circleColor = "#326342";
     
-    //this.solarCardElements.gridConsumption.entity = config.grid_consumption_entity;
-    //this.solarCardElements.gridFeedIn.entity = config.grid_feed_entity;
-    //this.solarCardElements.battery_consumption.entity = config.battery_consumption_consumption_entity;
-    //this.solarCardElements.barrery_charge.entity = config.battery_consumption_charge_entity;
+    //this.solarCardElements.house_consumption.entity = config.battery_consumption_consumption_entity;
+    //this.solarCardElements.battery_charge.entity = config.battery_charge_entity;
+    //this.solarCardElements.solar_yield.entity = config.solar_yield_entity;
 
     this.topIcon = 'mdi:solar-panel-large';
     if (config.top_icon !== undefined) {
@@ -142,14 +137,6 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
     this.iconSize = this.multiplier * 8;
     this.iconPadding = this.multiplier * 6;
 
-    var houseConsumptionLine = '';
-    if (true) {
-      houseConsumptionLine = '';//`<line x1="0" y1="20" x2="500" y2="20" style="stroke:var(--primary-text-color);" />`;
-    }
-    //var solar_consumption_line = '<path id=solar_consumption_line d="M5,5 C5,109 5,105 105,105" />';//`<line x1="0" y1="0" x2="0" y2="200" style="stroke:var(--primary-text-color);" />`;
-    //var battery_line = '<path id="battery_line" d="M5,110 C5,5 5,5 110,5" />';//`<line x1="0" y1="0" x2="0" y2="200" style="stroke:var(--primary-text-color);" />`;
-
-
     content.innerHTML = `
 <style>
 .tesla-style-solar-power-card{
@@ -168,6 +155,25 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
 .acc_icon {
     --mdc-icon-size: 40px;
 }
+.solar_icon_container {
+  border: 1px solid var(--warning-color);
+}
+.solar_icon_container .acc_icon{
+  color: var(--warning-color);
+}
+.battery_icon_container{
+  border: 1px solid var(--success-color);
+}
+.battery_icon_container .acc_icon{
+  color: var(--success-color);
+}
+.house_icon_container{
+  border: 1px solid var(--info-color);
+}
+.house_icon_container .acc_icon{
+  color: var(--info-color);
+}
+
 .acc_text_container {
     position: relative;
     left: 14px;
@@ -202,7 +208,7 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
 #battery_consumption_line, #solar_consumption_line, #grid_consumption_line, #battery_charging_line, #grid_feed_in_line{
   stroke:var(--primary-color);
   fill:none;
-  stroke-width:2;
+  stroke-width:1;
 }
 #grid_consumption_line{
   stroke-width:1;
@@ -221,7 +227,7 @@ br.clear {
 </style>
 <div class="tesla-style-solar-power-card">
   <div class="acc_top">
-      <div class="acc_container">
+      <div class="acc_container solar_icon_container">
             <ha-icon class="acc_icon" icon="${ this.topIcon }"></ha-icon>
       </div>
   </div>
@@ -290,12 +296,11 @@ br.clear {
         viewBox="0 0 40 `+ this.pxRate * 10 + `"
         preserveAspectRatio="xMinYMax slice"
       >
-        
       </svg>
     </div>
     <div class="acc_td acc_right">
         <div class="acc_icon_with_text">
-            <div class="acc_container">
+            <div class="acc_container house_icon_container">
                 <ha-icon class="acc_icon" icon="${ this.rightIcon }"></ha-icon>
             </div>
             <div class="acc_text_container">
@@ -305,9 +310,10 @@ br.clear {
 </div>
 <br class="clear">
   <div class="acc_bottom">
-    <div class="acc_container">
+    <div class="acc_container battery_icon_container">
           <ha-icon class="acc_icon" icon="${ this.bottomIcon }"></ha-icon>
     </div>
+    <div class="acc_text_container></div>
   </div>
 </div>
     `;
@@ -331,10 +337,6 @@ br.clear {
   }
 
   updateProperties(hass) {
-    //console.log("calling this.updateProperties solarCard Elements")
-    //console.log(this.solarCardElements);
-    //console.log(' in updateProperties clientWidth:' + this.clientWidth);
-
     for (var prop in this.solarCardElements) {
       if (Object.prototype.hasOwnProperty.call(this.solarCardElements, prop)) {
         this.solarCardElements[prop].value = this.getStateValue(hass, this.solarCardElements[prop].entity);
@@ -346,7 +348,6 @@ br.clear {
         }
       }
     }
-    //console.log(this.solarCardElements);
   }
 
   createCircleAndLine(entity, cssSelector, pathDAttribute){
@@ -399,7 +400,7 @@ br.clear {
 
     let lineSize = 22 * pxRate;
 
-    this.correctDimensionsOfCircleLineAndContainer('battery_consumption', 23 * pxRate, 23 * pxRate, 44 * pxRate, 10 * pxRate, 'M5,'+ 22 * pxRate +' C10,10 10,10 '+22 * pxRate+',10');
+    this.correctDimensionsOfCircleLineAndContainer('battery_consumption', 23 * pxRate, 23 * pxRate, 44 * pxRate, 11 * pxRate, 'M5,'+ 22 * pxRate +' C10,10 10,10 '+22 * pxRate+',10');
 
     this.correctDimensionsOfCircleLineAndContainer('solar_consumption', 23 * pxRate, 23 * pxRate, 44 * pxRate, -9.5 * pxRate, 'M5,5 C5,'+ lineSize +' 5,'+ lineSize +' '+lineSize+','+lineSize);
   
@@ -408,11 +409,6 @@ br.clear {
     this.correctDimensionsOfCircleLineAndContainer('grid_consumption', 2 * pxRate, 43.5 * pxRate, 23 * pxRate, 9.5 * pxRate, 'M5,5 C5,5 '+ lineSize * 2 +',5 '+ lineSize*2 +',5');
 
     this.correctDimensionsOfCircleLineAndContainer('battery_charging',  44 * pxRate, 2 * pxRate, 44 * pxRate, -10 * pxRate, 'M5,5 C5,5 5,'+ lineSize * 2 +' 5,'+ lineSize*2);
-
-    //console.log('chekcing clientHeight ' + this.clientHeight);
-    //icons.style.iconSize = 10*pxRate;
-    
-    //console.log("testing query selector: " + document.readyState);
   }
 
   correctDimensionsOfCircleLineAndContainer(cssClass, height, width, left, top, pathDAttribute){
@@ -428,8 +424,6 @@ br.clear {
   }
 
   updateAllCircles(timestamp){
-    //console.log(' in updateAllCircles clientWidth:' + this.clientWidth);
-    //console.log("timestamp alone: " + timestamp);
     for (var prop in this.solarCardElements) {
       if (Object.prototype.hasOwnProperty.call(this.solarCardElements, prop)) {
         //console.log("calling this.updateAllCircles "+ prop);
@@ -441,19 +435,16 @@ br.clear {
       this.changeStylesDependingOnWidth(this.clientWidth);
     }
 
-    if(this.counter < 1000){
+    //if(this.counter < 1000){
       var obj = this;
-      this.counter++;
+      //this.counter++;
       requestAnimationFrame(function(timestamp){
         obj.updateAllCircles(timestamp);
       });
-    }
+    //}
   }
 
   updateOneCircle(timestamp, entity) {
-    //console.log('updatingOneCircle speed:' + entity.speed + " maxpos:" + entity.maxPosition);
-    //console.log('updatingOneCircle beg pos:' + entity.currentPosition);
-    //console.log('client Width:' + this.clientWidth);
 
     if(entity.line == undefined) return;
 
@@ -467,33 +458,6 @@ br.clear {
     if (entity.prevTimestamp === undefined) {
       entity.prevTimestamp = timestamp;
     }
-
-    /*var timePassed = timestamp - entity.prevTimestamp;
-    var deltaPosition = entity.speed * timePassed;
-    if(!entity.backwardsMovement){
-      if (entity.currentPosition === undefined) {
-        entity.currentPosition = entity.startPosition;
-      }
-
-      entity.currentPosition += deltaPosition;
-
-      if (entity.currentPosition > entity.maxPosition) {
-        entity.currentPosition = entity.startPosition;
-      }
-    } else {
-      if (entity.currentPosition === undefined) {
-        entity.currentPosition = entity.maxPosition;
-      }
-      entity.currentPosition -= deltaPosition;
-
-      if (entity.currentPosition < entity.startPosition) {
-        entity.currentPosition = entity.maxPosition;
-      }
-    }*/
-
-
-    //console.log(entity.circle);
-
     let LineLength = entity.line.getTotalLength();
     
     if (entity.prevTimestamp === undefined) {
@@ -510,15 +474,12 @@ br.clear {
       percentageDelta = 0.01;
     }
 
-
     let point = entity.line.getPointAtLength(LineLength * percentageDelta);
-    //console.log('percentage position:' +  percentagePosition );
+    
     entity.circle.setAttributeNS(null, "cx", point.x);
     entity.circle.setAttributeNS(null, "cy", point.y);
 
     entity.prevTimestamp = timestamp;
-    //console.log('updatingOneCircle end pos:' + entity.currentPosition + " poin.x: " + point.x + " LineLength:" + LineLength + " delta:" + entity.currentDelta + " percentageDelta:"+percentageDelta);
-    //entity.moveCircle(entity.currentPosition, entity);
 
   }
   
@@ -564,17 +525,8 @@ br.clear {
 
     var speed = 0;
 
-    // I have found min & max speed that looks ok to me.
-    // And then I have calculated math function
-    // using the dots:
-    //
-    // value    speed
-    // 0.001    0.02
-    // 15       2
-
     if (value > 0) {
-      //speed = 0.1320 * value + 0.02;
-      speed = 0.06 * value;
+      speed = 0.08 * value;
     }
 
     return speed;
