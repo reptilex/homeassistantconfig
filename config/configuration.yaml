@@ -98,6 +98,9 @@ scene: !include scenes.yaml
 frontend:
   themes: !include themes.yaml
 
+tesla:
+  username: !secret tesla_username
+  password: !secret tesla_password
 
 utility_meter:
   solar_yield_daily:
