@@ -359,6 +359,7 @@ br.clear {
     circle.setAttributeNS(null, "cx", entity.startPosition);
     circle.setAttributeNS(null, "cy", "5");
     circle.setAttributeNS(null, "fill", entity.circleColor);
+    circle.setAttributeNS(null, "id", cssSelector+"_circle");
     this.querySelector("." + cssSelector + " svg").appendChild(circle);
     entity.line = document.createElementNS("http://www.w3.org/2000/svg", 'path');
     entity.line.setAttributeNS(null, "d", pathDAttribute);
