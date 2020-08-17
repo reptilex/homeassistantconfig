@@ -134,7 +134,7 @@
       battery_charging:
         value_template: '{% set batter_cons = states.sensor.solarsensors.attributes["total_dc_power"] - states.sensor.solarsensors.attributes["power_dc1"] - states.sensor.solarsensors.attributes["power_dc2"] | round(0) %}
                         {% if batter_cons < 0 %}
-                            {{ batter_cons * -1 }}
+                            {{ batter_cons * -1  | round(0) }}
                         {% else %}
                             0
                         {% endif %}'
@@ -146,7 +146,7 @@
         unit_of_measurement: W
       grid_feed_in:
         value_template: '{% set feed_in = states.sensor.solarsensors.attributes["inverter_generation_power_actual"] | int - states.sensor.solarsensors.attributes["total_active_power_powermeter_home_consumption"] | int %}
-                         {% if feed_in < 9000 and feedn_in > 0 %}
+                         {% if feed_in < 9000 and feed_in > 0 %}
                             {{ feed_in  }}
                         {% else %}
                             0
