@@ -75,19 +75,19 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
     this.solarCardElements.solarYield.entity = config.solar_yield_entity;
 
     this.solarCardElements.gridConsumption.entity = config.grid_consumption_entity;
-    this.solarCardElements.gridConsumption.circleColor = "#326342";
+    this.solarCardElements.gridConsumption.circleColor = "var(--info-color)";
     
     this.solarCardElements.gridFeedIn.entity = config.grid_feed_in_entity;
-    this.solarCardElements.gridFeedIn.circleColor = "#326342";
+    this.solarCardElements.gridFeedIn.circleColor = "var(--warning-color)";
     
     this.solarCardElements.batteryConsumption.entity = config.battery_consumption_entity;
-    this.solarCardElements.batteryConsumption.circleColor = "#326342";
+    this.solarCardElements.batteryConsumption.circleColor = "var(--success-color)";
 
     this.solarCardElements.batteryCharging.entity = config.battery_charging_entity;
-    this.solarCardElements.batteryCharging.circleColor = "#326342";
+    this.solarCardElements.batteryCharging.circleColor = "var(--warning-color)";
     
     this.solarCardElements.solarConsumption.entity = config.solar_consumption_entity;
-    this.solarCardElements.solarConsumption.circleColor = "#326342";
+    this.solarCardElements.solarConsumption.circleColor = "var(--warning-color)";
     
     //this.solarCardElements.house_consumption.entity = config.battery_consumption_consumption_entity;
     //this.solarCardElements.battery_charge.entity = config.battery_charge_entity;
@@ -208,18 +208,18 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
   position:absolute;
 }
 #battery_consumption_line, #solar_consumption_line, #grid_consumption_line, #battery_charging_line, #grid_feed_in_line{
-  stroke:var(--primary-color);
+  stroke:var(--info-color);
   fill:none;
   stroke-width:1;
 }
 #grid_consumption_line{
   stroke-width:1;
 }
-#solar_consumption_line, #grid_feed_in_line{
-  stroke:var(--success-color);
-}
-#battery_consumption_line, #battery_charging_line{
+#solar_consumption_line, #grid_feed_in_line, #battery_charging_line{
   stroke:var(--warning-color);
+}
+#battery_consumption_line{
+  stroke:var(--success-color);
 }
 
 
@@ -300,6 +300,16 @@ br.clear {
       >
       </svg>
     </div>
+    <div class="acc_line power_lines">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="20px"
+        height="50%"
+        viewBox="0 0 40 `+ this.pxRate * 10 + `"
+        preserveAspectRatio="xMinYMax slice"
+      >
+      </svg>
+    </div>
     <div class="acc_td acc_right">
         <div class="acc_icon_with_text">
             <div class="acc_container house_icon_container">
@@ -352,7 +362,7 @@ br.clear {
     }
   }
 
-  createCircleAndLine(entity, cssSelector, pathDAttribute){
+  createCircleAndLineOld(entity, cssSelector, pathDAttribute){
     entity.circle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
     var circle = entity.circle;
     circle.setAttributeNS(null, "r", "5");
@@ -363,8 +373,24 @@ br.clear {
     this.querySelector("." + cssSelector + " svg").appendChild(circle);
     entity.line = document.createElementNS("http://www.w3.org/2000/svg", 'path');
     entity.line.setAttributeNS(null, "d", pathDAttribute);
+    circle.setAttributeNS(null, "stroke", entity.circleColor);
     entity.line.setAttributeNS(null, 'id', cssSelector+"_line");
     this.querySelector("." + cssSelector + " svg").appendChild(entity.line);
+  }
+
+  createCircleAndLine(entity, cssSelector, pathDAttribute){
+    entity.circle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
+    var circle = entity.circle;
+    circle.setAttributeNS(null, "r", "5");
+    circle.setAttributeNS(null, "cx", entity.startPosition);
+    circle.setAttributeNS(null, "cy", "5");
+    circle.setAttributeNS(null, "fill", entity.circleColor);
+    circle.setAttributeNS(null, "id", cssSelector+"_circle");
+    this.querySelector(".power_lines svg").appendChild(circle);
+    entity.line = document.createElementNS("http://www.w3.org/2000/svg", 'path');
+    entity.line.setAttributeNS(null, "d", pathDAttribute);
+    entity.line.setAttributeNS(null, 'id', cssSelector+"_line");
+    this.querySelector(".power_lines svg").appendChild(entity.line);
   }
 
   changeStylesDependingOnWidth(newWidth){
@@ -401,20 +427,24 @@ br.clear {
     this.cardRoot.querySelector('.acc_top').style['padding-bottom'] = 9 * pxRate + 'px';
     this.cardRoot.querySelector('.acc_bottom').style['padding-top'] = 9 * pxRate + 'px';
 
-    let lineSize = 22 * pxRate;
+    this.cardRoot.querySelector('.power_lines').style['height'] = 42 * pxRate + 'px';
+    this.cardRoot.querySelector('.power_lines').style['width'] = 42 * pxRate + 'px';
+    this.cardRoot.querySelector('.power_lines').style['top'] = 29 * pxRate + 'px';
+    this.cardRoot.querySelector('.power_lines').style['left'] = 29 * pxRate + 'px';
+    this.cardRoot.querySelector('.power_lines svg').style['height'] = 42 * pxRate + 'px';
+    this.cardRoot.querySelector('.power_lines svg').style['width'] = 42 * pxRate + 'px';
+    this.cardRoot.querySelector(".power_lines svg").setAttribute("viewBox", "0 0 "+ 42 * pxRate + " " + 42 * pxRate); 
 
-    this.correctDimensionsOfCircleLineAndContainer('battery_consumption', 23 * pxRate, 23 * pxRate, 44 * pxRate, 11 * pxRate, 'M5,'+ 22 * pxRate +' C10,10 10,10 '+22 * pxRate+',10');
+    let half = 22 * pxRate;
 
-    this.correctDimensionsOfCircleLineAndContainer('solar_consumption', 23 * pxRate, 23 * pxRate, 44 * pxRate, -9.5 * pxRate, 'M5,5 C5,'+ lineSize +' 5,'+ lineSize +' '+lineSize+','+lineSize);
-  
-    this.correctDimensionsOfCircleLineAndContainer('grid_feed_in',23 * pxRate, 23 * pxRate, 23 * pxRate,  -9.5 * pxRate, 'M'+ lineSize +',5 C'+ lineSize +','+ lineSize +' '+ lineSize +','+ lineSize +' 5,'+ lineSize);
-    
-    this.correctDimensionsOfCircleLineAndContainer('grid_consumption', 2 * pxRate, 43.5 * pxRate, 23 * pxRate, 9.5 * pxRate, 'M5,5 C5,5 '+ lineSize * 2 +',5 '+ lineSize*2 +',5');
-
-    this.correctDimensionsOfCircleLineAndContainer('battery_charging',  44 * pxRate, 2 * pxRate, 44 * pxRate, -10 * pxRate, 'M5,5 C5,5 5,'+ lineSize * 2 +' 5,'+ lineSize*2);
+    this.correctDimensionsOfCircleLineAndContainer('battery_consumption', 'M'+ half +','+ half * 2 +' C'+ half +','+ half +' '+ half +','+ half +' '+half*2+','+half);
+    this.correctDimensionsOfCircleLineAndContainer('solar_consumption', 'M'+ half +',0 C'+ half +','+ half +' '+ half +','+ half +' '+half*2+','+half);
+    this.correctDimensionsOfCircleLineAndContainer('grid_feed_in', 'M'+ half +',0 C'+ half +','+ half +' '+ half +','+ half +' 0,'+ half);
+    this.correctDimensionsOfCircleLineAndContainer('grid_consumption',  'M0,'+half+' C'+half+','+ half + ' '+half +','+half+' '+half * 2+','+half);
+    this.correctDimensionsOfCircleLineAndContainer('battery_charging',   'M'+half+',0 C'+half+',0 '+half+','+ half * 2 +' '+half+','+ half*2);
   }
 
-  correctDimensionsOfCircleLineAndContainer(cssClass, height, width, left, top, pathDAttribute){
+  correctDimensionsOfCircleLineAndContainerOld(cssClass, height, width, left, top, pathDAttribute){
     //console.log(cssClass);
     this.cardRoot.querySelector("." + cssClass).style['height'] = height + 'px';
     this.cardRoot.querySelector("." + cssClass).style['width'] = width + 'px';
@@ -423,6 +453,18 @@ br.clear {
     this.cardRoot.querySelector("." + cssClass +' svg').setAttribute('height', height);
     this.cardRoot.querySelector("." + cssClass +' svg').setAttribute('width', width);
     this.cardRoot.querySelector("." + cssClass +' svg').setAttribute("viewBox", "0 0 "+ width + " " + height); 
+    this.cardRoot.querySelector("#" + cssClass +'_line').setAttribute('d',pathDAttribute);
+  }
+
+  correctDimensionsOfCircleLineAndContainer(cssClass, pathDAttribute){
+    /*console.log(cssClass);
+    this.cardRoot.querySelector("." + cssClass).style['height'] = height + 'px';
+    this.cardRoot.querySelector("." + cssClass).style['width'] = width + 'px';
+    this.cardRoot.querySelector("." + cssClass).style['margin-left'] = left + 'px';
+    this.cardRoot.querySelector("." + cssClass).style['margin-top'] = top + 'px';
+    this.cardRoot.querySelector("." + cssClass +' svg').setAttribute('height', height);
+    this.cardRoot.querySelector("." + cssClass +' svg').setAttribute('width', width);
+    this.cardRoot.querySelector("." + cssClass +' svg').setAttribute("viewBox", "0 0 "+ width + " " + height); */
     this.cardRoot.querySelector("#" + cssClass +'_line').setAttribute('d',pathDAttribute);
   }
 

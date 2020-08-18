@@ -169,3 +169,6 @@ utility_meter:
     source: sensor.stromz_gesamt
     cycle: daily
   
+duckdns:
+  domain: !secret duckdnsdomain
+  access_token: !secret duckdnstoken
