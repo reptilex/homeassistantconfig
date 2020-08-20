@@ -1,5 +1,4 @@
 class TeslaStyleSolarPowerCard extends HTMLElement {
-
   set hass(hass) {
     if (!this.contentIsCreated) {
 
@@ -25,7 +24,6 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
       this.style.backgroundColor = '#ff353d';
       this.style.color = 'white';
     }
-
   }
 
   setConfig(config) {
@@ -271,73 +269,12 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
       <div class="acc_container panel_icon_container">
             <ha-icon class="acc_icon" icon="${ this.solarCardIcons.panel.icon }"></ha-icon>
       </div>
-  </div>
-  <div class="acc_line panel_consumption">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="20px"
-        height="100%"
-        viewBox="0 0 40 `+ this.pxRate * 10 + `"
-        preserveAspectRatio="xMinYMax slice"
-      >
-      </svg>
-    </div>
-  <div class="acc_line grid_feed_in">
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="20px"
-      height="100%"
-      viewBox="0 0 40 `+ this.pxRate * 10 + `"
-      preserveAspectRatio="xMinYMax slice"
-    >
-    </svg>
-  </div>
-    
+  </div>    
 <div class="acc_center">
     <div class="acc_td acc_left">
         <div class="acc_container grid_icon_container">
               <ha-icon class="acc_icon" icon="${ this.solarCardIcons.grid.icon }"></ha-icon>
         </div>
-    </div>
-    <div class="acc_line grid_consumption">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="100%"
-        height="20px"
-        viewBox="0 0 `+ this.pxRate * 10 + ` 40"
-        preserveAspectRatio="xMinYMax slice"
-      >
-      </svg>
-    </div>
-    <div class="acc_line house_consumption">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="50%"
-        height="20px"
-        viewBox="0 0 `+ this.pxRate * 10 + ` 40"
-        preserveAspectRatio="xMinYMax slice"
-      >
-      </svg>
-    </div>
-    <div class="acc_line battery_charging">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="20px"
-        height="50%"
-        viewBox="0 0 40 `+ this.pxRate * 10 + `"
-        preserveAspectRatio="xMinYMax slice"
-      >
-      </svg>
-    </div>
-    <div class="acc_line battery_consumption">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="20px"
-        height="50%"
-        viewBox="0 0 40 `+ this.pxRate * 10 + `"
-        preserveAspectRatio="xMinYMax slice"
-      >
-      </svg>
     </div>
     <div class="acc_line power_lines">
       <svg
