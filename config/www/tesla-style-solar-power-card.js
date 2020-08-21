@@ -389,7 +389,9 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
     this.pxRate = newWidth / 100;
     var pxRate = this.pxRate;
 
-    this.cardRoot = document.querySelector('home-assistant').shadowRoot.querySelector('home-assistant-main').shadowRoot.querySelector('ha-panel-lovelace').shadowRoot.querySelector('hui-root').shadowRoot.querySelector('hui-view').shadowRoot.querySelector('tesla-style-solar-power-card ha-card');
+    var huiShadowRoot = document.querySelector('home-assistant').shadowRoot.querySelector('home-assistant-main').shadowRoot.querySelector('ha-panel-lovelace').shadowRoot.querySelector('hui-root').shadowRoot;
+    if(this.huiShadowRoot == null) return;
+    this.cardRoot = huiShadowRoot.querySelector('hui-view').shadowRoot.querySelector('tesla-style-solar-power-card ha-card');
     if(this.cardRoot == null) return;
     
     this.cardRoot.querySelector('.tesla-style-solar-power-card').style['width'] = 90 * pxRate + 'px';
