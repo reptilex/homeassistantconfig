@@ -109,7 +109,6 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
 
 
     if(config.battery_charging_entity != undefined){
-      console.log("wtf config"+config.battery_charging_entity );
       this.solarCardElements['batteryCharge'] = new sensorCardData(),
       this.solarCardElements['batteryCharging'] = new sensorCardData(),
       this.solarCardElements['batteryConsumption'] = new sensorCardData(),
@@ -311,7 +310,6 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
     this.createCircleAndLine(this.solarCardElements.gridFeedIn, "grid_feed_in", "M101,9 C100,101 99,106 10,102");
 
     if(this.solarCardElements.batteryCharge != undefined){
-      console.log("wtf?");
       this.createIconTextElement(['batteryCharging','batteryConsumption'], 'battery');
       this.createCircleAndLine(this.solarCardElements.batteryCharging, "battery_charging", "M10,10 C10,10 105,10 105,10");
       this.createCircleAndLine(this.solarCardElements.batteryConsumption, "battery_consumption", "M100,10 C10,109 10,105 105,105");
@@ -392,6 +390,7 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
     var pxRate = this.pxRate;
 
     this.cardRoot = document.querySelector('home-assistant').shadowRoot.querySelector('home-assistant-main').shadowRoot.querySelector('ha-panel-lovelace').shadowRoot.querySelector('hui-root').shadowRoot.querySelector('hui-view').shadowRoot.querySelector('tesla-style-solar-power-card ha-card');
+    if(this.cardRoot == null) return;
     
     this.cardRoot.querySelector('.tesla-style-solar-power-card').style['width'] = 90 * pxRate + 'px';
     if(this.solarCardElements.batteryCharging != undefined){
@@ -447,8 +446,6 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
 
     //car charge
     if(this.carCharge != undefined){
-      console.log("wtf?");
-      console.log(this.carCharge);
       this.cardRoot.querySelector('.car_icon_container').style['bottom'] = 4 * pxRate + 'px';
       this.cardRoot.querySelector('.car_icon_container').style['right'] = 5 * pxRate + 'px';
       this.cardRoot.querySelector('.car_consumption').style['height'] = 10 * pxRate + 'px';
