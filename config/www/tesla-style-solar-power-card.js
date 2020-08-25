@@ -535,10 +535,10 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
           value = valueStr;
         }
 
-        if (value > 0.2) {
+        if (value > 0.1) {
           value = Math.round(value * 10) / 10
         } else {
-          value = Math.round(value * 1000) / 1000
+          value = Math.round(value * 100) / 100
         }
     }
     return value;
