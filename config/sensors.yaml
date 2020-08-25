@@ -154,11 +154,11 @@
         device_class: power
         unit_of_measurement: W
       solar_consumption:
-        value_template: '{{ (states.sensor.solarsensors.attributes["home_own_consumption_from_pv"]/1000) | round(1) }}'
+        value_template: '{{ states.sensor.solarsensors.attributes["home_own_consumption_from_pv"] | int }}'
         device_class: power
         unit_of_measurement: W
       house_consumption:
-        value_template: '{{ (states.sensor.solarsensors.attributes["total_active_power_powermeter_home_consumption"] /1000) | round(1) }}'
+        value_template: '{{ states.sensor.solarsensors.attributes["total_active_power_powermeter_home_consumption"]  | int }}'
         device_class: power
         unit_of_measurement: W
       house_energy:
