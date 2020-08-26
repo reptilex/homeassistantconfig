@@ -139,6 +139,7 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
 
   reactToIosActive(){
     this.changeStylesDependingOnWidth();
+    console.log("ios became active");
   }
 
   createContent(hass) {
