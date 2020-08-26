@@ -132,7 +132,13 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
       this.carIcon = 'mdi:car-sports';
     }
 
+    this.addEventListener("ios.became_active",this.reactToIosActive);
+
     this.contentIsCreated = false
+  }
+
+  reactToIosActive(){
+    this.changeStylesDependingOnWidth();
   }
 
   createContent(hass) {
