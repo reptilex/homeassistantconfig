@@ -352,15 +352,17 @@
       vacuum_status:
         friendly_name: "Vacuum - Status"
         value_template: "Status: {{ states.vacuum.walle.attributes.state }}"
-
-
-  - platform: template
-    sensors:
       vacuum_battery:
         friendly_name: "Vacuum - Battery"
         value_template: "Battery: {{ states.vacuum.walle.attributes.battery_level }}"
         device_class: battery
         unit_of_measurement: '%'
+  - platform: mqtt
+    name: "Walle Error"
+    state_topic: "valetudo/walle/state"
+    value_template: "{{ value_json.error }}"
+
+      
 
   - platform: template
     sensors:
