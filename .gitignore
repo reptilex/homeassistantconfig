@@ -3,6 +3,7 @@ config/secrets.yaml
 config/home-assistant.log
 config/home-assistant*
 config/.storage/
+config/storage_backup
 config/.*
 
 config/ip_bans.yaml
@@ -12,3 +13,5 @@ config/zone.yaml
 
 testconfig.sh
 curlup.txt
+__*__
+__*__/
