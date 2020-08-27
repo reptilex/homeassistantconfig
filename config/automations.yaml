@@ -223,4 +223,3 @@
     platform: state
   condition: []
   action: []
-  mode: single
