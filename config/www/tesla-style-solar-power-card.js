@@ -27,6 +27,8 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
   }
 
   setConfig(config) {
+
+    //console.log("set config");
     if (!config.entity) {
       throw new Error('You need to define "entity"');
     }
@@ -132,17 +134,19 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
       this.carIcon = 'mdi:car-sports';
     }
 
-    //this.addEventListener("ios.became_active",this.reactToIosActive);
-
     this.contentIsCreated = false
   }
 
-  connectedCallback() {
-    this.changeStylesDependingOnWidth();
+  /*connectedCallback() {
+    console.log(this.contentIsCreated);
+    if(!this.contentIsCreated) return;
+
     console.log("testing callback");
-  }
+    //this.changeStylesDependingOnWidth();
+  }*/
 
   createContent(hass) {
+    //console.log("create content");
     const card = document.createElement('ha-card');
     var content = document.createElement('div');
     content.style.padding = '16px';
@@ -415,17 +419,20 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
     //icons
     var iconContainer = this.cardRoot.querySelectorAll('.acc_container');
     iconContainer.forEach(
-      function(currentValue, currentIndex, iconObj){
-        iconObj[currentIndex].style["height"] = 10 * pxRate + 'px';
-        iconObj[currentIndex].style["width"] = 10 * pxRate + 'px';
-        iconObj[currentIndex].style["padding"] = 7 * pxRate + 'px';        
+      function(currentValue, currentIndex, iconContainerItem){
+        iconContainerItem[currentIndex].style["height"] = 10 * pxRate + 'px';
+        iconContainerItem[currentIndex].style["width"] = 10 * pxRate + 'px';
+        iconContainerItem[currentIndex].style["padding"] = 7 * pxRate + 'px';        
       }
     );
     var icons = this.cardRoot.querySelectorAll('ha-icon');
     icons.forEach(
-      function(currentValue, currentIndex, listObj){
-        listObj[currentIndex].shadowRoot.querySelector('ha-svg-icon').style["height"] = 10 * pxRate + 'px';       
-        listObj[currentIndex].shadowRoot.querySelector('ha-svg-icon').style["width"] = 10 * pxRate + 'px';       
+      function(currentValue, currentIndex, iconItem){
+        const iconElement = iconItem[currentIndex].shadowRoot.querySelector('ha-svg-icon');
+        if(iconElement != null){
+          iconElement.style["height"] = 10 * pxRate + 'px';       
+          iconElement.style["width"] = 10 * pxRate + 'px';        
+        }
       }
     );
     this.cardRoot.querySelector('.acc_top').style['padding-bottom'] = 9 * pxRate + 'px';
@@ -511,6 +518,7 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
 
     if (entity.prevTimestamp === undefined) {
       entity.prevTimestamp = timestamp;
+      entity.currentDelta = 0;
     }
     var timePassed = timestamp - entity.prevTimestamp;
     var delta = entity.speed * timePassed;
