@@ -215,11 +215,12 @@
     entity_id: input_boolean.blinds_west_down
     service: input_boolean.turn_off
 - id: '1598548454362'
-  alias: Testing 2
+  alias: Testing 4
   description: ''
   trigger:
   - entity_id: sensor.home_energy_daily
-    from: '30000'
+    from: '32000'
     platform: state
   condition: []
   action: []
+  mode: single
