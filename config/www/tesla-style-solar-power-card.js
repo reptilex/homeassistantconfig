@@ -136,7 +136,7 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
   }
 
   /*connectedCallback() {
-    //checking hook 4
+    //checking hook 5
     if(!this.contentIsCreated) return;
 
     console.log("testing callback");
