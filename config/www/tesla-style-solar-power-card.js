@@ -27,8 +27,6 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
   }
 
   setConfig(config) {
-
-    //console.log("set config");
     if (!config.entity) {
       throw new Error('You need to define "entity"');
     }
