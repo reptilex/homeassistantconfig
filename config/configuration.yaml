@@ -9,8 +9,17 @@ default_config:
 #  default: notset
 #testing
 # Text to speech
-tts:
-  - platform: google_translate
+
+influxdb:
+  host: 192.168.178.55
+  include:
+    entities:
+       - sensor.solar_yield
+       - sensor.battery_consumption
+       - sensor.grid_consumption
+       - sensor.house_consumption
+       - sensor.battery_charging
+       - sensor.grid_feed_in
 
 binary_sensor:
   - platform: ping
