@@ -181,7 +181,7 @@
       title: Walle-e is done
     service: notify.notify
 - id: '1595418614216'
-  alias: New Automation
+  alias: Open west blinds after 17:30
   description: ''
   trigger:
   - at: '17:30'
@@ -214,6 +214,7 @@
   - data: {}
     entity_id: input_boolean.blinds_west_down
     service: input_boolean.turn_off
+  mode: single
 - id: '1598548454362'
   alias: Testing 10
   description: ''
