@@ -1,1 +1,2 @@
 docker run -d --name="homeassistant" -v /home/reptilex/projects/homeassistant/config:/config -v /etc/localtime:/etc/localtime:ro -p 8123:8123 homeassistant/home-assistant:stable
+ls
