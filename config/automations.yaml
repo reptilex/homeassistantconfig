@@ -225,3 +225,127 @@
   condition: []
   action: []
   mode: single
+- id: '1601052307418'
+  alias: Charge Marvin
+  description: ''
+  trigger:
+  - above: '1300'
+    entity_id: sensor.grid_feed_in
+    for: 00:00:10
+    platform: numeric_state
+  condition:
+  - condition: state
+    entity_id: binary_sensor.marvin_charger_sensor
+    state: 'on'
+  - below: '80'
+    condition: numeric_state
+    entity_id: sensor.marvin_battery_sensor
+  - condition: state
+    entity_id: switch.marvin_charger_switch
+    state: 'off'
+  action:
+  - data:
+      message: Charging Marvin
+      title: Grid Feed above 1300 starting to charge Marvin
+    service: notify.notify
+  - device_id: f104da4c0570465f971b436d98db7ab7
+    domain: switch
+    entity_id: switch.marvin_charger_switch
+    type: turn_on
+  mode: single
+- id: '1601372273010'
+  alias: Test Grid Feed In
+  description: ''
+  trigger:
+  - above: '1300'
+    entity_id: sensor.grid_feed_in
+    for: 00:00:10
+    platform: numeric_state
+  condition:
+  - condition: state
+    entity_id: binary_sensor.marvin_charger_sensor
+    state: 'on'
+  - below: '80'
+    condition: numeric_state
+    entity_id: sensor.marvin_battery_sensor
+  - below: '10'
+    condition: numeric_state
+    entity_id: sensor.marvin_charging_rate_sensor
+  action:
+  - data:
+      message: Test 2 Charging Marvin
+      title: Grid Feed above 1300 testing
+    service: notify.mobile_app_exe
+  mode: single
+- id: '1601381644975'
+  alias: Stop charging Marvin draining battery
+  description: ''
+  trigger:
+  - above: '600'
+    entity_id: sensor.battery_consumption
+    for: 00:20:00
+    platform: numeric_state
+  condition:
+  - above: '1000'
+    condition: numeric_state
+    entity_id: sensor.marvin_charging_rate_sensor
+  action:
+  - device_id: f104da4c0570465f971b436d98db7ab7
+    domain: switch
+    entity_id: switch.marvin_charger_switch
+    type: turn_off
+  - data:
+      message: Using too much battery, stopping the charge
+      title: STOP Charging Marvin draining battery
+    service: notify.notify
+  mode: single
+- id: '1601395638431'
+  alias: should we charge Marvin?
+  description: ''
+  trigger:
+  - above: '1400'
+    entity_id: sensor.grid_feed_in
+    for: 00:05:00
+    platform: numeric_state
+  condition:
+  - condition: device
+    device_id: f104da4c0570465f971b436d98db7ab7
+    domain: switch
+    entity_id: switch.marvin_charger_switch
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 1
+    type: is_off
+  - condition: state
+    entity_id: device_tracker.marvin_location_tracker
+    state: home
+  action:
+  - device_id: a43da30ea4ba4a1faed7a6364faadbac
+    domain: cover
+    entity_id: cover.unteres_bad
+    position: 32
+    type: set_position
+  mode: single
+- id: '1601623603362'
+  alias: Ask to charge Marvin
+  description: ''
+  trigger:
+  - above: '1300'
+    entity_id: sensor.grid_feed_in
+    for: 00:00:10
+    platform: numeric_state
+  condition:
+  - condition: state
+    entity_id: device_tracker.marvin_location_tracker
+    state: home
+  - below: '80'
+    condition: numeric_state
+    entity_id: sensor.marvin_battery_sensor
+  action:
+  - data:
+      message: Marvin is currently not connected but we are selling at least 1300W
+        of our valuable  sun electricty, connect and charge might be a good idea
+      title: Should we connect Marvin and charge?
+    service: notify.notify
+  mode: single
