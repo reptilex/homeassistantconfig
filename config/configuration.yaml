@@ -146,3 +146,24 @@ utility_meter:
 duckdns:
   domain: !secret duckdnsdomain
   access_token: !secret duckdnstoken
+
+ios:
+  push:
+    categories:
+      - name: Power for marvin
+        identifier: 'marvinpower'
+        actions:
+          - identifier: 'POWER_MARVIN'
+            title: 'Power up Marvin'
+            activationMode: 'background'
+            authenticationRequired: true
+            destructive: true
+            behavior: 'default'
+          - identifier: 'NO_POWER_MARVIN'
+            title: 'No power for marvin'
+            activationMode: 'background'
+            authenticationRequired: true
+            destructive: false
+            behavior: 'textInput'
+            textInputButtonTitle: 'Silencio!'
+            textInputPlaceholder: 'Placeholder'
