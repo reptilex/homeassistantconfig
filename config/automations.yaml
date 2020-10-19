@@ -101,6 +101,19 @@
   - data: {}
     entity_id: input_boolean.blinds_west_down
     service: input_boolean.turn_on
+- id: '1592566081594'
+  alias: Test triggers
+  description: ''
+  trigger:
+  - at: '21:41:00'
+    platform: time
+  condition: []
+  action:
+  - data:
+      message: trigger the time already!!
+      title: testing above 3500 yield 60 sec
+    service: notify.notify
+  initial_state: true
 - id: '1592852434061'
   alias: Roll blinds up east when too hot after 13:20
   description: ''
@@ -218,7 +231,7 @@
   trigger:
   - above: '1300'
     entity_id: sensor.grid_feed_in
-    for: 00:05:00
+    for: 00:00:10
     platform: numeric_state
   condition:
   - condition: state
@@ -231,14 +244,14 @@
     entity_id: switch.marvin_charger_switch
     state: 'off'
   action:
-  - device_id: f104da4c0570465f971b436d98db7ab7
-    domain: switch
-    entity_id: switch.marvin_charger_switch
-    type: turn_on
   - data:
       message: Charging Marvin
       title: Grid Feed above 1300 starting to charge Marvin
     service: notify.notify
+  - device_id: f104da4c0570465f971b436d98db7ab7
+    domain: switch
+    entity_id: switch.marvin_charger_switch
+    type: turn_on
   mode: single
 - id: '1601372273010'
   alias: Test Grid Feed In
@@ -270,15 +283,12 @@
   trigger:
   - above: '600'
     entity_id: sensor.battery_consumption
-    for: 00:10:00
+    for: 00:20:00
     platform: numeric_state
   condition:
-  - above: '1'
+  - above: '1000'
     condition: numeric_state
-    entity_id: sensor.marvin_current_charging
-  - above: '200'
-    condition: numeric_state
-    entity_id: sensor.solar_yield
+    entity_id: sensor.marvin_charging_rate_sensor
   action:
   - device_id: f104da4c0570465f971b436d98db7ab7
     domain: switch
@@ -289,11 +299,39 @@
       title: STOP Charging Marvin draining battery
     service: notify.notify
   mode: single
+- id: '1601395638431'
+  alias: should we charge Marvin?
+  description: ''
+  trigger:
+  - above: '1400'
+    entity_id: sensor.grid_feed_in
+    for: 00:05:00
+    platform: numeric_state
+  condition:
+  - condition: device
+    device_id: f104da4c0570465f971b436d98db7ab7
+    domain: switch
+    entity_id: switch.marvin_charger_switch
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 1
+    type: is_off
+  - condition: state
+    entity_id: device_tracker.marvin_location_tracker
+    state: home
+  action:
+  - device_id: a43da30ea4ba4a1faed7a6364faadbac
+    domain: cover
+    entity_id: cover.unteres_bad
+    position: 32
+    type: set_position
+  mode: single
 - id: '1601623603362'
   alias: Ask to charge Marvin
   description: ''
   trigger:
-  - above: '1100'
+  - above: '1300'
     entity_id: sensor.grid_feed_in
     for: 00:00:10
     platform: numeric_state
@@ -304,63 +342,10 @@
   - below: '80'
     condition: numeric_state
     entity_id: sensor.marvin_battery_sensor
-  - below: '6'
-    condition: numeric_state
-    entity_id: sensor.marvin_charging_rate_sensor
-  - condition: state
-    entity_id: binary_sensor.marvin_charger_sensor
-    state: 'off'
   action:
   - data:
       message: Marvin is currently not connected but we are selling at least 1300W
         of our valuable  sun electricty, connect and charge might be a good idea
       title: Should we connect Marvin and charge?
-    service: notify.notify
-  mode: single
-- id: '1601893936099'
-  alias: Stop charging Marvin too much Grid energy
-  description: ''
-  trigger:
-  - above: '1200'
-    entity_id: sensor.grid_consumption
-    platform: numeric_state
-  condition:
-  - above: '1'
-    condition: numeric_state
-    entity_id: sensor.marvin_current_charging
-  - above: '100'
-    condition: numeric_state
-    entity_id: sensor.solar_yield
-  action:
-  - device_id: f104da4c0570465f971b436d98db7ab7
-    domain: switch
-    entity_id: switch.marvin_charger_switch
-    type: turn_off
-  - data:
-      message: Using too much grid, stopping the charge
-      title: STOP Charging Marvin using too much grid. Deactivate this automation
-        if you want to proceed anyway.
-    service: notify.notify
-  mode: single
-- id: '1602506980612'
-  alias: Ask to increase Marvin Charge
-  description: ''
-  trigger:
-  - above: '900'
-    entity_id: sensor.grid_feed_in
-    for: 00:05:00
-    platform: numeric_state
-  condition:
-  - condition: state
-    entity_id: switch.marvin_charger_switch
-    state: 'on'
-  - below: '2.3'
-    condition: numeric_state
-    entity_id: sensor.marvin_current_charging
-  action:
-  - data:
-      message: Marvin is currently not charging with all power and we are feeding
-        in, do we want to increase power?
-      title: Should we increase Marvin charge?
     service: notify.notify
   mode: single
