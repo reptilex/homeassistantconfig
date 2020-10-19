@@ -20,6 +20,7 @@ influxdb:
        - sensor.house_consumption
        - sensor.battery_charging
        - sensor.grid_feed_in
+       - sensor.solar_consumption
 
 binary_sensor:
   - platform: ping
