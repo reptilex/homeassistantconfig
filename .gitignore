@@ -5,7 +5,7 @@ config/home-assistant*
 config/.storage/
 config/storage_backup
 config/.*
-
+config/custom_components/hacs/*
 config/ip_bans.yaml
 config/secrets.yaml
 config/known_devices.yaml
