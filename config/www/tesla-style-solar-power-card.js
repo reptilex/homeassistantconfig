@@ -144,7 +144,6 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
   }*/
 
   createContent(hass) {
-    //console.log("create content");
     const card = document.createElement('ha-card');
     var content = document.createElement('div');
     content.style.padding = '16px';
@@ -399,9 +398,11 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
     this.pxRate = newWidth / 100;
     var pxRate = this.pxRate;
   
+
     try {
-      this.cardRoot = document.querySelector('home-assistant').shadowRoot.querySelector('home-assistant-main').shadowRoot.querySelector('ha-panel-lovelace').shadowRoot.querySelector('hui-root').shadowRoot.querySelector('hui-view').shadowRoot.querySelector('tesla-style-solar-power-card ha-card');  
+      this.cardRoot = document.querySelector('home-assistant').shadowRoot.querySelector('home-assistant-main').shadowRoot.querySelector('ha-panel-lovelace').shadowRoot.querySelector('hui-root').shadowRoot.querySelector('hui-masonry-view').shadowRoot.querySelector('tesla-style-solar-power-card ha-card');  
     } catch (error) {
+      console.log("cardRoot error");
       return;
     }
     
@@ -491,6 +492,7 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
 
     if(this.carCharge != undefined) this.updateOneCircle(timestamp, this.carCharge);
 
+    //console.log(this);
     if(this.oldWidth != this.clientWidth && document.readyState === "complete") {
       this.changeStylesDependingOnWidth(this.clientWidth);
     }
