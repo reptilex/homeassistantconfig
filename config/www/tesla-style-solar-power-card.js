@@ -135,14 +135,6 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
     this.contentIsCreated = false
   }
 
-  /*connectedCallback() {
-    //checking hook 8.1
-    if(!this.contentIsCreated) return;
-
-    console.log("testing callback");
-    //this.changeStylesDependingOnWidth();
-  }*/
-
   createContent(hass) {
     const card = document.createElement('ha-card');
     var content = document.createElement('div');
@@ -524,7 +516,7 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
     var delta = entity.speed * timePassed;
     entity.currentDelta += delta;
     let percentageDelta = entity.currentDelta / lineLength;
-    if (percentageDelta >= 1) {
+    if (percentageDelta >= 1 || isNaN(percentageDelta)) {
       entity.currentDelta = 0;
       percentageDelta = 0.01;
     }
