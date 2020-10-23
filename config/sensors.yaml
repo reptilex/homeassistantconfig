@@ -389,3 +389,19 @@
     unit_prefix: k
     round: 2
 
+  - platform: template
+    sensors:
+      heater_operation:
+        friendly_name: "Heater Operation"
+        value_template: '
+          {% if is_state("sensor.verdichtungsanforderung", "0") %}
+            No demand
+          {%- elif is_state("sensor.verdichtungsanforderung", "10") -%}   
+            Cooling??
+          {%- elif is_state("sensor.verdichtungsanforderung", "20") -%}   
+            Heating
+          {%- elif is_state("sensor.verdichtungsanforderung", "30") -%}   
+            Warm water
+          {%- else -%} 
+            Error
+          {%- endif -%}'
