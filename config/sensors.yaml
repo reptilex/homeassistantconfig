@@ -262,11 +262,17 @@
                           On
                         {%- endif -%}'
       pufferladepumpe:
-        value_template: '{{ states.sensor.heatersensors.attributes["pufferladepumpe"] }}'
+        value_template: '{% if states.sensor.heatersensors.attributes.pufferladepumpe == 0 %}
+                          Off
+                        {%- else -%} 
+                          On
+                        {%- endif -%}'
       verdichter:
-        value_template: '{{ states.sensor.heatersensors.attributes["verdichter"] }}'
-        device_class: temperature
-        unit_of_measurement: °C
+        value_template: '{% if states.sensor.heatersensors.attributes.verdichter == 0 %}
+                          Off
+                        {%- else -%} 
+                          On
+                        {%- endif -%}'
       stoerung:
         value_template: '{{ states.sensor.heatersensors.attributes["stoerung"] }}'
       vierwegewentil_luft:
