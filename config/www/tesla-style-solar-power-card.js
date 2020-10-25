@@ -165,26 +165,7 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
     var batteryHtml = '';
 
     if(this.carCharge != undefined){
-      carHtml = `<div class="acc_line car2_consumption">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="20px"
-                        height="50%"
-                        viewBox="0 0 40 `+ this.pxRate * 10 + `"
-                        preserveAspectRatio="xMinYMax slice"
-                      >
-                      </svg>
-                    </div>
-                    <div class="acc_container car2_icon_container">
-                          <div class="car2_battery_state_text acc_text">.</div>
-                          <ha-icon class="acc_icon" icon="${ this.carIcon }"></ha-icon>
-                          <div class="car2_charging_text acc_text">.</div>
-                    </div>`;
-    }
-
-
-    if(this.car2Charge != undefined){
-      car2Html = `<div class="acc_line car_consumption">
+      carHtml = `<div class="acc_line car_consumption">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="20px"
@@ -198,6 +179,25 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
                           <div class="car_battery_state_text acc_text">.</div>
                           <ha-icon class="acc_icon" icon="${ this.carIcon }"></ha-icon>
                           <div class="car_charging_text acc_text">.</div>
+                    </div>`;
+    }
+
+
+    if(this.car2Charge != undefined){
+      car2Html = `<div class="acc_line car2_consumption">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="20px"
+                        height="50%"
+                        viewBox="0 0 40 `+ this.pxRate * 10 + `"
+                        preserveAspectRatio="xMinYMax slice"
+                      >
+                      </svg>
+                    </div>
+                    <div class="acc_container car2_icon_container">
+                          <div class="car2_battery_state_text acc_text">.</div>
+                          <ha-icon class="acc_icon" icon="${ this.carIcon }"></ha-icon>
+                          <div class="car2_charging_text acc_text">.</div>
                     </div>`;
     }
 
@@ -435,6 +435,7 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
   }
 
   createCircleAndLine(entity, cssSelector, pathDAttribute, svgSelector = "power_lines"){
+    console.log("selector:"+cssSelector)
     entity.circle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
     var circle = entity.circle;
     circle.setAttributeNS(null, "r", "4");
