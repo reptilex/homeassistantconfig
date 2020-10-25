@@ -435,7 +435,7 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
   }
 
   createCircleAndLine(entity, cssSelector, pathDAttribute, svgSelector = "power_lines"){
-    console.log("selector:"+cssSelector)
+    //console.log("selector:"+cssSelector)
     entity.circle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
     var circle = entity.circle;
     circle.setAttributeNS(null, "r", "4");
@@ -515,8 +515,6 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
     
     if(this.solarCardElements.gridToBattery != undefined){
       this.correctDimensionsOfCircleLineAndContainer("grid_to_battery", 'M0,'+half+' C'+half+','+ half + ' '+half +','+half+' '+half+','+half * 2);
-      console.log('correcting dimensions of grid to battery');
-      console.log(this.solarCardElements);
     }
     //battery
     if(this.solarCardElements.batteryCharge != undefined){
