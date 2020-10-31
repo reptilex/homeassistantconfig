@@ -420,8 +420,8 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
 
     if(this.houseBatteryState != undefined){
       let batteryChargeValue = this.getStateValue(hass, this.houseBatteryState.entity);
-      let batteryChargingValue = this.getStateValue(hass, this.houseBatteryCharging.entity);
-      this.querySelector(".battery_charge_state_text").textContent = batteryChargeValue + " %";
+      let batteryChargingValue = this.getStateValue(hass, this.solarCardElements.batteryCharging.entity);
+      this.querySelector(".battery_charge_state_text").textContent = batteryChargeValue+" %";
       this.updateBatteryIcon(batteryChargeValue, batteryChargingValue);
     }
   }
@@ -626,13 +626,14 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
   updateBatteryIcon(batteryChargeValue, batteryChargingValue){
     let normalizedValue = batteryChargeValue / 100;
     normalizedValue = normalizedValue.toFixed(1) * 100;
-    normalizedValue = '-' + normalizedValue.toString;
+    normalizedValue = '-' + normalizedValue.toString();
     let chargingIcon = '';
     if(batteryChargingValue > 0){
       chargingIcon = '-charging';
     }else{
       if(normalizedValue == '-100') normalizedValue = '';
     }
+    console.log('mdi:battery'+chargingIcon+normalizedValue);
     this.querySelector(".battery_icon_container ha-icon").setAttribute('icon','mdi:battery'+chargingIcon+normalizedValue);
   }
 
