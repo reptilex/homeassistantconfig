@@ -419,7 +419,10 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
     }  
 
     if(this.houseBatteryState != undefined){
-      this.querySelector(".battery_charge_state_text").textContent = this.getStateValue(hass, this.houseBatteryState.entity)+ " %";
+      let batteryChargeValue = this.getStateValue(hass, this.houseBatteryState.entity);
+      let batteryChargingValue = this.getStateValue(hass, this.houseBatteryCharging.entity);
+      this.querySelector(".battery_charge_state_text").textContent = batteryChargeValue + " %";
+      this.updateBatteryIcon(batteryChargeValue, batteryChargingValue);
     }
   }
 
@@ -525,7 +528,11 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
 
     //car charge
     if(this.carCharge != undefined){
-      this.cardRoot.querySelector('.car_icon_container').style['top'] = -62 * pxRate + 'px';
+      if(this.solarCardElements.batteryCharge != undefined){
+        this.cardRoot.querySelector('.car_icon_container').style['top'] = -62 * pxRate + 'px';
+      }else{
+        this.cardRoot.querySelector('.car_icon_container').style['top'] = -39 * pxRate + 'px';
+      }
       this.cardRoot.querySelector('.car_icon_container').style['right'] = 5 * pxRate + 'px';
       this.cardRoot.querySelector('.car_consumption').style['height'] = 10 * pxRate + 'px';
       this.cardRoot.querySelector('.car_consumption').style['width'] = 3 * pxRate + 'px';
@@ -565,10 +572,12 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
       }
     }
 
-    //if(this.gridToBattery != undefined) this.updateOneCircle(timestamp, this.gridToBattery);
+    if(this.gridToBattery != undefined) this.updateOneCircle(timestamp, this.gridToBattery);
 
     if(this.carCharge != undefined) this.updateOneCircle(timestamp, this.carCharge);
     if(this.car2Charge != undefined) this.updateOneCircle(timestamp, this.car2Charge);
+
+    if(this.batteryCharge != undefined) this.updateBatteryIcon(this.batteryCharge);
 
     //console.log(this);
     if(this.oldWidth != this.clientWidth && document.readyState === "complete") {
@@ -612,6 +621,19 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
     entity.circle.setAttributeNS(null, "cy", point.y);
 
     entity.prevTimestamp = timestamp;
+  }
+
+  updateBatteryIcon(batteryChargeValue, batteryChargingValue){
+    let normalizedValue = batteryChargeValue / 100;
+    normalizedValue = normalizedValue.toFixed(1) * 100;
+    normalizedValue = '-' + normalizedValue.toString;
+    let chargingIcon = '';
+    if(batteryChargingValue > 0){
+      chargingIcon = '-charging';
+    }else{
+      if(normalizedValue == '-100') normalizedValue = '';
+    }
+    this.querySelector(".battery_icon_container ha-icon").setAttribute('icon','mdi:battery'+chargingIcon+normalizedValue);
   }
 
   getStateValue(hass, entityId){
