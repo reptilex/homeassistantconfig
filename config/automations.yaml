@@ -216,7 +216,7 @@
   alias: Charge Marvin
   description: ''
   trigger:
-  - above: '1300'
+  - above: '1150'
     entity_id: sensor.grid_feed_in
     for: 00:05:00
     platform: numeric_state
