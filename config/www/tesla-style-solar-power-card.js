@@ -626,14 +626,12 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
   updateBatteryIcon(batteryChargeValue, batteryChargingValue){
     let normalizedValue = batteryChargeValue / 100;
     normalizedValue = normalizedValue.toFixed(1) * 100;
-    normalizedValue = '-' + normalizedValue.toString();
+    let normalizedString = '-' + normalizedValue.toString();
     let chargingIcon = '';
-    if(batteryChargingValue > 0){
-      chargingIcon = '-charging';
-    }else{
-      if(normalizedValue == '-100') normalizedValue = '';
-    }
-    this.querySelector(".battery_icon_container ha-icon").setAttribute('icon','mdi:battery'+chargingIcon+normalizedValue);
+    if(batteryChargingValue > 0) chargingIcon = '-charging';
+    if(normalizedValue == 100) normalizedString = '';
+    if(normalizedValue <= 4) normalizedString = '-outline';
+    this.querySelector(".battery_icon_container ha-icon").setAttribute('icon','mdi:battery'+chargingIcon+normalizedString);
   }
 
   getStateValue(hass, entityId){
