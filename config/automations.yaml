@@ -295,7 +295,7 @@
   trigger:
   - above: '1100'
     entity_id: sensor.grid_feed_in
-    for: 00:00:10
+    for: 00:02:00
     platform: numeric_state
   condition:
   - condition: state
