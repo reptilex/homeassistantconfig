@@ -373,13 +373,11 @@
     name: esp8266_2_temperature
     unit_of_measurement: '°C'
     state_topic: 'sensor_esp8266_2/temperature'
-    value_template: '{{ value_json.temperature }}'
     
   - platform: mqtt
     name: esp8266_2_humidity
     unit_of_measurement: '%'
     state_topic: 'sensor_esp8266_2/humidity'
-    value_template: '{{ value_json.humidity }}'
 
   - platform: template
     sensors:
