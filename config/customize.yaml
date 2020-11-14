@@ -15,3 +15,6 @@
 
   sensor.solar_yield:
     friendly_name: "Solar Yield"
+  
+  sensor.house_consumption:
+    friendly_name: "House Consumption"
