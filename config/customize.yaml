@@ -9,3 +9,9 @@
 
   sensor.esp8266_2_temperature:
    friendly_name: "Temp living room"
+
+  sensor.heating_stromz_leistung:
+    friendly_name: "Heating Consumption"
+
+  sensor.solar_yield:
+    friendly_name: "Solar Yield"
