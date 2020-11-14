@@ -3,6 +3,8 @@
 homeassistant:
   time_zone: Europe/Berlin
   elevation: 52
+  customize: !include customize.yaml
+
 default_config:
 
 #logger:

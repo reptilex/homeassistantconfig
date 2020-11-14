@@ -1,0 +1,2 @@
+  sensor.esp8266_3_temperature:
+    friendly_name: "Temp Schlafzimmer"
