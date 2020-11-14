@@ -10,6 +10,12 @@
   sensor.esp8266_2_temperature:
    friendly_name: "Temp living room"
 
+  sensor.esp8266_1_humidity:
+   friendly_name: "Hum Anahi"
+
+  sensor.esp8266_1_temperature:
+   friendly_name: "Temp Anahi"
+
   sensor.heating_stromz_leistung:
     friendly_name: "Heating Consumption"
 
