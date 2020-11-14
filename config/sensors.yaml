@@ -327,7 +327,7 @@
         value_template: '{{ states.sensor.heatersensors.attributes["stromz_gesamt"] }}'
         device_class: power
         unit_of_measurement: W
-      stromz_leistung:
+      heating_stromz_leistung:
         value_template: '{{ states.sensor.heatersensors.attributes["stromz_leistung"] }}'
         device_class: power
         unit_of_measurement: W
