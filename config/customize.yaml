@@ -1,11 +1,11 @@
   sensor.esp8266_3_temperature:
-    friendly_name: "Temp Schlafzimmer"
+    friendly_name: "Temp bedroom"
 
   sensor.esp8266_3_humidity:
-   friendly_name: "Hum Schlafzimmer"
+   friendly_name: "Hum bedroom"
 
   sensor.esp8266_2_humidity:
-   friendly_name: "Hum Wohnzimmer"
+   friendly_name: "Hum living room"
 
   sensor.esp8266_2_temperature:
-   friendly_name: "Temp Wohnzimmer"
+   friendly_name: "Temp living room"
