@@ -379,6 +379,16 @@
     unit_of_measurement: '%'
     state_topic: 'sensor_esp8266_2/humidity'
 
+  - platform: mqtt
+    name: esp8266_3_temperature
+    unit_of_measurement: '°C'
+    state_topic: 'sensor_esp8266_2/temperature'
+    
+  - platform: mqtt
+    name: esp8266_3_humidity
+    unit_of_measurement: '%'
+    state_topic: 'sensor_esp8266_2/humidity'
+
   - platform: template
     sensors:
       marvin_current_charging:
