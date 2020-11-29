@@ -110,40 +110,40 @@ utility_meter:
 
 
   power_heliotherm_daily:
-    source: sensor.heating_stromz_leistung
+    source: sensor.integer_heating_stromz_leistung
     cycle: daily
   power_water_daily:
-    source: sensor.heating_stromz_brauchwasser
+    source: sensor.integer_heating_stromz_brauchwasser
     cycle: daily
   power_heating_daily:
-    source: sensor.heating_stromz_heizung
+    source: sensor.integer_heating_stromz_heizung
     cycle: daily
   power_water_heating_daily:
-    source: sensor.heating_stromz_gesamt
+    source: sensor.integer_heating_stromz_gesamt
     cycle: daily
   power_heliotherm_monthly:
-    source: sensor.heating_stromz_leistung
+    source: sensor.integer_heating_stromz_leistung
     cycle: monthly
   power_water_monthly:
-    source: sensor.heating_stromz_brauchwasser
+    source: sensor.integer_heating_stromz_brauchwasser
     cycle: monthly
   power_heating_monthly:
-    source: sensor.heating_stromz_heizung
+    source: sensor.integer_heating_stromz_heizung
     cycle: monthly
   power_water_heating_monthly:
-    source: sensor.heating_stromz_gesamt
+    source: sensor.integer_heating_stromz_gesamt
     cycle: monthly
   power_heliotherm_yearly:
-    source: sensor.heating_stromz_leistung
+    source: sensor.integer_heating_stromz_leistung
     cycle: yearly
   power_water_yearly:
-    source: sensor.heating_stromz_brauchwasser
+    source: sensor.integer_heating_stromz_brauchwasser
     cycle: yearly
   power_heating_yearly:
-    source: sensor.heating_stromz_heizung
+    source: sensor.integer_heating_stromz_heizung
     cycle: daily
   power_water_heating_yearly:
-    source: sensor.heating_stromz_gesamt
+    source: sensor.integer_heating_stromz_gesamt
     cycle: daily
   
 duckdns:
