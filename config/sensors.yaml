@@ -425,6 +425,21 @@
     name: integer_heating_stromz_leistung
     unit_prefix: k
     round: 2
+  - platform: integration
+    source: sensor.heating_stromz_brauchwasser
+    name: integer_heating_stromz_brauchwasser
+    unit_prefix: k
+    round: 2
+  - platform: integration
+    source: sensor.heating_stromz_heizung
+    name: integer_heating_stromz_heizung
+    unit_prefix: k
+    round: 2
+  - platform: integration
+    source: sensor.heating_stromz_gesamt
+    name: integer_heating_stromz_gesamt
+    unit_prefix: k
+    round: 2
 
   - platform: template
     sensors:
