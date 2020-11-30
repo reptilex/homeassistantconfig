@@ -314,7 +314,7 @@
       heating_stromz_heizung:
         value_template: '{{ states.sensor.heatersensors.attributes["stromz_heizung"] }}'
         device_class: power
-        unit_of_measurement: W
+        unit_of_measurement: kWh
       heating_wmz_brauchwasser:
         value_template: '{{ states.sensor.heatersensors.attributes["wmz_brauchwasser"] }}'
         device_class: power
@@ -326,7 +326,7 @@
       heating_stromz_gesamt:
         value_template: '{{ states.sensor.heatersensors.attributes["stromz_gesamt"] }}'
         device_class: power
-        unit_of_measurement: W
+        unit_of_measurement: kWh
       heating_stromz_leistung:
         value_template: '{{ states.sensor.heatersensors.attributes["stromz_leistung"] }}'
         device_class: power
