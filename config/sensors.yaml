@@ -423,6 +423,7 @@
   - platform: integration
     source: sensor.heating_stromz_leistung
     name: integer_heating_stromz_leistung
+    method: left
     unit_prefix: k
     round: 2
   - platform: integration
