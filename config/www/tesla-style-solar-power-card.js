@@ -31,6 +31,11 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
     this.pxRate = 3;
     var pxRate = this.pxRate;
     this.oldWidth = 0;
+    this.w_or_kw = 'kW';
+
+    if(config.show_w_not_kw != undefined){
+      this.w_or_kw = 'W';
+    }
 
     class sensorCardData {
       constructor(){
@@ -379,7 +384,8 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
     this.contentIsCreated = true;
   }
 
-  updateProperties(hass) {    
+  updateProperties(hass) { 
+    console.log('updating properties');   
     for (var element in this.solarCardElements) {
       if (Object.prototype.hasOwnProperty.call(this.solarCardElements, element)) {
         if(this.solarCardElements[element].entity == undefined) continue;
@@ -397,14 +403,14 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
         if(this.solarCardIcons[icon].accTextElement == null) continue;
 
         this.solarCardIcons[icon].setValue();
-        this.solarCardIcons[icon].accTextElement.textContent = this.solarCardIcons[icon].value + ' kW';
+        this.solarCardIcons[icon].accTextElement.textContent = this.solarCardIcons[icon].value + ' ' + this.w_or_kw;
       }
     }
 
     if(this.carCharge != undefined){
       this.carCharge.value = this.getStateValue(hass, this.carCharge.entity);
       this.carCharge.speed = this.getSpeed(this.carCharge.value)/4;
-      this.querySelector(".car_charging_text").textContent = this.carCharge.value + " kW";
+      this.querySelector(".car_charging_text").textContent = this.carCharge.value + " " + this.w_or_kw;
       if(this.carBatteryState.entity != undefined){
         this.querySelector(".car_battery_state_text").textContent = this.getStateValue(hass, this.carBatteryState.entity)+ " %";
       }
@@ -412,7 +418,7 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
     if(this.car2Charge != undefined){
       this.car2Charge.value = this.getStateValue(hass, this.car2Charge.entity);
       this.car2Charge.speed = this.getSpeed(this.car2Charge.value)/4;
-      this.querySelector(".car2_charging_text").textContent = this.car2Charge.value + " kW";
+      this.querySelector(".car2_charging_text").textContent = this.car2Charge.value + " " + this.w_or_kw;
       if(this.car2BatteryState.entity != undefined){
         this.querySelector(".car2_battery_state_text").textContent = this.getStateValue(hass, this.car2BatteryState.entity)+ " %";
       }
@@ -457,26 +463,22 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
     this.oldWidth = newWidth;
     this.pxRate = newWidth / 100;
     var pxRate = this.pxRate;
-  
+    console.log('pxrate:'+ this.pxRate)
 
-    try {
-      this.cardRoot = document.querySelector('home-assistant').shadowRoot.querySelector('home-assistant-main').shadowRoot.querySelector('ha-panel-lovelace').shadowRoot.querySelector('hui-root').shadowRoot.querySelector('hui-masonry-view').shadowRoot.querySelector('tesla-style-solar-power-card ha-card');  
-    } catch (error) {
-      console.log("cardRoot error");
-      return;
-    }
+
     
-    if(this.cardRoot == null) return;
+    this;
     
-    this.cardRoot.querySelector('.tesla-style-solar-power-card').style['width'] = 90 * pxRate + 'px';
+    
+    this.querySelector('.tesla-style-solar-power-card').style['width'] = 90 * pxRate + 'px';
     if(this.solarCardElements.batteryCharging != undefined){
-      this.cardRoot.querySelector('.tesla-style-solar-power-card').style['height'] = 90 * pxRate + 'px';
+      this.querySelector('.tesla-style-solar-power-card').style['height'] = 90 * pxRate + 'px';
     }else{
-      this.cardRoot.querySelector('.tesla-style-solar-power-card').style['height'] = 60 * pxRate + 'px';
+      this.querySelector('.tesla-style-solar-power-card').style['height'] = 60 * pxRate + 'px';
     }
 
     //icons
-    var iconContainer = this.cardRoot.querySelectorAll('.acc_container');
+    var iconContainer = this.querySelectorAll('.acc_container');
     iconContainer.forEach(
       function(currentValue, currentIndex, iconContainerItem){
         iconContainerItem[currentIndex].style["height"] = 10 * pxRate + 'px';
@@ -484,7 +486,7 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
         iconContainerItem[currentIndex].style["padding"] = 7 * pxRate + 'px';        
       }
     );
-    var icons = this.cardRoot.querySelectorAll('ha-icon');
+    var icons = this.querySelectorAll('ha-icon');
     icons.forEach(
       function(currentValue, currentIndex, iconItem){
         const iconElement = iconItem[currentIndex].shadowRoot.querySelector('ha-svg-icon');
@@ -494,22 +496,22 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
         }
       }
     );
-    this.cardRoot.querySelector('.acc_top').style['padding-bottom'] = 9 * pxRate + 'px';
-    this.cardRoot.querySelector('.acc_bottom').style['padding-top'] = 9 * pxRate + 'px';
+    this.querySelector('.acc_top').style['padding-bottom'] = 9 * pxRate + 'px';
+    this.querySelector('.acc_bottom').style['padding-top'] = 9 * pxRate + 'px';
 
     //icon texts
-    this.cardRoot.querySelectorAll('.acc_text').forEach((el) => {
+    this.querySelectorAll('.acc_text').forEach((el) => {
       el.style['font-size'] = 3 * pxRate + 'px';
     });
 
     //power lines
-    this.cardRoot.querySelector('.power_lines').style['height'] = 42 * pxRate + 'px';
-    this.cardRoot.querySelector('.power_lines').style['width'] = 42 * pxRate + 'px';
-    this.cardRoot.querySelector('.power_lines').style['top'] = 29 * pxRate + 'px';
-    this.cardRoot.querySelector('.power_lines').style['left'] = 29 * pxRate + 'px';
-    this.cardRoot.querySelector('.power_lines svg').style['height'] = 42 * pxRate + 'px';
-    this.cardRoot.querySelector('.power_lines svg').style['width'] = 42 * pxRate + 'px';
-    this.cardRoot.querySelector(".power_lines svg").setAttribute("viewBox", "0 0 "+ 42 * pxRate + " " + 42 * pxRate); 
+    this.querySelector('.power_lines').style['height'] = 42 * pxRate + 'px';
+    this.querySelector('.power_lines').style['width'] = 42 * pxRate + 'px';
+    this.querySelector('.power_lines').style['top'] = 29 * pxRate + 'px';
+    this.querySelector('.power_lines').style['left'] = 29 * pxRate + 'px';
+    this.querySelector('.power_lines svg').style['height'] = 42 * pxRate + 'px';
+    this.querySelector('.power_lines svg').style['width'] = 42 * pxRate + 'px';
+    this.querySelector(".power_lines svg").setAttribute("viewBox", "0 0 "+ 42 * pxRate + " " + 42 * pxRate); 
     let half = 22 * pxRate;
 
     this.correctDimensionsOfCircleLineAndContainer('solar_consumption', 'M'+ half +',0 C'+ half +','+ half +' '+ half +','+ half +' '+half*2+','+half);
@@ -523,46 +525,46 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
     if(this.solarCardElements.batteryCharge != undefined){
       this.correctDimensionsOfCircleLineAndContainer('battery_consumption', 'M'+ half +','+ half * 2 +' C'+ half +','+ half +' '+ half +','+ half +' '+ half * 2 +','+ half);
       this.correctDimensionsOfCircleLineAndContainer('battery_charging',   'M'+half+',0 C'+half+',0 '+half+','+ half * 2 +' '+half+','+ half*2);
-      this.cardRoot.querySelector(".battery_charge_state_text").style['padding-left'] = 2 * pxRate + 'px';
+      this.querySelector(".battery_charge_state_text").style['padding-left'] = 2 * pxRate + 'px';
     }
 
     //car charge
     if(this.carCharge != undefined){
       if(this.solarCardElements.batteryCharge != undefined){
-        this.cardRoot.querySelector('.car_icon_container').style['top'] = -62 * pxRate + 'px';
+        this.querySelector('.car_icon_container').style['top'] = -62 * pxRate + 'px';
       }else{
-        this.cardRoot.querySelector('.car_icon_container').style['top'] = -39 * pxRate + 'px';
+        this.querySelector('.car_icon_container').style['top'] = -39 * pxRate + 'px';
       }
-      this.cardRoot.querySelector('.car_icon_container').style['right'] = 5 * pxRate + 'px';
-      this.cardRoot.querySelector('.car_consumption').style['height'] = 10 * pxRate + 'px';
-      this.cardRoot.querySelector('.car_consumption').style['width'] = 3 * pxRate + 'px';
-      this.cardRoot.querySelector('.car_consumption').style['top'] = 29 * pxRate + 'px';
-      this.cardRoot.querySelector('.car_consumption').style['right'] = 16 * pxRate + 'px';
-      this.cardRoot.querySelector('.car_consumption svg').setAttribute('height', 10 * pxRate + 'px');
-      this.cardRoot.querySelector('.car_consumption svg').setAttribute('width', 3 * pxRate + 'px');
-      this.cardRoot.querySelector(".car_consumption svg").setAttribute("viewBox", "0 0 "+ 3 * pxRate + " " + 10 * pxRate); 
+      this.querySelector('.car_icon_container').style['right'] = 5 * pxRate + 'px';
+      this.querySelector('.car_consumption').style['height'] = 10 * pxRate + 'px';
+      this.querySelector('.car_consumption').style['width'] = 3 * pxRate + 'px';
+      this.querySelector('.car_consumption').style['top'] = 29 * pxRate + 'px';
+      this.querySelector('.car_consumption').style['right'] = 16 * pxRate + 'px';
+      this.querySelector('.car_consumption svg').setAttribute('height', 10 * pxRate + 'px');
+      this.querySelector('.car_consumption svg').setAttribute('width', 3 * pxRate + 'px');
+      this.querySelector(".car_consumption svg").setAttribute("viewBox", "0 0 "+ 3 * pxRate + " " + 10 * pxRate); 
       this.correctDimensionsOfCircleLineAndContainer('car_consumption', 'M4,'+10*pxRate+' C4,'+10*pxRate+' 4,0 4,0');
-      this.cardRoot.querySelector(".car_battery_state_text").style['padding-left'] = 2 * pxRate + 'px'; 
+      this.querySelector(".car_battery_state_text").style['padding-left'] = 2 * pxRate + 'px'; 
     }
 
     //2nd charge
     if(this.car2Charge != undefined){
-      this.cardRoot.querySelector('.car2_icon_container').style['bottom'] = 4 * pxRate + 'px';
-      this.cardRoot.querySelector('.car2_icon_container').style['right'] = 5 * pxRate + 'px';
-      this.cardRoot.querySelector('.car2_consumption').style['height'] = 10 * pxRate + 'px';
-      this.cardRoot.querySelector('.car2_consumption').style['width'] = 3 * pxRate + 'px';
-      this.cardRoot.querySelector('.car2_consumption').style['bottom'] = 29 * pxRate + 'px';
-      this.cardRoot.querySelector('.car2_consumption').style['right'] = 16 * pxRate + 'px';
-      this.cardRoot.querySelector('.car2_consumption svg').setAttribute('height', 10 * pxRate + 'px');
-      this.cardRoot.querySelector('.car2_consumption svg').setAttribute('width', 3 * pxRate + 'px');
-      this.cardRoot.querySelector(".car2_consumption svg").setAttribute("viewBox", "0 0 "+ 3 * pxRate + " " + 10 * pxRate); 
+      this.querySelector('.car2_icon_container').style['bottom'] = 4 * pxRate + 'px';
+      this.querySelector('.car2_icon_container').style['right'] = 5 * pxRate + 'px';
+      this.querySelector('.car2_consumption').style['height'] = 10 * pxRate + 'px';
+      this.querySelector('.car2_consumption').style['width'] = 3 * pxRate + 'px';
+      this.querySelector('.car2_consumption').style['bottom'] = 29 * pxRate + 'px';
+      this.querySelector('.car2_consumption').style['right'] = 16 * pxRate + 'px';
+      this.querySelector('.car2_consumption svg').setAttribute('height', 10 * pxRate + 'px');
+      this.querySelector('.car2_consumption svg').setAttribute('width', 3 * pxRate + 'px');
+      this.querySelector(".car2_consumption svg").setAttribute("viewBox", "0 0 "+ 3 * pxRate + " " + 10 * pxRate); 
       this.correctDimensionsOfCircleLineAndContainer('car2_consumption', 'M4,0 C4,0 4,'+10*pxRate+' 4,'+10*pxRate);
-      this.cardRoot.querySelector(".car2_battery_state_text").style['padding-left'] = 2 * pxRate + 'px'; 
+      this.querySelector(".car2_battery_state_text").style['padding-left'] = 2 * pxRate + 'px'; 
     }
   }
 
   correctDimensionsOfCircleLineAndContainer(cssClass, pathDAttribute){
-    this.cardRoot.querySelector("#" + cssClass +'_line').setAttribute('d',pathDAttribute);
+    this.querySelector("#" + cssClass +'_line').setAttribute('d',pathDAttribute);
   }
 
   updateAllCircles(timestamp){
@@ -579,8 +581,8 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
 
     if(this.batteryCharge != undefined) this.updateBatteryIcon(this.batteryCharge);
 
-    //console.log(this);
     if(this.oldWidth != this.clientWidth && document.readyState === "complete") {
+      console.log('changing style');
       this.changeStylesDependingOnWidth(this.clientWidth);
     }
 
@@ -644,8 +646,11 @@ class TeslaStyleSolarPowerCard extends HTMLElement {
         var value;
         if (unit_of_measurement === 'kW') {
           value = valueStr * 1;
-        } else if (unit_of_measurement === 'W') {
+        } else if (unit_of_measurement === 'W' && this.w_or_kw !== 'W') {
           value = valueStr / 1000;
+        } else if (unit_of_measurement === 'W' && this.w_or_kw === 'W') {
+          value = valueStr;
+          console.log(this.show_w_not_kw);
         } else if (unit_of_measurement === '%') {
           value = valueStr;
         }
