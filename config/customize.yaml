@@ -1,0 +1,26 @@
+  sensor.esp8266_3_temperature:
+    friendly_name: "Temp bedroom"
+
+  sensor.esp8266_3_humidity:
+   friendly_name: "Hum bedroom"
+
+  sensor.esp8266_2_humidity:
+   friendly_name: "Hum living room"
+
+  sensor.esp8266_2_temperature:
+   friendly_name: "Temp living room"
+
+  sensor.esp8266_1_humidity:
+   friendly_name: "Hum Anahi"
+
+  sensor.esp8266_1_temperature:
+   friendly_name: "Temp Anahi"
+
+  sensor.heating_stromz_leistung:
+    friendly_name: "Heating Consumption"
+
+  sensor.solar_yield:
+    friendly_name: "Solar Yield"
+  
+  sensor.house_consumption:
+    friendly_name: "House Consumption"
